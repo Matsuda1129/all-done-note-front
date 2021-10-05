@@ -1,0 +1,17 @@
+{
+    "workbench.colorTheme": "GitHub Dark Dimmed",
+    "prettier.singleQuote": true,
+    "prettier.jsxSingleQuote": true,
+    "prettier.useEditorConfig": false,
+    "prettier.jsxBracketSameLine": true,
+    "workbench.tree.indent": 16,
+    "workbench.tree.renderIndentGuides": "always",
+    "editor.formatOnSave": true,
+    "explorer.confirmDelete": false,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.autoSave": "afterDelay",
+    "editor.formatOnType": true,
+    "editor.codeActionsOnSave": null
+}
