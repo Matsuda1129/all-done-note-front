@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import remark from 'remark';
 import html from 'remark-html';
+// import fetch from 'node-fetch';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
@@ -41,7 +42,6 @@ export function getSortedPostsData() {
 
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory);
-
   // Returns an array that looks like this:
   // [
   //   {
@@ -55,6 +55,7 @@ export function getAllPostIds() {
   //     }
   //   }
   // ]
+
   return fileNames.map((fileName) => {
     return {
       params: {
@@ -83,4 +84,28 @@ export async function getPostData(id: string) {
     contentHtml,
     ...(matterResult.data as { date: string; title: string }),
   };
+}
+
+export async function getUserData(username: string) {
+  const url = 'http://localhost:3000/user';
+  const res = await fetch(url);
+  const userData = await res.json();
+
+  return {
+    username,
+  };
+}
+
+export async function getAllUserNames() {
+  const userUrl = 'http://localhost:3000/user';
+  const res = await fetch(userUrl);
+  const users = await res.json();
+
+  return users.data.map((user) => {
+    return {
+      params: {
+        username: user.username,
+      },
+    };
+  });
 }

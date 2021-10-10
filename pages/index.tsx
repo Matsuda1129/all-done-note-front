@@ -18,6 +18,7 @@ export default function Home({
 }) {
   return (
     <Layout home>
+      <h1>The value of baseURL is: {process.env.baseURL}</h1>
       <Head>
         <title>{siteTitle}</title>
       </Head>

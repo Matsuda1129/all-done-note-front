@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "next dev -p 8080",
+    "build": "NODE_ENV=production next build",
+    "start": "next start -p 8080",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css,scss}'"
   },
   "dependencies": {
+    "axios": "^0.22.0",
     "date-fns": "^2.25.0",
+    "dotenv": "^10.0.0",
     "gray-matter": "^4.0.3",
     "js-base64": "^3.7.2",
     "next": "^11.0.0",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@types/node": "^16.10.3",
+    "@types/node-fetch": "^3.0.3",
     "@types/react": "^17.0.27",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.2",
