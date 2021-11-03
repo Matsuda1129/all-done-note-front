@@ -35,7 +35,7 @@ export default function CreateAccountPage() {
         password: password,
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
 
     alert('アカウントの登録ができました');

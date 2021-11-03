@@ -18,7 +18,6 @@ export default function LoginPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state: { users: RootState }) => state.users);
-  console.log(user);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const {

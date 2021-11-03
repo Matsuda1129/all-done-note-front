@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useStore } from 'react-redux';
 export default function Index() {
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
