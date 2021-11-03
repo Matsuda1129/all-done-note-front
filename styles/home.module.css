@@ -1,0 +1,42 @@
+.grid_container {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  right: 3%;
+  bottom: 3%;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 2fr 5fr 3fr;
+  grid-template-areas: 'areaA areaB areaC';
+}
+
+.item_A {
+  grid-area: areaA;
+  background-color: rgb(255, 255, 255, 0.7);
+  border: 2px solid gray;
+}
+.item_B {
+  grid-area: areaB;
+  background-color: rgb(255, 255, 255, 0.7);
+  border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+.item_C {
+  grid-area: areaC;
+  background-color: rgb(255, 255, 255, 0.7);
+  border: 2px solid gray;
+}
+
+.bodyBackground {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../public/images/mainBack.jpg');
+  background-size: 100% 100%;
+}
+
+.menubar_position {
+  position: relative;
+  top: 3%;
+  left: 10%;
+  right: 10%;
+}

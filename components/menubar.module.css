@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-flow: column;
+}
+
+.container div {
+  font-size: 2rem;
+}
+
+.iconHome {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/menu/home.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconMail {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/menu/mail.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+
+.iconCheck {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/menu/check.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+
+.icon118251 {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/menu/118251.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconMushimegane {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/menu/mushimegane.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconPerson {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/menu/Person.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconGrahp {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/menu/grahp.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}

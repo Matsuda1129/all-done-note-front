@@ -1,33 +1,78 @@
-import { GetStaticPaths } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import fetch from 'node-fetch';
-export default function post({ users }) {
+export default function user({
+  userData,
+}: {
+  userData: {
+    id: string;
+    username: string;
+    email: string;
+  };
+}) {
   return (
     <div>
-      <h1>POST(投稿){users.id}</h1>
-      <h2>{users.username}</h2>
-      <p>{users.email}</p>
+      <h1>User(情報){userData.id}</h1>
+      <h2>{userData.username}</h2>
+      <p>{userData.email}</p>
     </div>
   );
 }
-export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`${process.env.baseURL}/user`);
-  const users = await res.json();
-  const paths = users.data.map((user) => `/users/${user.id}`);
 
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking',
   };
 };
-export async function getStaticProps({ params }) {
+
+type StaticProps = { params: { user: string } };
+
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}: StaticProps) => {
   const id = params.user;
   const res = await fetch(`${process.env.baseURL}/user/${id}`);
-  const users = await res.json();
-  if (!Object.keys(users).length) {
+  const userData = await res.json();
+
+  try {
+    await fetchWithErrorHandling(`${process.env.baseURL}/user/${id}`);
+  } catch (error) {
     return {
       notFound: true,
     };
   }
 
-  return { props: { users } };
-}
+  return {
+    props: { userData },
+    revalidate: 60,
+  };
+};
+
+const handleErrors = (res) => {
+  if (res.ok) {
+    return res;
+  }
+
+  switch (res.status) {
+    case 400:
+      throw Error('INVALID_TOKEN');
+    case 401:
+      throw Error('UNAUTHORIZED');
+    case 500:
+      throw Error('INTERNAL_SERVER_ERROR');
+    case 502:
+      throw Error('BAD_GATEWAY');
+    case 404:
+      throw Error('NOT_FOUND');
+    default:
+      throw Error('UNHANDLED_ERROR');
+  }
+};
+
+const fetchWithErrorHandling = (url) =>
+  fetch(url)
+    .catch((error) => {
+      throw Error(error);
+    })
+    .then(handleErrors)
+    .then((res) => res.json());

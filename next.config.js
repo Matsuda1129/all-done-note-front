@@ -2,14 +2,6 @@
 const isProd = process.env.NODE_ENV === 'production';
 module.exports = {
   env: {
-    baseURL: isProd
-      ? 'http://18.181.147.191:3000'
-      : 'http://localhost:3000',
+    baseURL: isProd ? 'http://localhost:8000' : 'http://localhost:8000',
   },
-  typescript: {
-    // !! 警告 !!
-    // あなたのプロジェクトに型エラーがあったとしても、プロダクションビルドを正常に完了するために危険な許可をする。
-    // !! 警告 !!
-    ignoreBuildErrors: true
-  }
 };

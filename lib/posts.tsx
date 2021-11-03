@@ -86,13 +86,13 @@ export async function getPostData(id: string) {
   };
 }
 
-export async function getUserData(username: string) {
+export async function getUserData(id: string) {
   const url = 'http://localhost:3000/user';
   const res = await fetch(url);
   const userData = await res.json();
 
   return {
-    username,
+    id,
   };
 }
 

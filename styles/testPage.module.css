@@ -1,0 +1,39 @@
+.grid_container {
+  position: absolute;
+  top: 5%;
+  left: 15%;
+  display: grid; /* グリッドレイアウト */
+  grid-template-rows: 100px 100px 80px 80px 80px 100px;
+  grid-template-columns: 500px 500px;
+  grid-template-areas:
+    'areaA areaB'
+    'areaC areaC'
+    'areaD areaD'
+    'areaE areaE'
+    'areaF areaF'
+    'areaG areaG';
+  display: grid;
+  place-items: center;
+}
+
+.item_A {
+  grid-area: areaA;
+}
+.item_B {
+  grid-area: areaB;
+}
+.item_C {
+  grid-area: areaC;
+}
+.item_D {
+  grid-area: areaD;
+}
+.item_E {
+  grid-area: areaE;
+}
+.item_F {
+  grid-area: areaF;
+}
+.item_G {
+  grid-area: areaG;
+}

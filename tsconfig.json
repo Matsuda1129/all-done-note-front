@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/posts/[id].tsx"  ],
+, "pages/posts/[id].tsx", "pages/ajax.tsx", "pages/Todo.js", "pages/TodoList.js", "pages/App.js", "pages/user.tsx", "pages/reduxUser.tsx", "pages/_app.tsx"  ],
   "exclude": [
     "node_modules"
   ]
