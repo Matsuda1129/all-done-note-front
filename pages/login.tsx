@@ -2,12 +2,10 @@ import Image from 'next/image';
 import Head from 'next/head';
 import loginStyles from '../styles/login.module.css';
 import { useForm } from 'react-hook-form';
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
-import { setUsers } from '../redux/usersSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import Cooike from 'js-cookie';
 
 type FormValuse = {
   email: string;
@@ -16,8 +14,6 @@ type FormValuse = {
 
 export default function LoginPage() {
   const router = useRouter();
-  const dispatch = useDispatch();
-  const user = useSelector((state: { users: RootState }) => state.users);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const {
@@ -27,16 +23,21 @@ export default function LoginPage() {
   } = useForm<FormValuse>();
 
   const onSubmit = async () => {
-    await fetch(`${process.env.baseURL}/user/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    await router.push('/home');
+    try {
+      const res = await fetch(`${process.env.baseURL}/user/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      const loginData = await res.json();
+      Cooike.set('jwt', loginData.jwt);
+      Cooike.set('signedIn', 'true');
+      await router.push('/home');
+    } catch (e) {}
   };
 
   return (

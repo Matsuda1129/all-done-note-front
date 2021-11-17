@@ -5,8 +5,11 @@ import { useRouter } from 'next/router';
 import { reset } from '../redux/usersSlice';
 import { useSelector } from 'react-redux';
 import { UserState } from '../redux/usersSlice';
+import Cooike from 'js-cookie';
+import { useState } from 'react';
 
-export default function Menubar() {
+
+export default function Menubar({show, setShow}) {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state: { users: UserState }) => state.users.user);
@@ -17,8 +20,12 @@ export default function Menubar() {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     });
+
+    Cooike.remove('jwt');
+    Cooike.remove('signedIn');
     router.push('/firstPage');
   };
+
 
   return (
     <div className={Styles.container}>
@@ -32,14 +39,15 @@ export default function Menubar() {
         />
         <div>{user.name}</div>
       </div>
-      <div className={Styles.iconHome}>ホーム</div>
-      <div className={Styles.iconMail}>メッセージ</div>
-      <div className={Styles.iconCheck}>目標リスト</div>
-      <div className={Styles.icon118251}>情報検索</div>
-      <div className={Styles.iconMushimegane}>ユーザー検索</div>
-      <div className={Styles.iconPerson}>プロフィール</div>
-      <div className={Styles.iconGrahp}>データ分析</div>
-      <button onClick={logout}>ログアウト</button>
+      <a href='' className={Styles.iconHome}>ホーム</a>
+      <a href='' className={Styles.iconMail}>メッセージ</a>
+      <a href='' className={Styles.iconCheck}>目標リスト</a>
+      <a href='' className={Styles.icon118251}>情報検索</a>
+      <a href='' className={Styles.iconMushimegane}>ユーザー検索</a>
+      <a href='' className={Styles.iconPerson}>プロフィール</a>
+      <a href='' className={Styles.iconGrahp}>データ分析</a>
+      <button className={Styles.post_button} onClick={() => setShow(true)}>投稿する</button>
+      {/* <button onClick={logout}>ログアウト</button> */}
     </div>
   );
 }

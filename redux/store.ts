@@ -5,6 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import userReducer from './usersSlice';
 import counterReducer from './counterSlice';
+import postReducer from './postsSlice';
 import { persistReducer } from 'redux-persist';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
@@ -29,6 +30,7 @@ const storage =
 const rootReducer = combineReducers({
   counter: counterReducer,
   users: userReducer,
+  posts: postReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

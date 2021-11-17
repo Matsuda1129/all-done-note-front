@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type User = {
+  id: number | null
   name: string | null;
   email: string | null;
   alive: true;
@@ -20,6 +21,7 @@ export type UpdateUserPayload = User;
 
 const initialState: UserState = {
   user: {
+    id: null,
     name: null,
     email: null,
     alive: true,

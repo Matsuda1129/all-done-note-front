@@ -5,14 +5,14 @@ export default function user({
 }: {
   userData: {
     id: string;
-    username: string;
+    name: string;
     email: string;
   };
 }) {
   return (
     <div>
       <h1>User(情報){userData.id}</h1>
-      <h2>{userData.username}</h2>
+      <h2>{userData.name}</h2>
       <p>{userData.email}</p>
     </div>
   );
@@ -37,6 +37,8 @@ export const getStaticProps: GetStaticProps = async ({
   try {
     await fetchWithErrorHandling(`${process.env.baseURL}/user/${id}`);
   } catch (error) {
+    console.log('error');
+
     return {
       notFound: true,
     };
