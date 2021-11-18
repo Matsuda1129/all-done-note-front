@@ -6,6 +6,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import Cooike from 'js-cookie';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 type FormValuse = {
   email: string;
@@ -13,6 +15,7 @@ type FormValuse = {
 };
 
 export default function LoginPage() {
+  const [cookies, setCookie] = useCookies(['jwt']);
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,7 +37,9 @@ export default function LoginPage() {
         }),
       });
       const loginData = await res.json();
-      Cooike.set('jwt', loginData.jwt);
+      // const cookie = cookies.get('jwt');
+      setCookie('jwt', loginData.jwt);
+      // Cooike.set('jwt', loginData.jwt);
       Cooike.set('signedIn', 'true');
       await router.push('/home');
     } catch (e) {}

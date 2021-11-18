@@ -11,13 +11,17 @@ import React, { useEffect, useState } from 'react';
 import router from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import Cookies from 'js-cookie';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 export function Modal({ show, setShow }) {
   const user = useSelector((state: RootState) => state.users.user);
   const [content, setContent] = useState('');
 
   const sendPost = async () => {
-    await fetch(`${process.env.baseURL}/post`, {
+    const cookie = Cookies.get('jwt');
+    const post = await fetch(`${process.env.baseURL}/post`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -27,6 +31,7 @@ export function Modal({ show, setShow }) {
         picture: '',
       }),
     });
+    console.log(post);
     await setShow(false);
 
     alert('投稿しました');
@@ -61,6 +66,9 @@ export function Modal({ show, setShow }) {
 }
 
 export default function Home() {
+  // const cookie = Cookies.get('jwt');
+  const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
+  console.log(cookies.jwt);
   const dispatch = useDispatch();
   const [posts, setPostsData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -69,9 +77,6 @@ export default function Home() {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await fetch(`${process.env.baseURL}/user/cookie`, {
-          credentials: 'include',
-        });
         const getPostsData = await fetch(
           'http://localhost:8000/post/page?page=1&limit=20',
           {
@@ -79,18 +84,32 @@ export default function Home() {
           }
         );
 
-        const content = await response.json();
+        const getCookie = await axios.get(`${process.env.baseURL}/user/cookie`, {
+          withCredentials: true,
+        });
+        // const cookieData = await getCookie.();
+        console.log(getCookie);
+        // const response = await fetch(
+          // `${process.env.baseURL}/user/cookie`
+          // cookies.jwt
+          // {
+          //   credentials: 'include',
+          // }
+        // );
+
+        const content = await getCookie.data;
         const postsData = await getPostsData.json();
-        if (content.statusCode) {
-          throw new Error('error');
-        }
+        console.log(content);
+        // if (content.statusCode) {
+        //   throw new Error('error');
+        // }
         await dispatch(setPosts(postsData.items));
         await dispatch(setUsers(content));
         await setPostsData(postsData.items);
       } catch (e) {}
     };
     getPosts();
-  }, [dispatch]);
+  }, [cookies.jwt, dispatch]);
 
   const fetchPosts = async () => {
     const res = await fetch(
