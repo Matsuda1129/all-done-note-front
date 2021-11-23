@@ -12,6 +12,7 @@ import router from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 export function Modal({ show, setShow }) {
   const user = useSelector((state: RootState) => state.users.user);
@@ -61,6 +62,10 @@ export function Modal({ show, setShow }) {
   }
 }
 
+type FormValuse = {
+  items: [];
+};
+
 export default function Home() {
   const dispatch = useDispatch();
   const [posts, setPostsData] = useState([]);
@@ -70,26 +75,22 @@ export default function Home() {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await fetch(`${process.env.baseURL}/user/cookie`, {
-          credentials: 'include',
-          mode: 'cors',
+        const response = await axios({
+          method: 'post',
+          url: `${process.env.baseURL}/user/cookie`,
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+          },
         });
-        const getPostsData = await fetch(
-          `${process.env.baseURL}/post/page?page=1&limit=20`,
-          {
-            credentials: 'include',
-          }
-        );
+        const getPostsData = await axios({
+          method: 'get',
+          url: `${process.env.baseURL}/post/page?page=1&limit=20`,
+          withCredentials: true,
+        });
 
-        // const res = await fetch(`https://jsonplaceholder.typicode.com/posts`, {
-        //   credentials: 'include',
-        // });
-        // const posts = await res.json();
-
-        const content = await response.json();
-        const postsData = await getPostsData.json();
-        console.log(postsData.items);
-        console.log(content);
+        const content = await response.data;
+        const postsData : FormValuse = await getPostsData.data;
         await dispatch(setPosts(postsData.items));
         await dispatch(setUsers(content));
         await setPostsData(postsData.items);
@@ -162,7 +163,8 @@ export default function Home() {
                     <div
                       className={`${homeStyles.content_name} ${homeStyles.iconTree}`}
                     >
-                      {post.user.name}, {post.id}
+                      {/* {post.user.name}, */}
+                      {post.id}
                     </div>
                     <div className={homeStyles.content_content}>
                       {post.content}

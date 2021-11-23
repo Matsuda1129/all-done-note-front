@@ -27,16 +27,19 @@ export default function LoginPage() {
 
   const onSubmit = async () => {
     try {
-      const res = await fetch(`${process.env.baseURL}/user/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({
+      const getUser = await axios.get(`${process.env.baseURL}/user`);
+      console.log(getUser.data);
+
+      const res = await axios.post(
+        `${process.env.baseURL}/user/login`,
+        {
           email,
           password,
-        }),
-      });
-      const loginData = await res.json();
+        },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+      console.log(res);
+      const loginData = await res.data;
       // const cookie = cookies.get('jwt');
       setCookie('jwt', loginData.jwt);
       // Cooike.set('jwt', loginData.jwt);

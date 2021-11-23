@@ -37,7 +37,7 @@ export default function Menubar({show, setShow}) {
           width={50}
           alt={'アイコン'}
         />
-        <div>{user.name}</div>
+        {/* <div>{user.name}</div> */}
       </div>
       <a href='' className={Styles.iconHome}>ホーム</a>
       <a href='' className={Styles.iconMail}>メッセージ</a>
