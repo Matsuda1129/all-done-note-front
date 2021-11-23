@@ -5,8 +5,7 @@ import { useForm } from 'react-hook-form';
 import React, { useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
-import Cooike from 'js-cookie';
-import { useCookies } from 'react-cookie';
+import Cookie from 'js-cookie';
 import axios from 'axios';
 
 type FormValuse = {
@@ -15,7 +14,6 @@ type FormValuse = {
 };
 
 export default function LoginPage() {
-  const [cookies, setCookie] = useCookies(['jwt']);
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,25 +23,25 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm<FormValuse>();
 
+  type loginData = {
+    jwt: string;
+  };
+
   const onSubmit = async () => {
     try {
-      const getUser = await axios.get(`${process.env.baseURL}/user`);
-      console.log(getUser.data);
-
-      const res = await axios.post(
-        `${process.env.baseURL}/user/login`,
-        {
-          email,
-          password,
+      const reponse = await axios({
+        method: 'post',
+        url: `${process.env.baseURL}/user/login`,
+        data: {
+          email: email,
+          password: password,
         },
-        { headers: { 'Content-Type': 'application/json' } }
-      );
-      console.log(res);
-      const loginData = await res.data;
-      // const cookie = cookies.get('jwt');
-      setCookie('jwt', loginData.jwt);
-      // Cooike.set('jwt', loginData.jwt);
-      Cooike.set('signedIn', 'true');
+
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const loginData: loginData = await reponse.data;
+      Cookie.set('jwt', loginData.jwt);
+      Cookie.set('signedIn', 'true');
       await router.push('/home');
     } catch (e) {}
   };
