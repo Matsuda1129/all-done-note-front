@@ -11,8 +11,88 @@ import React, { useEffect, useState } from 'react';
 import router from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
+export function Heart(props) {
+  const [likes, setLikes] = useState();
+  const [likesCheck, setLikesCheck] = useState(Boolean);
+  const [likesCount, setLikesCount] = useState();
+  useEffect(() => {
+    const fetchLikes = async () => {
+      try {
+        const getLikesData = await axios({
+          method: 'post',
+          url: `${process.env.baseURL}/like/get`,
+          withCredentials: true,
+          data: {
+            userId: props.userId,
+            postId: props.postId,
+          },
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+          },
+        });
+        setLikes(getLikesData.data);
+        if (!getLikesData.data) {
+          setLikesCheck(false);
+        } else {
+          setLikesCheck(true);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchLikes();
+  }, []);
+
+  const onLike = async () => {
+    try {
+      await axios({
+        method: 'post',
+        url: `${process.env.baseURL}/like`,
+        data: {
+          userId: props.userId,
+          postId: props.postId,
+        },
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      setLikesCheck(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const offLike = async () => {
+    try {
+      await axios({
+        method: 'delete',
+        url: `${process.env.baseURL}/like/delete`,
+        data: {
+          userId: props.userId,
+          postId: props.postId,
+        },
+        headers: { 'Content-Type': 'application/json' },
+      });
+      setLikesCheck(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  if (!likesCheck) {
+    return (
+      <div>
+        <button className={homeStyles.offHeart} onClick={onLike}></button>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <button className={homeStyles.heart} onClick={offLike}></button>
+      </div>
+    );
+  }
+}
 
 export function Modal({ show, setShow }) {
   const user = useSelector((state: RootState) => state.users.user);
@@ -48,7 +128,6 @@ export function Modal({ show, setShow }) {
               onChange={(e) => setContent(e.target.value)}
               placeholder='250字以内で入力してください'
             ></textarea>
-            {/* <p>{content}</p> */}
             <button className={homeStyles.post_button} onClick={sendPost}>
               投稿する
             </button>
@@ -68,6 +147,7 @@ type FormValuse = {
 
 export default function Home() {
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.users.user);
   const [posts, setPostsData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
@@ -75,22 +155,26 @@ export default function Home() {
   useEffect(() => {
     const getPosts = async () => {
       try {
+        const jwt = Cookies.get('jwt');
         const response = await axios({
           method: 'post',
           url: `${process.env.baseURL}/user/cookie`,
-          withCredentials: true,
           headers: {
+            Authorization: `Bearer ${jwt}`,
             'Content-Type': 'application/json;charset=UTF-8',
           },
         });
         const getPostsData = await axios({
           method: 'get',
           url: `${process.env.baseURL}/post/page?page=1&limit=20`,
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+            'Content-Type': 'application/json;charset=UTF-8',
+          },
         });
 
         const content = await response.data;
-        const postsData : FormValuse = await getPostsData.data;
+        const postsData: FormValuse = await getPostsData.data;
         await dispatch(setPosts(postsData.items));
         await dispatch(setUsers(content));
         await setPostsData(postsData.items);
@@ -102,13 +186,16 @@ export default function Home() {
   }, [dispatch]);
 
   const fetchPosts = async () => {
-    const res = await fetch(
-      `${process.env.baseURL}/post/page?page=${page}&limit=20`,
-      {
-        credentials: 'include',
-      }
-    );
-    const data = await res.json();
+    const jwt = Cookies.get('jwt');
+    const res = await axios({
+      method: 'get',
+      url: `${process.env.baseURL}/post/page?page=${page}&limit=20`,
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+    });
+    const data: FormValuse = await res.data;
 
     return data.items;
   };
@@ -163,14 +250,13 @@ export default function Home() {
                     <div
                       className={`${homeStyles.content_name} ${homeStyles.iconTree}`}
                     >
-                      {/* {post.user.name}, */}
-                      {post.id}
+                      {post.user.name},{post.id}
                     </div>
                     <div className={homeStyles.content_content}>
                       {post.content}
                     </div>
                     <div className={homeStyles.content_bar}>
-                      <div className={homeStyles.iconHeart}>50</div>
+                      <Heart postId={post.id} userId={user.id} />
                       <div className={homeStyles.iconHukidashi}>50</div>
                       <div className={homeStyles.iconRappa}>50</div>
                     </div>
@@ -178,11 +264,7 @@ export default function Home() {
                 );
               })}
             </InfiniteScroll>
-            <Modal
-              show={show}
-              setShow={setShow}
-              // content='Appから内容を変更できます'
-            />
+            <Modal show={show} setShow={setShow} />
           </div>
         </div>
       </main>
