@@ -22,11 +22,16 @@ export async function findOneUser(username: string) {
 }
 
 export async function editProfile(data, userId) {
+  let alive = true;
+  if (data.alive === 'false') {
+    alive = false;
+  }
+  console.log(alive);
   const res = await instance.put(`/user/${userId}`, {
     name: data.name,
     introduction: data.introduction,
     gender: data.gender,
-    alive: data.alive,
+    alive: alive,
     birthday: data.birthday,
   });
 

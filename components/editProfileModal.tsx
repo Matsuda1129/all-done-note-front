@@ -98,8 +98,8 @@ export default function ProfileModal(props) {
                   defaultValue={user.alive}
                   className={Styles.flex_container_item３}
                 >
-                  <MenuItem value={true}>alive</MenuItem>
-                  <MenuItem value={false}>dead</MenuItem>
+                  <MenuItem value={'true'}>alive</MenuItem>
+                  <MenuItem value={'false'}>dead</MenuItem>
                 </Select>
                 <label>誕生日</label>
                 <div className={Styles.flex_container_item}>
