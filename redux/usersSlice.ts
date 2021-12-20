@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type User = {
-  id: number | null
+  id: number | null;
   name: string | null;
   email: string | null;
   alive: true;
+  introduction: string | null;
   will: string | null;
   movie: string | null;
-  sex: string | null;
-  birthday: Date | null;
+  gender: string | null;
+  birthday: string | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -24,10 +25,11 @@ const initialState: UserState = {
     id: null,
     name: null,
     email: null,
+    introduction: null,
     alive: true,
     will: null,
     movie: null,
-    sex: null,
+    gender: null,
     birthday: null,
     createdAt: null,
     updatedAt: null,
@@ -49,14 +51,6 @@ export const usersSlice = createSlice({
     },
   },
 });
-
-export const getUsers = () => {
-  return async (dispatch) => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
-    const data = await res.json();
-    dispatch(setUsers(data));
-  };
-};
 
 export const { updateUser, setUsers, reset } = usersSlice.actions;
 

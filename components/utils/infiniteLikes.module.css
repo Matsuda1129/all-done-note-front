@@ -1,0 +1,49 @@
+.content_grid_container {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: 'name con bar';
+}
+
+.content_border {
+  border-top: 2px solid gray;
+}
+.content_name {
+  position: relative;
+  margin-top: 3%;
+  grid-area: name;
+}
+.content_content {
+  position: relative;
+  margin-bottom: 10px;
+  white-space: pre;
+  grid-area: con;
+}
+.content_bar {
+  position: relative;
+  justify-content: space-evenly;
+  grid-area: bar;
+  display: flex;
+}
+.iconHukidashi {
+  padding-top: 0.6rem;
+  padding-left: 4.5rem;
+  padding-bottom: 2rem;
+  background: url(../../public/post/hukidashi.jpg) no-repeat;
+  background-size: 4rem 4rem;
+}
+.iconRappa {
+  padding-top: 0.6rem;
+  padding-left: 4.5rem;
+  padding-bottom: 2rem;
+  background: url(../../public/post/rappa.jpg) no-repeat;
+  background-size: 4rem 4rem;
+}
+
+.iconTree {
+  padding-top: 0.6rem;
+  padding-left: 7rem;
+  padding-bottom: 2rem;
+  background: url(../../public/images/treeIcon.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}

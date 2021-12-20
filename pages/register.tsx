@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
-import registerStyles from '../styles/register.module.css';
-import axios from 'axios';
+import React from 'react';
+import Styles from '../styles/register.module.css';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
+import { createUser } from '../services/users';
+import { findAllUser } from '../repositories/users';
 
 type FormValuse = {
   name: string;
@@ -12,12 +12,7 @@ type FormValuse = {
   password: string;
   confirmPassword: string;
 };
-export default function CreateAccountPage() {
-  const router = useRouter();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+export default function Register() {
   const {
     register,
     handleSubmit,
@@ -25,28 +20,15 @@ export default function CreateAccountPage() {
     formState: { errors },
   } = useForm<FormValuse>();
 
-  const createNewUser = async () => {
-    if (password !== confirmPassword) {
-    }
-    axios
-      .post(`${process.env.baseURL}/user/register`, {
-        name: name,
-        email: email,
-        password: password,
-      })
-      .catch((error) => {
-        // console.log(error);
-      });
-
-    alert('アカウントの登録ができました');
-    await router.push('/login');
+  const onSubmit = async (data) => {
+    await createUser(data.name, data.email, data.password);
   };
 
   return (
     <div>
-      <div className={registerStyles.grid_container}>
-        <div className={registerStyles.item_A}>アカウント作成</div>
-        <div className={registerStyles.item_B}>
+      <div className={Styles.grid_container}>
+        <div className={Styles.item_A}>アカウント作成</div>
+        <div className={Styles.item_B}>
           <Image
             priority
             src='/images/treeIcon.jpg'
@@ -55,10 +37,7 @@ export default function CreateAccountPage() {
             alt={'アイコン'}
           />
         </div>
-        <form
-          className={registerStyles.container}
-          onSubmit={handleSubmit(createNewUser)}
-        >
+        <form className={Styles.container} onSubmit={handleSubmit(onSubmit)}>
           {errors.name && <div>{errors.name.message}</div>}
           <input
             {...register('name', {
@@ -67,11 +46,21 @@ export default function CreateAccountPage() {
                 value: 20,
                 message: 'ニックネームは20字以内でお願いします',
               },
+              validate: {
+                checkName: async () => {
+                  const { name } = getValues();
+                  const users = await findAllUser();
+                  for (let i = 0; i < users.length; i++) {
+                    if (name === users[i].name) {
+                      return 'このニックネームはすでに登録されています';
+                    }
+                  }
+                },
+              },
             })}
             type='text'
             placeholder='ニックネーム'
-            onChange={(e) => setName(e.target.value)}
-            className={registerStyles.item_C}
+            className={Styles.item_C}
           />
           {errors.email && <div>{errors.email.message}</div>}
           <input
@@ -81,11 +70,21 @@ export default function CreateAccountPage() {
                 value: 50,
                 message: 'メールアドレス50字以内でお願いします',
               },
+              validate: {
+                checkEmail: async () => {
+                  const { email } = getValues();
+                  const users = await findAllUser();
+                  for (let i = 0; i < users.length; i++) {
+                    if (email === users[i].email) {
+                      return 'このメールドレスはすでに登録されています';
+                    }
+                  }
+                },
+              },
             })}
             type='text'
             placeholder='メールアドレス'
-            onChange={(e) => setEmail(e.target.value)}
-            className={registerStyles.item_D}
+            className={Styles.item_D}
           />
           {errors.password && <div>{errors.password.message}</div>}
           <input
@@ -102,15 +101,12 @@ export default function CreateAccountPage() {
             })}
             type='password'
             placeholder='パスワード'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={registerStyles.item_E}
+            className={Styles.item_E}
           />
           {errors.confirmPassword && (
             <div>{errors.confirmPassword.message}</div>
           )}
           <input
-            value={confirmPassword}
             {...register('confirmPassword', {
               required: '再入力パスワードは必須項目です',
               validate: {
@@ -131,10 +127,9 @@ export default function CreateAccountPage() {
             })}
             type='password'
             placeholder='再入力パスワード'
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className={registerStyles.item_F}
+            className={Styles.item_F}
           />
-          <button type='submit' className={registerStyles.item_G}>
+          <button type='submit' className={Styles.item_G}>
             アカウント作成
           </button>
         </form>

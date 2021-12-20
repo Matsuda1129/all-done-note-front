@@ -1,49 +1,25 @@
 import Image from 'next/image';
 import Head from 'next/head';
-import loginStyles from '../styles/login.module.css';
+import Styles from '../styles/login.module.css';
 import { useForm } from 'react-hook-form';
-import React, { useState } from 'react';
-import { useRouter } from 'next/dist/client/router';
+import React from 'react';
 import Link from 'next/link';
-import Cookie from 'js-cookie';
-import axios from 'axios';
+import { login } from '../services/users';
 
 type FormValuse = {
   email: string;
   password: string;
 };
 
-export default function LoginPage() {
-  const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValuse>();
 
-  type loginData = {
-    jwt: string;
-  };
-
-  const onSubmit = async () => {
-    try {
-      const reponse = await axios({
-        method: 'post',
-        url: `${process.env.baseURL}/user/login`,
-        data: {
-          email: email,
-          password: password,
-        },
-
-        headers: { 'Content-Type': 'application/json' },
-      });
-      const loginData: loginData = await reponse.data;
-      Cookie.set('jwt', loginData.jwt);
-      Cookie.set('signedIn', 'true');
-      await router.push('/home');
-    } catch (e) {}
+  const onSubmit = async (data) => {
+    await login(data.email, data.password);
   };
 
   return (
@@ -51,8 +27,8 @@ export default function LoginPage() {
       <Head>
         <meta name='viewport' content='width=device-width,initial-scale=1.0' />
       </Head>
-      <div className={loginStyles.grid_container}>
-        <div className={loginStyles.item_A}>
+      <div className={Styles.grid_container}>
+        <div className={Styles.item_A}>
           <Image
             priority
             src='/images/treeIcon.jpg'
@@ -61,11 +37,11 @@ export default function LoginPage() {
             alt={'アイコン'}
           />
         </div>
-        <div className={loginStyles.item_B}>
-          <span className={loginStyles.text}>All Done ノート</span>
-          <span className={loginStyles.text}>にログイン</span>
+        <div className={Styles.item_B}>
+          <span className={Styles.text}>All Done ノート</span>
+          <span className={Styles.text}>にログイン</span>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className={loginStyles.form}>
+        <form onSubmit={handleSubmit(onSubmit)} className={Styles.form}>
           <input
             {...register('email', {
               required: 'メールドレスは必須項目です',
@@ -74,10 +50,9 @@ export default function LoginPage() {
                 message: 'メールドレスは50字以内でお願いします',
               },
             })}
-            onChange={(e) => setEmail(e.target.value)}
             type='email'
             placeholder='メールドレス'
-            className={loginStyles.item_C}
+            className={Styles.item_C}
           />
           {errors.email && <p>{errors.email.message}</p>}
           <input
@@ -92,30 +67,29 @@ export default function LoginPage() {
                 message: 'パスワードは6字以上でお願いします',
               },
             })}
-            onChange={(e) => setPassword(e.target.value)}
             type='password'
             placeholder='パスワード'
-            className={loginStyles.item_D}
+            className={Styles.item_D}
           />
           {errors.password && <p>{errors.password.message}</p>}
-          <button type='submit' className={loginStyles.item_E}>
+          <button type='submit' className={Styles.item_E}>
             ログインする
           </button>
         </form>
         <input
           type='submit'
           value='Twitrerでログインする'
-          className={loginStyles.item_F}
+          className={Styles.item_F}
         />
         <input
           type='submit'
           value='Googleでログインする'
-          className={loginStyles.item_G}
+          className={Styles.item_G}
         />
-        <div className={loginStyles.item_I}>
+        <div className={Styles.item_I}>
           <a href=''>パスワードをお忘れですか？</a>
         </div>
-        <div className={loginStyles.item_J}>
+        <div className={Styles.item_J}>
           <Link href='./register'>
             <a>アカウント作成</a>
           </Link>

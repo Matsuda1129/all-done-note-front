@@ -3,7 +3,7 @@
   top: 5%;
   left: 15%;
   right: 15%;
-  display: grid; /* グリッドレイアウト */
+  display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:

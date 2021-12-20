@@ -10,17 +10,3 @@
   border-radius: 2em;
   width: 70%;
 }
-
-.search_container button {
-  background-color: rgb(35, 123, 196);
-  color: white;
-  border: 2px solid rgb(35, 123, 196);
-  border-radius: 1.5rem;
-  width: 100px;
-}
-
-.search_container button:hover {
-  color: rgb(35, 123, 196);
-  background: #fff;
-  border: 2px solid rgb(35, 123, 196);
-}

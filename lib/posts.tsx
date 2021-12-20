@@ -1,111 +1,132 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import remark from 'remark';
-import html from 'remark-html';
-// import fetch from 'node-fetch';
+// import fs from 'fs';
+// import path from 'path';
+// import matter from 'gray-matter';
+// import remark from 'remark';
+// import html from 'remark-html';
+import instance from '../axios';
 
-const postsDirectory = path.join(process.cwd(), 'posts');
+type FormValuse = {
+  items: [];
+};
 
-export function getSortedPostsData() {
-  // Get file names under /posts
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, '');
+export async function fetchPosts(page) {
+  const res = await instance.get(`/post/page?page=${page}&limit=20`);
+  const data: FormValuse = await res.data;
 
-    // Read markdown file as string
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
-
-    // Combine the data with the id
-    return {
-      id,
-      ...(matterResult.data as { date: string; title: string }),
-    };
-  });
-  // Sort posts by date
-
-  return allPostsData.sort(({ date: a }, { date: b }) => {
-    if (a < b) {
-      return 1;
-    } else if (a > b) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
+  return data.items;
 }
 
-export function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory);
-  // Returns an array that looks like this:
-  // [
-  //   {
-  //     params: {
-  //       id: 'ssg-ssr'
-  //     }
-  //   },
-  //   {
-  //     params: {
-  //       id: 'pre-rendering'
-  //     }
-  //   }
-  // ]
-
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, ''),
-      },
-    };
-  });
+export async function fetchData(page, posts, setPostsData, setHasMore, setPage) {
+  const componentsFormServer = await fetchPosts(page);
+  setPostsData([...posts, ...componentsFormServer]);
+  if (componentsFormServer.length === 0 || componentsFormServer.length < 20) {
+    setHasMore(false);
+  }
+  setPage(page + 1);
 }
 
-export async function getPostData(id: string) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
+// const postsDirectory = path.join(process.cwd(), 'posts');
 
-  // Use remark to convert markdown into HTML string
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+// export function getSortedPostsData() {
+//   // Get file names under /posts
+//   const fileNames = fs.readdirSync(postsDirectory);
+//   const allPostsData = fileNames.map((fileName) => {
+//     // Remove ".md" from file name to get id
+//     const id = fileName.replace(/\.md$/, '');
 
-  // Combine the data with the id
-  return {
-    id,
-    contentHtml,
-    ...(matterResult.data as { date: string; title: string }),
-  };
-}
+//     // Read markdown file as string
+//     const fullPath = path.join(postsDirectory, fileName);
+//     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-export async function getUserData(id: string) {
-  const url = 'http://localhost:3000/user';
-  const res = await fetch(url);
-  const userData = await res.json();
+//     // Use gray-matter to parse the post metadata section
+//     const matterResult = matter(fileContents);
 
-  return {
-    id,
-  };
-}
+//     // Combine the data with the id
+//     return {
+//       id,
+//       ...(matterResult.data as { date: string; title: string }),
+//     };
+//   });
+//   // Sort posts by date
 
-export async function getAllUserNames() {
-  const userUrl = 'http://localhost:3000/user';
-  const res = await fetch(userUrl);
-  const users = await res.json();
+//   return allPostsData.sort(({ date: a }, { date: b }) => {
+//     if (a < b) {
+//       return 1;
+//     } else if (a > b) {
+//       return -1;
+//     } else {
+//       return 0;
+//     }
+//   });
+// }
 
-  return users.data.map((user) => {
-    return {
-      params: {
-        username: user.username,
-      },
-    };
-  });
-}
+// export function getAllPostIds() {
+//   const fileNames = fs.readdirSync(postsDirectory);
+//   // Returns an array that looks like this:
+//   // [
+//   //   {
+//   //     params: {
+//   //       id: 'ssg-ssr'
+//   //     }
+//   //   },
+//   //   {
+//   //     params: {
+//   //       id: 'pre-rendering'
+//   //     }
+//   //   }
+//   // ]
+
+//   return fileNames.map((fileName) => {
+//     return {
+//       params: {
+//         id: fileName.replace(/\.md$/, ''),
+//       },
+//     };
+//   });
+// }
+
+// export async function getPostData(id: string) {
+//   const fullPath = path.join(postsDirectory, `${id}.md`);
+//   const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+//   // Use gray-matter to parse the post metadata section
+//   const matterResult = matter(fileContents);
+
+//   // Use remark to convert markdown into HTML string
+//   const processedContent = await remark()
+//     .use(html)
+//     .process(matterResult.content);
+//   const contentHtml = processedContent.toString();
+
+//   // Combine the data with the id
+//   return {
+//     id,
+//     contentHtml,
+//     ...(matterResult.data as { date: string; title: string }),
+//   };
+// }
+
+// export async function getUserData(id: string) {
+//   const url = 'http://localhost:3000/user';
+//   const res = await fetch(url);
+//   const userData = await res.json();
+
+//   return {
+//     id,
+//   };
+// }
+
+// export async function getAllUserNames() {
+//   const userUrl = 'http://localhost:3000/user';
+//   const res = await fetch(userUrl);
+//   const users = await res.json();
+
+//   return users.data.map((user) => {
+//     return {
+//       params: {
+//         username: user.username,
+//       },
+//     };
+//   });
+// }

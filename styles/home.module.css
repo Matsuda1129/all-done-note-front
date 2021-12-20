@@ -1,13 +1,3 @@
-.grid_container {
-  background-color: rgb(255, 255, 255, 0.7);
-  height: 150%;
-  position: absolute;
-  left: 3%;
-  right: 3%;
-  display: grid;
-  grid-template-columns: 2fr 5fr 3fr;
-  grid-template-areas: 'areaA areaB areaC';
-}
 
 .grid_container2 {
   position: absolute;
@@ -16,56 +6,21 @@
   display: grid;
   grid-template-rows: 7rem 1fr;
   grid-template-columns: 100%;
+  border-left: 2px solid gray;
+  border-right: 2px solid gray;
   grid-template-areas:
     ' areaB2 '
     ' areaD2 ';
 }
 
-.item_A {
-  grid-area: areaA;
-  border-left: 2px solid gray;
-  border-bottom: 2px solid gray;
-  height: 150%;
-}
-
 .item_B2 {
   grid-area: areaB2;
-  border-left: 2px solid gray;
-  border-right: 2px solid gray;
-  z-index: 1;
 }
 
-.item_C {
-  grid-area: areaC;
-  border-right: 2px solid gray;
-  border-bottom: 2px solid gray;
-  height: 150%;
-}
 .item_D2 {
   grid-area: areaD2;
-  border-left: 2px solid gray;
-  border-right: 2px solid gray;
-  z-index: 2;
 }
 
-.bodyBackground {
-  width: 100vw;
-  height: 100vh;
-  background-image: url('../public/images/mainBack.jpg');
-  background-size: 100% 100%;
-  background-attachment: fixed;
-}
-
-.position_fixed {
-  position: fixed;
-}
-
-.menubar_position {
-  position: relative;
-  top: 3%;
-  left: 10%;
-  right: 10%;
-}
 
 .content_grid_container {
   display: grid;
@@ -80,12 +35,12 @@
 .content_name {
   position: relative;
   margin-top: 3%;
-  left: 2%;
+  /* left: 2%; */
   grid-area: name;
 }
 .content_content {
   position: relative;
-  left: 80px;
+  /* left: 80px; */
   margin-bottom: 10px;
   grid-area: con;
 }
@@ -94,14 +49,6 @@
   justify-content: space-evenly;
   grid-area: bar;
   display: flex;
-}
-
-.iconHeart {
-  padding-top: 0.6rem;
-  padding-left: 4.5rem;
-  padding-bottom: 2rem;
-  background: url(../public/post/heart.jpg) no-repeat;
-  background-size: 4rem 4rem;
 }
 .iconHukidashi {
   padding-top: 0.6rem;
@@ -124,123 +71,6 @@
   padding-bottom: 2rem;
   background: url(../public/images/treeIcon.jpg) no-repeat;
   background-size: 5rem 5rem;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.content {
-  z-index: 2;
-  width: 50%;
-  height: 70%;
-  padding: 1em;
-  background: #fff;
-  border-radius: 2rem;
-}
-
-.textarea {
-  font-size: 1.5em;
-  width: 100%;
-  height: 80%;
-  border: none;
-}
-
-.post_button {
-  margin-top: 1rem;
-  background-color: rgb(35, 123, 196);
-  color: white;
-  border: 2px solid rgb(35, 123, 196);
-  border-radius: 1.5rem;
-  width: 120px;
-  height: 3.5rem;
-  white-space: normal;
-}
-
-.post_button:hover {
-  color: rgb(35, 123, 196);
-  background: #fff;
-  border: 2px solid rgb(35, 123, 196);
-}
-
-.batsu {
-  font-size: 100%; /*ボタンの大きさ*/
-  font-weight: bold;
-  border: 1px solid #999;
-  color: #999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
-  width: 1.3em;
-  line-height: 1em;
-  cursor: pointer;
-  transition: 0.2s;
-  margin-bottom: 1rem;
-}
-
-.batsu:hover {
-  background: #333;
-  border-color: #333;
-  color: #fff;
-}
-
-.heart {
-  position: absolute;
-  width: 0px;
-  height: 0px;
-  margin-top: 5px;
-}
-.heart:before,
-.heart:after {
-  position: absolute;
-  content: "";
-  left: 7px;
-  top: -7px;
-  width: 12px;
-  height: 19.2px;
-  background: #f88dc8;
-  border-radius: 50px 50px 0 0;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
-}
-.heart:after {
-  left: -6px;
-  transform: rotate(45deg);
-  transform-origin :100% 100%;
-}
-.offHeart {
-  position: absolute;
-  width: 0px;
-  height: 0px;
-  margin-top: 6px;
-}
-.offHeart:before,
-.offHeart:after {
-  position: absolute;
-  content: "";
-  left: 7px;
-  top: -7px;
-  width: 12px;
-  height: 19.2px;
-  background: #ada3a9;
-  border-radius: 50px 50px 0 0;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
-}
-.offHeart:after {
-  left: -6px;
-  transform: rotate(45deg);
-  transform-origin :100% 100%;
 }
 
 @media (max-width: 500px) {

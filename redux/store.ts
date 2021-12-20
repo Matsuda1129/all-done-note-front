@@ -6,6 +6,7 @@ import {
 import userReducer from './usersSlice';
 import counterReducer from './counterSlice';
 import postReducer from './postsSlice';
+import modalPostReducer from './modalSlice';
 import { persistReducer } from 'redux-persist';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
@@ -28,6 +29,7 @@ const storage =
     : createNoopStorage();
 
 const rootReducer = combineReducers({
+  modalPost: modalPostReducer,
   counter: counterReducer,
   users: userReducer,
   posts: postReducer,

@@ -1,0 +1,145 @@
+.grid_container {
+  background-color: rgb(255, 255, 255, 0.1);
+  position: absolute;
+  left: 20%;
+  right: 30%;
+  display: grid;
+  border-left: 2px solid gray;
+  border-right: 2px solid gray;
+  grid-template-rows: 20rem 0.1fr 5rem 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    ' areaA areaB'
+    ' areaC areaC'
+    ' areaD areaD'
+    ' areaE areaE';
+    /* ' areaF areaF' */
+}
+
+.item_A {
+  grid-area: areaA;
+}
+.item_B {
+  grid-area: areaB;
+}
+.item_C {
+  /* text-align: center; */
+  grid-area: areaC;
+}
+.item_D {
+  grid-area: areaD;
+}
+
+.item_E {
+  grid-area: areaE;
+}
+
+.item_F {
+  grid-area: areaF;
+  background-color: green;
+}
+
+.iconTree {
+  padding-top: 0.6rem;
+  padding-left: 13rem;
+  padding-bottom: 2rem;
+  background: url(../public/images/treeIcon.jpg) no-repeat;
+  background-size: 10rem 10rem;
+}
+.iconMovie {
+  padding-top: 0.6rem;
+  padding-left: 7rem;
+  padding-bottom: 2rem;
+  background: url(../public/images/movie.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconWill {
+  padding-top: 0.6rem;
+  padding-left: 7rem;
+  padding-bottom: 2rem;
+  background: url(../public/images/mail2.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+
+.flex_container_up {
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  position: relative;
+  left: 20%;
+  right: 20%;
+}
+
+.item_up {
+  margin: 5px;
+  background-color: rgb(35, 123, 196);
+  color: white;
+  border: 2px solid rgb(35, 123, 196);
+  border-radius: 1.5rem;
+  width: 100px;
+  height: 30px;
+}
+
+.item_up:hover {
+  color: rgb(35, 123, 196);
+  background: #fff;
+  border: 2px solid rgb(35, 123, 196);
+}
+.item_up2 {
+  margin: 20px;
+  margin-left: 25px;
+  background-color: white;
+  color: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+  border-radius: 1.5rem;
+  width: 150px;
+  height: 30px;
+}
+
+.item_up2:hover {
+  color: white;
+  background: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+}
+
+.flex_container_under {
+  position: relative;
+  top: 20%;
+  justify-content: space-evenly;
+  display: flex;
+}
+
+.position_name {
+  position: relative;
+  top: 25%;
+  bottom: 25%;
+  left: 20%;
+  right: 20%;
+}
+
+.alive {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 1.5rem;
+  width: 120px;
+  height: 35px;
+}
+
+.alive:hover {
+  color: white;
+  background: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+}
+
+.tab_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 3%;
+}
+
+.content {
+  white-space: pre;
+}
