@@ -7,7 +7,7 @@ export default function Upload() {
   return (
     <>
       <p>Upload a .png or .jpg image (max 1MB).</p>
-
+      <div>{process.env.FAVORITE_POKEMON}</div>
       <img src={imgurl}></img>
       <input
         onChange={uploadPhoto}
