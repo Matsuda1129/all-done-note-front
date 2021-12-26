@@ -8,6 +8,7 @@ export type User = {
   introduction: string | null;
   will: string | null;
   movie: string | null;
+  picture: string | null;
   gender: string | null;
   birthday: string | null;
   createdAt: Date | null;
@@ -29,6 +30,7 @@ const initialState: UserState = {
     alive: true,
     will: null,
     movie: null,
+    picture: null,
     gender: null,
     birthday: null,
     createdAt: null,

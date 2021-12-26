@@ -19,7 +19,11 @@ export default function Login() {
   } = useForm<FormValuse>();
 
   const onSubmit = async (data) => {
-    await login(data.email, data.password);
+    try {
+      await login(data.email, data.password);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

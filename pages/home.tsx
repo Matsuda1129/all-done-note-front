@@ -3,15 +3,16 @@ import { setUsers } from '../redux/usersSlice';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import { ProtectRoute } from '../components/protectRouter';
-import ResearchBar from '../components/researchBar';
-import CreatePostModal from '../components/createPostModal';
-import Header from '../components/header/header';
+import { ProtectRoute } from '../components/components/protectRouter/protectRouter';
+import {
+  Header,
+  InfinitePosts,
+  ResearchBar,
+  CreatePostModal,
+} from '../components/components';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import InfinitePosts from '../components/utils/infinitePosts';
-import { fetchPosts } from '../repositories/posts';
+import { fetchPosts, findPage1 } from '../repositories/posts';
 import { findLoginUser } from '../repositories/users';
-import { findPage1 } from '../repositories/posts';
 
 export default function Home() {
   const dispatch = useDispatch();

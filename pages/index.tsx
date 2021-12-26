@@ -1,9 +1,12 @@
 import Image from 'next/image';
 import Head from 'next/head';
 import Link from 'next/link';
-import Styles from '../styles/firstPage.module.css';
+import Styles from '../styles/index.module.css';
 
 export default function Index() {
+  const imgurl =
+    'https://all-done-note-dev-picture-bucket.s3.ap-northeast-1.amazonaws.com/treeIcon.jpg';
+
   return (
     <div>
       <Head>
@@ -16,8 +19,11 @@ export default function Index() {
             <span className={Styles.text}>
               ノート
               <Image
+                className={Styles.triming}
                 priority
-                src='/images/treeIcon.jpg'
+                src={
+                  'https://all-done-note-dev-picture-bucket.s3.ap-northeast-1.amazonaws.com/icons8-猫プロフィール-48.png'
+                }
                 height={80}
                 width={80}
                 alt={'アイコン'}

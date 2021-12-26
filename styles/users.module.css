@@ -13,7 +13,7 @@
     ' areaC areaC'
     ' areaD areaD'
     ' areaE areaE';
-    /* ' areaF areaF' */
+  /* ' areaF areaF' */
 }
 
 .item_A {
@@ -23,8 +23,8 @@
   grid-area: areaB;
 }
 .item_C {
-  /* text-align: center; */
   grid-area: areaC;
+  margin-left: 50px;
 }
 .item_D {
   grid-area: areaD;
@@ -61,6 +61,17 @@
   background-size: 5rem 5rem;
 }
 
+.flex_nameBar {
+  display: flex;
+}
+
+.nameBar_name {
+  margin-left: 20px;
+}
+
+.triming {
+  border-radius: 50%;
+}
 .flex_container_up {
   justify-content: space-evenly;
   display: flex;
@@ -98,6 +109,30 @@
 }
 
 .item_up2:hover {
+  color: white;
+  background: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+}
+
+.follow_btn {
+  margin: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: white;
+  color: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+  border-radius: 1.5rem;
+  width: 150px;
+  height: 30px;
+}
+
+.following_btn {
+  margin: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 1.5rem;
+  width: 150px;
+  height: 30px;
   color: white;
   background: rgb(0, 183, 255);
   border: 2px solid rgb(0, 183, 255);

@@ -27,7 +27,7 @@ export async function countOneLike(postId: number) {
 export async function deleteOneLike(postId: number, userId: number) {
   await instance({
     method: 'delete',
-    url: `${process.env.baseURL}/like`,
+    url: `like`,
     data: {
       userId: userId,
       postId: postId,

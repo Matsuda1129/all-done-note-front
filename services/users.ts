@@ -11,6 +11,7 @@ export async function login(email: string, password: string) {
 
     const jwt: any = await res.data;
     if (jwt.jwt === undefined) {
+      alert('メールドレスとパスワードを確認してください');
       throw 'メールドレスとパスワードを確認してください';
     }
     await Cookie.set('jwt', jwt.jwt);
