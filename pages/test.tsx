@@ -1,3 +1,5 @@
 export default function DisplayEnv() {
-  return <div>{process.env.FAVORITE_POKEMON}</div>;
+  console.log(process.env.NEXT_PUBLIC_FAVORITE_POKEMON);
+
+  return <div>{process.env.NEXT_PUBLIC_FAVORITE_POKEMON}</div>;
 }
