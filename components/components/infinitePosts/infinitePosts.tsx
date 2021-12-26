@@ -18,7 +18,7 @@ export default function InfinitePosts(props) {
                 <Image
                   className={Styles.icon}
                   priority
-                  src={`${process.env.Image_S3}` + post.user.picture}
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_URL}` + post.user.picture}
                   height={50}
                   width={50}
                   alt={'アイコン'}

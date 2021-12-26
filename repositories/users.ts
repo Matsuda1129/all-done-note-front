@@ -27,7 +27,6 @@ export async function editProfile(data, userId, userPicture) {
   if (data.alive === 'false') {
     alive = false;
   }
-  console.log(userPicture);
   deleteProfilephoto(userPicture);
   const res = await instance.put(`/user/${userId}`, {
     name: data.name,

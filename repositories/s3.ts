@@ -6,7 +6,7 @@ export async function uploadPhoto(e) {
   const res = await fetch(`/api/upload-url?file=${filename}`);
   const { url, fields } = await res.json();
   const formData: any = new FormData();
-
+  console.log(res);
   Object.entries({ ...fields, file }).forEach(([key, value]) => {
     formData.append(key, value);
   });
@@ -15,7 +15,6 @@ export async function uploadPhoto(e) {
     method: 'POST',
     body: formData,
   });
-  console.log(upload);
 
   if (upload.ok) {
     console.log(upload);
@@ -27,17 +26,19 @@ export async function uploadPhoto(e) {
 
 export async function deletePhoto(e) {
   aws.config.update({
-    accessKeyId: process.env.ACCESS_KEY,
-    secretAccessKey: process.env.SECRET_KEY,
-    region: process.env.REGION,
+    accessKeyId: process.env.NEXT_PUBLIC_ACCESS_KEY,
+    secretAccessKey: process.env.NEXT_PUBLIC_SECRET_KEY,
+    region: process.env.NEXT_PUBLIC_REGION,
     signatureVersion: 'v4',
   });
+  console.log(process.env.NEXT_PUBLIC_ACCESS_KEY);
+  console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
+  console.log(process.env.NEXT_PUBLIC_REGION);
   const file = e.target.files[0];
-  console.log(file);
   const filename = encodeURIComponent(file.name);
 
   const params = {
-    Bucket: process.env.BUCKET_NAME,
+    Bucket: process.env.NEXT_PUBLIC_BUCKET,
     Key: filename,
   };
 
@@ -50,17 +51,14 @@ export async function deletePhoto(e) {
 
 export async function deleteProfilephoto(filename) {
   aws.config.update({
-    accessKeyId: process.env.ACCESS_KEY,
-    secretAccessKey: process.env.SECRET_KEY,
-    region: process.env.REGION,
+    accessKeyId: process.env.NEXT_PUBLIC_ACCESS_KEY,
+    secretAccessKey: process.env.NEXT_PUBLIC_SECRET_KEY,
+    region: process.env.NEXT_PUBLIC_REGION,
     signatureVersion: 'v4',
   });
-  // const file = e.target.files[0];
-  // console.log(file);
-  // const filename = encodeURIComponent(file.name);
 
   const params = {
-    Bucket: process.env.BUCKET_NAME,
+    Bucket: process.env.NEXT_PUBLIC_BUCKET,
     Key: filename,
   };
 

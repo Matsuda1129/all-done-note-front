@@ -145,7 +145,7 @@ export default function User() {
                 <Image
                   className={Styles.triming}
                   priority
-                  src={`${process.env.Image_S3}` + loginUser.picture}
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_URL}` + loginUser.picture}
                   height={80}
                   width={80}
                   alt={'アイコン'}

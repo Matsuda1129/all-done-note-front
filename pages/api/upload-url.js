@@ -2,16 +2,15 @@ import aws from 'aws-sdk';
 
 export default async function handler(req, res) {
   aws.config.update({
-    accessKeyId: process.env.ACCESS_KEY,
-    secretAccessKey: process.env.SECRET_KEY,
-    region: process.env.REGION,
+    accessKeyId: process.env.NEXT_PUBLIC_ACCESS_KEY,
+    secretAccessKey: process.env.NEXT_PUBLIC_SECRET_KEY,
+    region: process.env.NEXT_PUBLIC_REGION,
     signatureVersion: 'v4',
   });
-  console.log(process.env.REGION);
 
   const s3 = new aws.S3();
   const post = await s3.createPresignedPost({
-    Bucket: process.env.BUCKET_NAME,
+    Bucket:  process.env.NEXT_PUBLIC_BUCKET ,
     Fields: {
       key: req.query.file,
     },
@@ -20,6 +19,5 @@ export default async function handler(req, res) {
       ['content-length-range', 0, 1048576], // up to 1 MB
     ],
   });
-
   res.status(200).json(post);
 }
