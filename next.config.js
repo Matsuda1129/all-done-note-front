@@ -10,6 +10,7 @@ module.exports = {
     BUCKET_NAME: 'all-done-note-dev-picture-bucket',
     Image_S3:
       'https://all-done-note-dev-picture-bucket.s3.ap-northeast-1.amazonaws.com/',
+    FAVORITE_POKEMON: 'pppppp',
   },
   images: {
     domains: [
