@@ -4,7 +4,7 @@ import router from 'next/router';
 
 export async function login(email: string, password: string) {
   try {
-    const res = await instance.post(`${process.env.baseURL}/user/login`, {
+    const res = await instance.post('/user/login', {
       email: email,
       password: password,
     });

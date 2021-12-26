@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 const jwt = Cookies.get('jwt');
 const instance = axios.create({
-  baseURL: `${process.env.baseURL}`,
+  baseURL: `${process.env.NEXT_PUBLIC_baseURL}`,
   // withCredentials: true,
   headers: {
     Authorization: `Bearer ${jwt}`,
