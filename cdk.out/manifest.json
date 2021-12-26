@@ -1,0 +1,75 @@
+{
+  "version": "15.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "HelloCdkStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "HelloCdkStack.template.json",
+        "validateOnSynth": false
+      },
+      "metadata": {
+        "/HelloCdkStack/MyFirstBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyFirstBucketB8884501",
+            "trace": [
+              "new Bucket (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/aws-s3/lib/bucket.js:619:26)",
+              "new HelloCdkStack (/Users/takuya/Documents/GitHub/all-done-note-front/lib/hello-cdk-stack.js:8:5)",
+              "Object.<anonymous> (/Users/takuya/Documents/GitHub/all-done-note-front/bin/hello-cdk.js:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/HelloCdkStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata",
+            "trace": [
+              "new MetadataResource (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/metadata-resource.js:22:30)",
+              "/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/synthesis.js:139:9",
+              "visit (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/synthesis.js:200:9)",
+              "visit (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/synthesis.js:197:9)",
+              "injectMetadataResources (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/synthesis.js:128:5)",
+              "Object.synthesize (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/synthesis.js:17:5)",
+              "App.synth (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/stage.js:103:41)",
+              "process.<anonymous> (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/app.js:53:51)",
+              "Object.onceWrapper (node:events:510:26)",
+              "process.emit (node:events:390:28)"
+            ]
+          }
+        ],
+        "/HelloCdkStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable",
+            "trace": [
+              "new MetadataResource (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/metadata-resource.js:30:35)",
+              "/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/synthesis.js:139:9",
+              "visit (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/synthesis.js:200:9)",
+              "visit (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/synthesis.js:197:9)",
+              "injectMetadataResources (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/synthesis.js:128:5)",
+              "Object.synthesize (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/private/synthesis.js:17:5)",
+              "App.synth (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/stage.js:103:41)",
+              "process.<anonymous> (/Users/takuya/Documents/GitHub/all-done-note-front/node_modules/@aws-cdk/core/lib/app.js:53:51)",
+              "Object.onceWrapper (node:events:510:26)",
+              "process.emit (node:events:390:28)"
+            ]
+          }
+        ]
+      },
+      "displayName": "HelloCdkStack"
+    }
+  }
+}

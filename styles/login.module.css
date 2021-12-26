@@ -1,0 +1,239 @@
+.grid_container {
+  position: absolute;
+  top: 5%;
+  left: 15%;
+  right: 15%;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'areaA areaA'
+    'areaB areaB'
+    'areaC areaF'
+    'areaC areaG'
+    'areaC areaH'
+    'areaI areaJ';
+  display: grid;
+  place-items: center;
+}
+
+.form {
+  grid-area: areaC;
+  display: flex;
+  flex-flow: column;
+  width: 60%;
+  height: 90%;
+}
+
+.item_A {
+  position: relative;
+  top: 20%;
+  right: 15%;
+  grid-area: areaA;
+}
+.item_B {
+  grid-area: areaB;
+  font-size: 3rem;
+}
+.item_C {
+  width: 100%;
+  height: 50%;
+  font-size: 2rem;
+  border-radius: 1rem;
+  margin: 1em auto;
+}
+.item_D {
+  width: 100%;
+  height: 50%;
+  font-size: 2rem;
+  border-radius: 1rem;
+  margin: 1em auto;
+}
+.item_E {
+  width: 100%;
+  height: 50%;
+  font-size: 2rem;
+  border-radius: 2rem;
+  text-align: center;
+  background-color: skyblue;
+  color: white;
+  border: 2px solid skyblue;
+  margin: 1em auto;
+}
+
+.item_E:hover {
+  color: skyblue;
+  background: #fff;
+  border: 2px solid skyblue;
+}
+.item_F {
+  grid-area: areaF;
+  width: 70%;
+  height: 50%;
+  font-size: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  background-color: rgb(35, 123, 196);
+  color: white;
+  border: 2px solid rgb(35, 123, 196);
+}
+
+.item_F:hover {
+  color: rgb(35, 123, 196);
+  background: #fff;
+  border: 2px solid rgb(35, 123, 196);
+}
+.item_G {
+  grid-area: areaG;
+  width: 70%;
+  height: 50%;
+  font-size: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  background-color: rgb(243, 76, 76);
+  color: white;
+  border: 2px solid rgb(243, 76, 76);
+}
+
+.item_G:hover {
+  color: rgb(243, 76, 76);
+  background: #fff;
+  border: 2px solid rgb(243, 76, 76);
+}
+
+.item_H {
+  grid-area: areaH;
+}
+.item_I {
+  grid-area: areaI;
+  position: relative;
+  left: 25%;
+}
+.item_J {
+  grid-area: areaJ;
+  position: relative;
+  right: 30%;
+}
+
+.text {
+  display: inline-block;
+}
+
+@media (max-width: 500px) {
+  .grid_container {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    left: 5%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 0.5fr 0.5fr 0.5fr 0.5fr;
+    grid-template-columns: 2.5fr 0.5fr;
+    grid-template-areas:
+      'areaB areaA'
+      'areaC areaC'
+      'areaF areaF'
+      'areaG areaG'
+      'areaI areaI'
+      'areaJ areaJ';
+    display: grid;
+    place-items: center;
+  }
+
+  .form {
+    grid-area: areaC;
+    display: flex;
+    flex-flow: column;
+    width: 60%;
+    height: 90%;
+  }
+
+  .item_A {
+    grid-area: areaA;
+    position: relative;
+    top: 10%;
+    right: 100%;
+  }
+  .item_B {
+    grid-area: areaB;
+    position: relative;
+    left: 10%;
+    font-size: 3rem;
+  }
+  .item_C {
+    width: 100%;
+    height: 50%;
+    font-size: 2rem;
+    border-radius: 1rem;
+    margin: 1em auto;
+  }
+  .item_D {
+    width: 100%;
+    height: 50%;
+    font-size: 2rem;
+    border-radius: 1rem;
+    margin: 1em auto;
+  }
+  .item_E {
+    width: 100%;
+    height: 50%;
+    font-size: 2rem;
+    border-radius: 2rem;
+    text-align: center;
+    background-color: skyblue;
+    color: white;
+    border: 2px solid skyblue;
+    margin: 1em auto;
+  }
+
+  .item_E:hover {
+    color: skyblue;
+    background: #fff;
+    border: 2px solid skyblue;
+  }
+  .item_F {
+    grid-area: areaF;
+    width: 70%;
+    height: 30%;
+    font-size: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    background-color: rgb(35, 123, 196);
+    color: white;
+    border: 2px solid rgb(35, 123, 196);
+  }
+
+  .item_F:hover {
+    color: rgb(35, 123, 196);
+    background: #fff;
+    border: 2px solid rgb(35, 123, 196);
+  }
+  .item_G {
+    grid-area: areaG;
+    width: 70%;
+    height: 30%;
+    font-size: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    background-color: rgb(243, 76, 76);
+    color: white;
+    border: 2px solid rgb(243, 76, 76);
+  }
+
+  .item_G:hover {
+    color: rgb(243, 76, 76);
+    background: #fff;
+    border: 2px solid rgb(243, 76, 76);
+  }
+
+  .item_I {
+    grid-area: areaI;
+    position: relative;
+    top: 0%;
+    left: 0%;
+  }
+  .item_J {
+    grid-area: areaJ;
+    position: relative;
+    right: 0%;
+  }
+}

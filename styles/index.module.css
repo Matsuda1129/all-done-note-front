@@ -1,0 +1,129 @@
+.grid_container {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  right: 15%;
+  display: grid; /* グリッドレイアウト */
+  grid-template-rows: 2fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-areas:
+    'areaA areaB'
+    'areaC areaD';
+}
+
+.item_A {
+  grid-area: areaA;
+  position: relative;
+  top: 20%;
+  overflow-wrap: keep-all;
+  font-size: 5rem;
+}
+.item_B {
+  grid-area: areaB;
+}
+.item_C {
+  grid-area: areaC;
+  position: relative;
+  top: 20%;
+  font-size: 2rem;
+}
+.item_D {
+  grid-area: areaD;
+}
+
+.bodyBackground {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../public/images/firstPageBack.jpg');
+  background-size: 100% 100%;
+}
+
+.text {
+  display: inline-block;
+}
+
+/* .btnLogin, */
+.btnLogin {
+  position: relative;
+  top: 50%;
+  left: 30%;
+  color: skyblue;
+  background-color: #fff;
+  border: 2px solid skyblue;
+  padding: 1rem 2rem 1rem 2rem;
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  border-color: skyblue;
+  border-radius: 100vh;
+}
+/* .btnLogin:hover, */
+.btnLogin:hover {
+  color: skyblue;
+  background: #fff;
+  border: 2px solid skyblue;
+}
+
+.btnAccount {
+  position: relative;
+  top: 30%;
+  left: 30%;
+  color: #fff;
+  background-color: blue;
+  padding: 1rem 2rem 1rem 2rem;
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  border-color: skyblue;
+  border-radius: 100vh;
+}
+/* .btnLogin:hover, */
+.btnAccount:hover {
+  color: #fff;
+  background: blue;
+}
+
+@media (max-width: 500px) {
+  .grid_container {
+    top: 0%;
+    display: grid; /* グリッドレイアウト */
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'areaA '
+      'areaC '
+      'areaB '
+      'areaD';
+  }
+
+  .description {
+    position: relative;
+    top: 25%;
+    font-size: 2rem;
+  }
+
+  .btnLogin {
+    position: relative;
+    top: 30%;
+    left: 15%;
+    color: skyblue;
+    background-color: #fff;
+    border: 2px solid skyblue;
+    padding: 1rem 2rem 1rem 2rem;
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+  }
+
+  .btnAccount {
+    position: relative;
+    top: 0%;
+    left: 15%;
+    color: #fff;
+    background-color: blue;
+    padding: 1rem 2rem 1rem 2rem;
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+  }
+}
