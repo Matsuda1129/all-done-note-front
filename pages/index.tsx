@@ -21,9 +21,7 @@ export default function Index() {
               <Image
                 className={Styles.triming}
                 priority
-                src={
-                  'https://all-done-note-dev-picture-bucket.s3.ap-northeast-1.amazonaws.com/icons8-猫プロフィール-48.png'
-                }
+                src={imgurl}
                 height={80}
                 width={80}
                 alt={'アイコン'}

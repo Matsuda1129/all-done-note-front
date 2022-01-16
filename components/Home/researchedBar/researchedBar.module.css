@@ -1,0 +1,20 @@
+.search_container {
+  display: flex;
+  margin: 3%;
+  height: 3.5rem;
+}
+
+.search_input {
+  height: 3.5rem;
+  margin-left: 5rem;
+  margin-right: 3%;
+  border-radius: 2em;
+  width: 150%;
+}
+
+.backButton {
+  border: transparent;
+  background-color: transparent;
+  font-size: 3rem;
+}
+

@@ -1,26 +1,24 @@
-
-.grid_container2 {
+.grid_container {
   position: absolute;
   left: 20%;
   right: 30%;
   display: grid;
-  grid-template-rows: 7rem 1fr;
+  grid-template-rows: 7rem 1fr 600px;
   grid-template-columns: 100%;
   border-left: 2px solid gray;
   border-right: 2px solid gray;
   grid-template-areas:
-    ' areaB2 '
-    ' areaD2 ';
+    ' areaB '
+    ' areaD ';
 }
 
-.item_B2 {
-  grid-area: areaB2;
+.item_B {
+  grid-area: areaB;
 }
 
-.item_D2 {
-  grid-area: areaD2;
+.item_D {
+  grid-area: areaD;
 }
-
 
 .content_grid_container {
   display: grid;
@@ -29,18 +27,20 @@
   grid-template-areas: 'name con bar';
 }
 
+.lastMessage {
+  text-align: center;
+}
+
 .content_border {
   border-top: 2px solid gray;
 }
 .content_name {
   position: relative;
   margin-top: 3%;
-  /* left: 2%; */
   grid-area: name;
 }
 .content_content {
   position: relative;
-  /* left: 80px; */
   margin-bottom: 10px;
   grid-area: con;
 }
@@ -77,17 +77,15 @@
   position: absolute;
   top: 4px;
   bottom: 0;
-  left: calc((100% - 280px)/2 + 4px);
+  left: calc((100% - 280px) / 2 + 4px);
   width: 272px;
   height: 272px;
   pointer-events: none;
-  content: "";
-  /* // 背景を透明にする（円形で画像が見える部分） */
+  content: '';
   background: transparent;
   border: 2px solid #fff;
   border-radius: 140px;
-  /* // 円以外の部分を影で埋める */
-  box-shadow: 0 0 1000px 1000px rgba(0,0,0,.5);
+  box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 500px) {

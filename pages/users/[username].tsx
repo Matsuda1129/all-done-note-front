@@ -1,15 +1,8 @@
 import Styles from '../../styles/users.module.css';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { ProtectRoute } from '../../components/components/protectRouter/protectRouter';
+import { ProtectRoute } from '../../components/Home/protectRouter/protectRouter';
 import { Button } from '../../components/utils';
-import {
-  InfiniteLikes,
-  EditProfileModal,
-  CreatePostModal,
-  InfinitePosts,
-  Header,
-} from '../../components/components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import 'react-tabs/style/react-tabs.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -17,15 +10,18 @@ import { reset } from '../../redux/usersSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { findOneUser } from '../../repositories/users';
-import { fetchPosts, findPage1 } from '../../repositories/posts';
+import { fetchPosts } from '../../repositories/posts';
 import {
   countOneFollowers,
   countOneFollowing,
   createOneFollowers,
   deleteOneFollower,
+  findOneFollower,
 } from '../../repositories/followers';
 import { logout } from '../../services/users';
 import Image from 'next/image';
+import { CreatePostModal, Header, InfinitePosts } from '../../components/Home';
+import { EditProfileModal, InfiniteLikes } from '../../components/MyPage';
 
 type user = {
   id: number;
@@ -63,8 +59,20 @@ export default function User() {
   useEffect(() => {
     if (username) {
       const firstFetch = async () => {
-        const page1 = await findPage1();
         const userData: user = await findOneUser(username);
+        if (loginUser.id !== null) {
+          const checkFollowData: any = await findOneFollower(
+            loginUser.id,
+            userData.id
+          );
+
+          if (checkFollowData.length === 0) {
+            setCheckFollow(false);
+          } else {
+            setCheckFollow(true);
+          }
+        }
+        const page1 = await fetchPosts(1);
         const countFollowerData: any = await countOneFollowers(userData.id);
         const countFollowingData: any = await countOneFollowing(userData.id);
         await setCountFollower(countFollowerData);
@@ -73,12 +81,14 @@ export default function User() {
         await setUser(userData);
         if (userData.id === loginUser.id) {
           await setCheckUser(true);
+        } else {
+          await setCheckUser(false);
         }
       };
       firstFetch();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username]);
+  }, [username, loginUser]);
 
   const showProfileModal = async () => {
     await setProfileModal(true);
@@ -145,9 +155,9 @@ export default function User() {
                 <Image
                   className={Styles.triming}
                   priority
-                  src={`${process.env.NEXT_PUBLIC_IMAGE_URL}` + loginUser.picture}
+                  src={process.env.NEXT_PUBLIC_IMAGE_URL + loginUser.picture}
                   height={80}
-                  width={80}
+                  width={100}
                   alt={'アイコン'}
                 />
                 <h1 className={Styles.nameBar_name}>{user.name}</h1>
@@ -164,16 +174,12 @@ export default function User() {
           </div>
           <div className={Styles.item_C}>
             <div className={Styles.content}>{user.introduction}</div>
-          </div>
-          <div className={Styles.item_D}>
             <div className={Styles.flex_container_under}>
               <div>フォロー中 {countFollowing}</div>
               <div>フォロワー {countFollower}</div>
               <Alive checkUser={checkUser} />
               <Logout checkUser={checkUser} logout={onLogout} />
             </div>
-          </div>
-          <div className={Styles.item_E}>
             <Tabs>
               <TabList className={Styles.tab_wrap}>
                 <Tab onClick={handleTabs1} style={tab === 1 ? underline : null}>

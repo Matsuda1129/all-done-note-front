@@ -6,14 +6,11 @@
   display: grid;
   border-left: 2px solid gray;
   border-right: 2px solid gray;
-  grid-template-rows: 20rem 0.1fr 5rem 1fr;
+  grid-template-rows: 20rem 1fr;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
     ' areaA areaB'
-    ' areaC areaC'
-    ' areaD areaD'
-    ' areaE areaE';
-  /* ' areaF areaF' */
+    ' areaC areaC';
 }
 
 .item_A {
@@ -22,21 +19,9 @@
 .item_B {
   grid-area: areaB;
 }
+
 .item_C {
   grid-area: areaC;
-  margin-left: 50px;
-}
-.item_D {
-  grid-area: areaD;
-}
-
-.item_E {
-  grid-area: areaE;
-}
-
-.item_F {
-  grid-area: areaF;
-  background-color: green;
 }
 
 .iconTree {
@@ -139,8 +124,9 @@
 }
 
 .flex_container_under {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
   position: relative;
-  top: 20%;
   justify-content: space-evenly;
   display: flex;
 }
@@ -176,5 +162,9 @@
 }
 
 .content {
-  white-space: pre;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 80%;
+  margin-top: 5rem;
+  overflow-wrap:  break-word;
 }

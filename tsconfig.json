@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -16,14 +12,22 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "downlevelIteration": true,
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "pages/posts/[id].tsx", "pages/ajax.tsx", "pages/Todo.js", "pages/TodoList.js", "pages/App.js", "pages/user.tsx", "pages/reduxUser.tsx", "pages/_app.tsx", "components/components/createPostModal"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "**/*.tsx",
+    "pages/posts/[id].tsx",
+    "pages/ajax.tsx",
+    "pages/Todo.js",
+    "pages/TodoList.js",
+    "pages/App.js",
+    "pages/user.tsx",
+    "pages/reduxUser.tsx",
+    "pages/_app.tsx",
+    "components/Home/createPostModal"
+  ],
+  "exclude": ["node_modules"],
 }

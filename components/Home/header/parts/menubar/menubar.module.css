@@ -1,0 +1,107 @@
+.container {
+  display: flex;
+  flex-flow: column;
+}
+
+.container div {
+  font-size: 1.5rem;
+}
+.container a {
+  font-size: 1.5rem;
+}
+
+.iconHome {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../../../public/menu/home.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconMail {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../../../public/menu/mail.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+
+.iconCheck {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../../../public/menu/check.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+
+.icon118251 {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../../../public/menu/118251.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconMushimegane {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../../../public/menu/mushimegane.jpg) no-repeat;
+
+  background-size: 5rem 5rem;
+}
+.iconPerson {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../../../public/menu/person.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconGrahp {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../../../public/menu/grahp.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  z-index: 2;
+  width: 50%;
+  padding: 1em;
+  background: #fff;
+}
+
+.post_button {
+  position: relative;
+  left: 10%;
+  right: 10%;
+  margin-top: 1rem;
+  background-color: rgb(35, 123, 196);
+  color: white;
+  border: 2px solid rgb(35, 123, 196);
+  border-radius: 1.5rem;
+  width: 120px;
+  height: 3.5rem;
+}
+
+.post_button:hover {
+  color: rgb(35, 123, 196);
+  background: #fff;
+  border: 2px solid rgb(35, 123, 196);
+}
+
+.modal {
+  z-index: 3;
+}

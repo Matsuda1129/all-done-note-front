@@ -1,0 +1,33 @@
+.follow_btn {
+  margin: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: white;
+  color: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+  border-radius: 1.5rem;
+  width: 150px;
+  height: 30px;
+}
+
+.following_btn {
+  margin: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 1.5rem;
+  width: 150px;
+  height: 30px;
+  color: white;
+  background: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+}
+
+.flex_container {
+  margin: 0 0 0 auto;
+  width: 330px;
+  display: flex;
+}
+
+.countFollower{
+  margin-top: 2rem;
+}

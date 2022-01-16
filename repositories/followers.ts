@@ -6,6 +6,15 @@ export async function findFollowers() {
   return res.data;
 }
 
+export async function findOneFollower(userId: number, followerId: number) {
+  const res = await instance.post('/follower/findOne', {
+    userId: userId,
+    followerId: followerId,
+  });
+
+  return res.data;
+}
+
 export async function createOneFollowers(userId: number, followerId: number) {
   const res = await instance.post('/follower', {
     userId: userId,
@@ -30,12 +39,12 @@ export async function countOneFollowing(userId: number) {
 
   return res.data;
 }
-export async function deleteOneFollower(userId: number,followerId: number) {
+export async function deleteOneFollower(userId: number, followerId: number) {
   const res = await instance({
     method: 'delete',
     url: '/follower',
     data: {
-      userId : userId,
+      userId: userId,
       followerId: followerId,
     },
   });

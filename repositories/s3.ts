@@ -1,8 +1,11 @@
 import aws from 'aws-sdk';
+import { editPicture } from './users';
 
 export async function uploadPhoto(e) {
+
   const file = e.target.files[0];
   const filename = encodeURIComponent(file.name);
+  console.log(filename);
   const res = await fetch(`/api/upload-url?file=${filename}`);
   const { url, fields } = await res.json();
   const formData: any = new FormData();

@@ -1,15 +1,15 @@
 import React from 'react';
-import { ResearchBar } from '../components/Home';
-import { Flash, Menubar } from '../components/parts';
-import Styles from '../styles/test.module.css';
+import { Header, ResearchBar } from '../components/Home';
+import { ProtectRoute } from '../components/Home/protectRouter/protectRouter';
+import Styles from '../styles/information.module.css';
 
-export default function Test() {
+export default function Information() {
   return (
-    <div className={Styles.bodyBackground}>
-      <div className={Styles.flex_container}>
-        <div className={Styles.position_fixed}>
-          <Menubar />
-        </div>
+    <ProtectRoute>
+      <header>
+        <Header />
+      </header>
+      <main>
         <div className={Styles.grid_container}>
           <div className={Styles.item_A}>
             <h1 className={Styles.title}>情報検索</h1>
@@ -22,8 +22,7 @@ export default function Test() {
             </div>
           </div>
         </div>
-        <Flash></Flash>
-      </div>
-    </div>
+      </main>
+    </ProtectRoute>
   );
 }
