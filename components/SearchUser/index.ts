@@ -1,2 +1,4 @@
-export { default as FollowButton } from './followButton/followButton';
-export { default as UserSearchBar } from './userSearchBar/userSearchBar';
+import UserSearchBar from './userSearchBar/userSearchBar';
+import SearchedUsers from './searchedUsers/searchedUsers';
+
+export { UserSearchBar, SearchedUsers };

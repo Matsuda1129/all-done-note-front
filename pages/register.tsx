@@ -3,8 +3,8 @@ import React from 'react';
 import Styles from '../styles/register.module.css';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
-import { createUser } from '../services/users';
-import { findAllUser } from '../repositories/users';
+import { usersService } from '../services';
+import { usersRepository } from '../repositories';
 
 type FormValuse = {
   name: string;
@@ -21,7 +21,7 @@ export default function Register() {
   } = useForm<FormValuse>();
 
   const onSubmit = async (data) => {
-    await createUser(data.name, data.email, data.password);
+    await usersService.register(data.name, data.email, data.password);
   };
 
   return (
@@ -49,7 +49,7 @@ export default function Register() {
               validate: {
                 checkName: async () => {
                   const { name } = getValues();
-                  const users = await findAllUser();
+                  const users = await usersRepository.findAll();
                   for (let i = 0; i < users.length; i++) {
                     if (name === users[i].name) {
                       return 'このニックネームはすでに登録されています';
@@ -73,7 +73,7 @@ export default function Register() {
               validate: {
                 checkEmail: async () => {
                   const { email } = getValues();
-                  const users = await findAllUser();
+                  const users = await usersRepository.findAll();
                   for (let i = 0; i < users.length; i++) {
                     if (email === users[i].email) {
                       return 'このメールドレスはすでに登録されています';

@@ -1,25 +1,9 @@
 import instance from '../axios';
 
-export async function findUserMoney(userId: number) {
+export async function findUserGroup(userId: number, group: string) {
   const res = await instance.post('todo/group', {
     userId: userId,
-    group: 'お金',
-  });
-
-  return res.data;
-}
-export async function findUserPreparation(userId: number) {
-  const res = await instance.post('todo/group', {
-    userId: userId,
-    group: '準備',
-  });
-
-  return res.data;
-}
-export async function findUserTodo(userId: number) {
-  const res = await instance.post('todo/group', {
-    userId: userId,
-    group: 'やりたいこと',
+    group: group,
   });
 
   return res.data;
@@ -30,6 +14,22 @@ export async function findLists(userId: number, group: string, genre: string) {
     userId: userId,
     group: group,
     genre: genre,
+  });
+
+  return res.data;
+}
+
+export async function findFinishedLists(
+  userId: number,
+  group: string,
+  genre: string,
+  finished: boolean
+) {
+  const res = await instance.post('todo/genre/finish', {
+    userId: userId,
+    group: group,
+    genre: genre,
+    finished: finished,
   });
 
   return res.data;

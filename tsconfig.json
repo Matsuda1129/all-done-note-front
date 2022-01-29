@@ -13,7 +13,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "downlevelIteration": true,
+    "downlevelIteration": true
   },
   "include": [
     "next-env.d.ts",
@@ -29,5 +29,5 @@
     "pages/_app.tsx",
     "components/Home/createPostModal"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules"]
 }

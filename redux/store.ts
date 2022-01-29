@@ -7,6 +7,8 @@ import userReducer from './usersSlice';
 import counterReducer from './counterSlice';
 import postReducer from './postsSlice';
 import modalPostReducer from './modalSlice';
+import isUseEffectReducer from './isUseEffect';
+import todoSearchBarReducer from './todos/todoSearchBarSlice';
 import { persistReducer } from 'redux-persist';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
@@ -29,10 +31,12 @@ const storage =
     : createNoopStorage();
 
 const rootReducer = combineReducers({
+  isUseEffect: isUseEffectReducer,
   modalPost: modalPostReducer,
   counter: counterReducer,
   users: userReducer,
   posts: postReducer,
+  todoSearchBar: todoSearchBarReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

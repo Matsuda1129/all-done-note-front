@@ -1,55 +1,81 @@
 import React, { useEffect, useState } from 'react';
-import { findLists } from '../../../repositories/todos';
-import TodoLists from '../parts/todoLists.tsx/todoLists';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { todosRepository } from '../../../repositories';
+import TodoLists from './parts/todoLists';
+import Styles from './todoGenreList.module.css';
 
-export default function TodoGenreList(props) {
+export default function TodoGenreList({
+  userId,
+  genre,
+  group,
+  searchBarState,
+}) {
   const [lists, setList] = useState([]);
+  const [genres, setGenres] = useState('');
+  const isUseEffect = useSelector(
+    (state: RootState) => state.isUseEffect.isUseEffect
+  );
+
   useEffect(() => {
     const firstFetch = async () => {
       try {
-        const listData: any = await findLists(
-          props.userId,
-          props.group,
-          props.genre
-        );
-        await setList(listData);
+        if (searchBarState.finished) {
+          const finishedListData: any = await todosRepository.findFinishedLists(
+            userId,
+            group,
+            genre,
+            true
+          );
+
+          await setList(finishedListData);
+        } else if (searchBarState.unfinished) {
+          const finishedListData: any = await todosRepository.findFinishedLists(
+            userId,
+            group,
+            genre,
+            false
+          );
+
+          await setList(finishedListData);
+        } else {
+          const listData: any = await todosRepository.findLists(
+            userId,
+            group,
+            genre
+          );
+          await setList(listData);
+        }
+
+        if (searchBarState.genre === undefined) {
+          await setGenres(genre);
+        } else {
+          await setGenres(searchBarState.genre);
+        }
       } catch (error) {
         console.log(error);
       }
     };
     firstFetch();
-  }, [props.genre, props.group, props.isUseEffect, props.userId]);
+  }, [
+    genre,
+    group,
+    searchBarState.finished,
+    searchBarState.genre,
+    searchBarState.unfinished,
+    userId,
+  ]);
 
-  useEffect(() => {
-    if (props.isUseEffect === false) {
-      const firstFetch = async () => {
-        try {
-          const listData: any = await findLists(
-            props.userId,
-            props.group,
-            props.genre
-          );
-          console.log(listData);
-          await setList(listData);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      firstFetch();
-    }
-  }, [props.genre, props.group, props.isUseEffect, props.userId]);
-
-  return (
-    <div>
-      {lists.map((list) => {
-        return (
-          <TodoLists
-            key={list}
-            list={list}
-            setIsUseEffect={props.setIsUseEffect}
-          />
-        );
-      })}
-    </div>
-  );
+  if (lists.length === 0 || genres !== genre) {
+    return null;
+  } else {
+    return (
+      <div>
+        <div className={Styles.genre_title}>{genre}</div>
+        {lists.map((list) => {
+          return <TodoLists key={list.id} list={list} userId={userId} />;
+        })}
+      </div>
+    );
+  }
 }

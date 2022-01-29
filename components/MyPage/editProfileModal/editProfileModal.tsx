@@ -2,12 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { useForm } from 'react-hook-form';
 import { setUsers } from '../../../redux/usersSlice';
-import { editProfile } from '../../../repositories/users';
 import Styles from './editProfileModal.module.css';
 import { Button } from '../../utils';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import { uploadPhoto } from '../../../repositories/s3';
+import { s3Repository, usersRepository } from '../../../repositories';
 
 type FormValuse = {
   name: string;
@@ -18,7 +17,11 @@ type FormValuse = {
   picture: string;
 };
 
-export default function ProfileModal(props) {
+export default function ProfileModal({
+  profileModal,
+  setProfileModal,
+  setUser,
+}) {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.users.user);
   const {
@@ -28,11 +31,10 @@ export default function ProfileModal(props) {
   } = useForm<FormValuse>();
 
   const onSubmit = async (data) => {
-    console.log(data);
     try {
-      const editedData = await editProfile(data, user);
-      await dispatch(setUsers(editedData));
-      await dispatch(() => props.setUser(editedData));
+      const updateData = await usersRepository.update(data, user);
+      await dispatch(setUsers(updateData));
+      await dispatch(() => setUser(updateData));
       alert('プロフィールを編集しました');
       await dispatch(() => showOffProfileModal());
     } catch (e) {
@@ -41,10 +43,10 @@ export default function ProfileModal(props) {
   };
 
   const showOffProfileModal = async () => {
-    await props.setProfileModal(false);
+    await setProfileModal(false);
   };
 
-  if (props.profileModal) {
+  if (profileModal) {
     return (
       <div>
         <div className={Styles.overlay}>
@@ -84,6 +86,7 @@ export default function ProfileModal(props) {
                   defaultValue={user.introduction}
                   className={Styles.flex_container_item}
                 />
+                {errors.birthday && <p>{errors.birthday.message}</p>}
                 <div className={Styles.flex_container_row}>
                   <label>性別</label>
                   <Select
@@ -100,16 +103,19 @@ export default function ProfileModal(props) {
                     <MenuItem value={'true'}>alive</MenuItem>
                     <MenuItem value={'false'}>dead</MenuItem>
                   </Select>
+
                   <label>誕生日</label>
                   <input
-                    {...register('birthday')}
+                    {...register('birthday', {
+                      required: '誕生日は必須項目です',
+                    })}
                     type='date'
                     defaultValue={user.birthday}
                   />
                 </div>
                 <input
                   {...register('picture')}
-                  onChange={uploadPhoto}
+                  onChange={s3Repository.uploadPhoto}
                   type='file'
                   accept='image/png, image/jpeg'
                   className={Styles.flex_container_item}

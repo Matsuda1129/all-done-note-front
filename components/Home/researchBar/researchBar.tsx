@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Styles from './researchBar.module.css';
-import { Button } from '../../utils';
 import { useForm } from 'react-hook-form';
-import { findAllPost } from '../../../repositories/posts';
+import { Button } from '../../utils';
 
 type FormValuse = {
   searchword: string;
 };
 
-export default function ResearchBar(props) {
+export default function ResearchBar({
+  searchWord,
+  setSearchWord,
+  setCheckedSearch,
+}) {
   const {
     register,
     handleSubmit,
@@ -16,18 +19,19 @@ export default function ResearchBar(props) {
   } = useForm<FormValuse>();
 
   const onSubmit = async (data) => {
-    await props.setCheckedSearch(true);
+    await setCheckedSearch(true);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={Styles.search_container}>
+      <div className={Styles.container}>
         <input
+          className={Styles.input}
           {...register('searchword', {})}
           type='text'
           placeholder='キーワード検索'
-          onChange={(e) => props.setSearchWord(e.target.value)}
-          value={props.searchWord}
+          onChange={(e) => setSearchWord(e.target.value)}
+          value={searchWord}
         />
         <Button>検索する</Button>
       </div>

@@ -4,7 +4,7 @@ import Styles from '../styles/login.module.css';
 import { useForm } from 'react-hook-form';
 import React from 'react';
 import Link from 'next/link';
-import { login } from '../services/users';
+import { usersService } from '../services';
 
 type FormValuse = {
   email: string;
@@ -20,7 +20,7 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     try {
-      await login(data.email, data.password);
+      await usersService.login(data.email, data.password);
     } catch (error) {
       alert(error);
     }

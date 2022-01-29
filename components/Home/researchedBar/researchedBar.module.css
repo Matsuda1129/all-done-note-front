@@ -1,10 +1,10 @@
-.search_container {
+.container {
   display: flex;
   margin: 3%;
   height: 3.5rem;
 }
 
-.search_input {
+.input {
   height: 3.5rem;
   margin-left: 5rem;
   margin-right: 3%;
@@ -17,4 +17,3 @@
   background-color: transparent;
   font-size: 3rem;
 }
-

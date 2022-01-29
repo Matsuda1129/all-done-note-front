@@ -32,10 +32,9 @@ export default function UserSearchBar(props) {
         <label>性別</label>
         <Select
           {...register('gender')}
-          className={Styles.flex_container_item３}
           onChange={(e) => props.setGender(e.target.value)}
         >
-          <MenuItem value=''>未選択</MenuItem>
+          <MenuItem defaultValue=''>未選択</MenuItem>
           <MenuItem value='man'>男性</MenuItem>
           <MenuItem value='woman'>女性</MenuItem>
           <MenuItem value='other'>その他</MenuItem>
@@ -46,7 +45,7 @@ export default function UserSearchBar(props) {
           className={Styles.flex_container_item３}
           onChange={(e) => props.setAge(e.target.value)}
         >
-          <MenuItem value=''>未選択</MenuItem>
+          <MenuItem defaultValue=''>未選択</MenuItem>
           <MenuItem value={10}>10代</MenuItem>
           <MenuItem value={20}>20代</MenuItem>
           <MenuItem value={30}>30代</MenuItem>

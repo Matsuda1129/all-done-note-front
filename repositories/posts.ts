@@ -1,13 +1,13 @@
 import instance from '../axios';
 
-export async function fetchPosts(page: number) {
+export async function fetchData(page: number) {
   const res = await instance.get(`/post/page?page=${page}&limit=20`);
   const data: any = await res.data;
 
   return data.items;
 }
 
-export async function fetchSearchedPosts(page: number, searchWord: string) {
+export async function fetchSearch(page: number, searchWord: string) {
   if (searchWord) {
     const res = await instance.get(
       `/post/${searchWord}/page?page=${page}&limit=20`
@@ -20,7 +20,16 @@ export async function fetchSearchedPosts(page: number, searchWord: string) {
   }
 }
 
-export async function createPost(userId, content) {
+export async function userPosts(page: number, searchId: number) {
+  const res = await instance.post(`/post/searchId/page?page=${page}&limit=20`, {
+    searchId,
+  });
+  const data: any = await res.data;
+
+  return data.items;
+}
+
+export async function create(userId, content) {
   await instance.post('post', {
     userId: userId,
     content: content,

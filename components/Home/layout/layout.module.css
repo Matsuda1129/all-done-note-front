@@ -1,0 +1,81 @@
+.position_fixed {
+  position: fixed;
+}
+
+.bodyBackground {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../../public/images/mainBack.jpg');
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+.grid_container {
+  background-color: rgb(255, 255, 255, 0.7);
+  height: 150%;
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  display: grid;
+  grid-template-columns: 2fr 5fr 3fr;
+  grid-template-areas: 'areaA areaB areaC';
+}
+
+.item_A {
+  grid-area: areaA;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.item_B {
+  position: absolute;
+  left: 20%;
+  right: 30%;
+  border-left: 2px solid gray;
+  border-right: 2px solid gray;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+.item_C {
+  grid-area: areaC;
+  border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.menubar_position {
+  position: relative;
+  top: 3%;
+  left: 10%;
+  right: 10%;
+}
+
+@media (max-width: 950px) {
+  .item_B {
+    position: absolute;
+    left: 30%;
+    right: 3%;
+  }
+
+  .item_C {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .grid_container {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+  }
+  .item_B {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+  }
+
+  .item_A {
+    display: none;
+  }
+}

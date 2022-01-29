@@ -1,21 +1,17 @@
 import instance from '../axios';
 
-export async function findFollowers() {
-  const res = await instance.get('/follower');
+export async function findFollower(userId: number, followerId: number) {
+  if (userId !== null) {
+    const res = await instance.post('/follower/findOne', {
+      userId: userId,
+      followerId: followerId,
+    });
 
-  return res.data;
+    return res.data;
+  }
 }
 
-export async function findOneFollower(userId: number, followerId: number) {
-  const res = await instance.post('/follower/findOne', {
-    userId: userId,
-    followerId: followerId,
-  });
-
-  return res.data;
-}
-
-export async function createOneFollowers(userId: number, followerId: number) {
+export async function create(userId: number, followerId: number) {
   const res = await instance.post('/follower', {
     userId: userId,
     followerId: followerId,
@@ -24,7 +20,7 @@ export async function createOneFollowers(userId: number, followerId: number) {
   return res.data;
 }
 
-export async function countOneFollowers(followerId: number) {
+export async function countFollowers(followerId: number) {
   const res = await instance.post('/follower/count', {
     followerId: followerId,
   });
@@ -32,14 +28,14 @@ export async function countOneFollowers(followerId: number) {
   return res.data;
 }
 
-export async function countOneFollowing(userId: number) {
+export async function countFollowing(userId: number) {
   const res = await instance.post('/follower/count/following', {
     userId: userId,
   });
 
   return res.data;
 }
-export async function deleteOneFollower(userId: number, followerId: number) {
+export async function deleteOne(userId: number, followerId: number) {
   const res = await instance({
     method: 'delete',
     url: '/follower',

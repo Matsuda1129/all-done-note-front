@@ -1,0 +1,15 @@
+.userBar {
+  display: flex;
+  padding: 2rem;
+  width: 100%;
+  border-top: 2px solid gray;
+}
+
+.triming {
+  border-radius: 50%;
+}
+
+.name {
+  margin-left: 3rem;
+  margin-top: 2rem;
+}

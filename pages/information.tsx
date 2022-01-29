@@ -1,28 +1,26 @@
-import React from 'react';
-import { Header, ResearchBar } from '../components/Home';
-import { ProtectRoute } from '../components/Home/protectRouter/protectRouter';
-import Styles from '../styles/information.module.css';
+import React, { useState } from 'react';
+import { Layout } from '../components/Home';
+import {
+  InformationSearchBar,
+  SearchedInformation,
+} from '../components/Information';
 
 export default function Information() {
+  const [searchTitle, setSearchTitle] = useState('');
+  const [searchGenre, setSearchGenre] = useState(undefined);
+
   return (
-    <ProtectRoute>
-      <header>
-        <Header />
-      </header>
-      <main>
-        <div className={Styles.grid_container}>
-          <div className={Styles.item_A}>
-            <h1 className={Styles.title}>情報検索</h1>
-            <ResearchBar />
-          </div>
-          <div className={Styles.item_B}>
-            <div className={Styles.information}>
-              <a href=''>タイトル</a>
-              <div>内容</div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </ProtectRoute>
+    <Layout>
+      <h1 style={{ textAlign: 'center' }}>情報検索</h1>
+      <InformationSearchBar
+        setSearchTitle={setSearchTitle}
+        setSearchGenre={setSearchGenre}
+        searchTitle={searchTitle}
+      />
+      <SearchedInformation
+        searchGenre={searchGenre}
+        searchTitle={searchTitle}
+      />
+    </Layout>
   );
 }

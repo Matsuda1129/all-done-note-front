@@ -1,0 +1,53 @@
+.iconMovie {
+  padding-top: 0.6rem;
+  padding-left: 7rem;
+  padding-bottom: 2rem;
+  background: url(../../../public/images/movie.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconWill {
+  padding-top: 0.6rem;
+  padding-left: 7rem;
+  padding-bottom: 2rem;
+  background: url(../../../public/images/mail2.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+
+.flex_container {
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+}
+
+.will_btn {
+  margin: 5px;
+  background-color: rgb(35, 123, 196);
+  color: white;
+  border: 2px solid rgb(35, 123, 196);
+  border-radius: 1.5rem;
+  width: 100px;
+  height: 30px;
+}
+
+.will_btn:hover {
+  color: rgb(35, 123, 196);
+  background: #fff;
+  border: 2px solid rgb(35, 123, 196);
+}
+
+.profile_btn {
+  margin: 20px;
+  margin-left: 25px;
+  background-color: white;
+  color: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+  border-radius: 1.5rem;
+  width: 150px;
+  height: 30px;
+}
+
+.profile_btn:hover {
+  color: white;
+  background: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+}

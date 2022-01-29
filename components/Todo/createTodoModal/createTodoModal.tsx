@@ -6,6 +6,7 @@ import { Button } from '../../utils';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createOneList } from '../../../repositories/todos';
+import { setTrue } from '../../../redux/isUseEffect';
 
 type FormValuse = {
   group: string;
@@ -15,7 +16,11 @@ type FormValuse = {
   money: number;
 };
 
-export default function CreateTodoModal(props) {
+export default function CreateTodoModal({
+  createTodoModal,
+  openCreateTodoModal,
+}) {
+  const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.users.user);
   const {
     register,
@@ -26,39 +31,38 @@ export default function CreateTodoModal(props) {
   const onSubmit = async (data) => {
     try {
       await createOneList(data, user.id);
+      await dispatch(setTrue());
       alert('todoリストを作成しました');
-      await props.openCreateTodoModal();
+      await openCreateTodoModal();
     } catch (e) {
       alert(e);
     }
   };
 
-  if (props.createTodoModal) {
+  if (createTodoModal) {
     return (
       <div>
         <div className={Styles.overlay}>
           <div className={Styles.content}>
-            <button
-              className={Styles.batsu}
-              onClick={props.openCreateTodoModal}
-            >
+            <button className={Styles.batsu} onClick={openCreateTodoModal}>
               ×
             </button>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={Styles.flex_container}>
                 <div className={Styles.flex_container_row}>
                   <label>グループ</label>
-                  <Select
-                    {...register('group')}
-                    defaultValue={'お金'}
-                  >
+                  <Select {...register('group')} defaultValue={'お金'}>
                     <MenuItem value='お金'>お金</MenuItem>
                     <MenuItem value='準備'>準備</MenuItem>
                     <MenuItem value='やりたいこと'>やりたいこと</MenuItem>
                   </Select>
                 </div>
                 <div className={Styles.flex_container_row}>
-                  {errors.genre && <div className={Styles.redColor}>{errors.genre.message}</div>}
+                  {errors.genre && (
+                    <div className={Styles.redColor}>
+                      {errors.genre.message}
+                    </div>
+                  )}
                   <label>ジャンル</label>
                   <input
                     {...register('genre', {
@@ -72,7 +76,11 @@ export default function CreateTodoModal(props) {
                   />
                 </div>
 
-                {errors.listname && <div className={Styles.redColor}>{errors.listname.message}</div>}
+                {errors.listname && (
+                  <div className={Styles.redColor}>
+                    {errors.listname.message}
+                  </div>
+                )}
                 <label>リスト名</label>
                 <input
                   {...register('listname', {
@@ -87,7 +95,9 @@ export default function CreateTodoModal(props) {
                   className={Styles.flex_container_item}
                 />
 
-                {errors.money && <div className={Styles.redColor}>{errors.money.message}</div>}
+                {errors.money && (
+                  <div className={Styles.redColor}>{errors.money.message}</div>
+                )}
                 <label>費用</label>
                 <input
                   {...register('money', {
@@ -97,7 +107,9 @@ export default function CreateTodoModal(props) {
                   placeholder='10000'
                   className={Styles.flex_container_item}
                 />
-                {errors.memo && <div className={Styles.redColor}>{errors.memo.message}</div>}
+                {errors.memo && (
+                  <div className={Styles.redColor}>{errors.memo.message}</div>
+                )}
                 <label>メモ</label>
                 <textarea
                   rows={5}

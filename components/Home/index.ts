@@ -1,5 +1,7 @@
-export { default as ResearchBar } from './researchBar/researchBar';
-export { default as ResearchedBar } from './researchedBar/researchedBar';
-export { default as InfinitePosts } from './infinitePosts/infinitePosts';
-export { default as Header } from './header/header';
-export { default as CreatePostModal } from './createPostModal/createPostModal';
+import ResearchBar from './researchBar/researchBar';
+import ResearchedBar from './researchedBar/researchedBar';
+import Layout from './layout/layout';
+import AllPosts from './allPosts/allPosts';
+import SearchPosts from './searchPosts/searchPosts';
+
+export { ResearchBar, ResearchedBar, Layout, AllPosts, SearchPosts };

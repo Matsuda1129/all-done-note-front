@@ -1,28 +1,27 @@
 import instance from '../axios';
-import { deleteProfilephoto } from './s3';
 
-export async function findAllUser() {
+export async function findAll() {
   const res = await instance.get('user');
   const users: any = res.data;
 
   return users;
 }
 
-export async function findLoginUser() {
+export async function findLogin() {
   const res = await instance.get('/user/cookie');
   const cookie = await res.data;
 
   return cookie;
 }
 
-export async function findOneUser(username: string) {
+export async function find(username: string) {
   const res = await instance.get(`/user/${username}`);
   const user = await res.data;
 
   return user;
 }
 
-export async function editProfile(data, user) {
+export async function update(data, user) {
   function getAge(birthday) {
     //今日
     const dateObject = new Date(birthday);
@@ -48,11 +47,14 @@ export async function editProfile(data, user) {
 
     return age;
   }
+
   const age = getAge(data.birthday);
+
   let alive = true;
   if (data.alive === 'false') {
     alive = false;
   }
+
   let picture;
   if (data.picture.length === 0) {
     picture = user.picture;
@@ -80,7 +82,7 @@ export async function editPicture(userId, picture) {
   return res.data;
 }
 
-export async function searchUser(searchWord, page, gender, age) {
+export async function fetchSearch(searchWord, page, gender, age) {
   const res: any = await instance.post(`/user/page?page=${page}&limit=20`, {
     searchWord: searchWord,
     gender: gender,
@@ -88,4 +90,7 @@ export async function searchUser(searchWord, page, gender, age) {
   });
 
   return res.data.items;
+}
+
+{
 }

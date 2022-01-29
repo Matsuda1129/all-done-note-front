@@ -1,12 +1,7 @@
-import instance from '../axios';
-import {
-  findUserMoney,
-  findUserPreparation,
-  findUserTodo,
-} from '../repositories/todos';
+import { todosRepository } from '../repositories';
 
-export async function findUserTodoGenre(userId: number) {
-  const data: any = await findUserTodo(userId);
+export async function findUserGenre(userId: number, group: string) {
+  const data: any = await todosRepository.findUserGroup(userId, group);
 
   let genres = [];
   for (let i = 0; i < data.length; i++) {
@@ -17,26 +12,17 @@ export async function findUserTodoGenre(userId: number) {
   return array;
 }
 
-export async function findUserMoneyGenre(userId: number) {
-  const data: any = await findUserMoney(userId);
+export async function findTodoPercent(userId: number, group: string) {
+  const groupData: any = await todosRepository.findUserGroup(userId, group);
 
-  let genres = [];
-  for (let i = 0; i < data.length; i++) {
-    genres.push(data[i].genre);
+  let countFinished = 0;
+  for (let i = 0; i < groupData.length; i++) {
+    if (groupData[i].finished === true) {
+      countFinished += 1;
+    }
   }
-  const array = [...new Set(genres)];
 
-  return array;
-}
+  const percent = await Math.floor((countFinished / groupData.length) * 100);
 
-export async function findUserPreparationGenre(userId: number) {
-  const data: any = await findUserPreparation(userId);
-
-  let genres = [];
-  for (let i = 0; i < data.length; i++) {
-    genres.push(data[i].genre);
-  }
-  const array = [...new Set(genres)];
-
-  return array;
+  return percent;
 }

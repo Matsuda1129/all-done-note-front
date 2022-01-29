@@ -1,0 +1,13 @@
+.search_input {
+  height: 3.5rem;
+  margin-left: 5rem;
+  margin-right: 3%;
+  border-radius: 2em;
+  width: 50%;
+}
+
+
+.flex_container_searchBar {
+  display: flex;
+  justify-content: center;
+}

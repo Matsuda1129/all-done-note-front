@@ -1,29 +1,43 @@
 import React from 'react';
-import { ResearchBar } from '../components/Home';
-import { Flash, Menubar } from '../components/parts';
-import Styles from '../styles/test.module.css';
 
 export default function Test() {
+  const OnFileSelect = async (e) => {
+    // ファイルリストを取得
+    console.log(e);
+    let fileList = e.target.files;
+    console.log(fileList);
+
+    // ファイルの数を取得
+    let fileCount = fileList.length;
+
+    // HTML文字列の生成
+    let fileListBody =
+      '選択されたファイルの数 = ' + fileCount + '<br/><br/>¥r¥n';
+
+    // 選択されたファイルの数だけ処理する
+    for (let i = 0; i < fileCount; i++) {
+      // ファイルを取得
+      let file = fileList[i];
+
+      // ファイルの情報を文字列に格納
+      fileListBody += '[ ' + (i + 1) + 'ファイル目 ]<br/>¥r¥n';
+      fileListBody += 'name             = ' + file.name + '<br/>¥r¥n';
+      fileListBody += 'type             = ' + file.type + '<br/>¥r¥n';
+      fileListBody += 'size             = ' + file.size + '<br/>¥r¥n';
+      fileListBody +=
+        'lastModifiedDate = ' + file.lastModifiedDate + '<br/>¥r¥n';
+      fileListBody += 'lastModified     = ' + file.lastModified + '<br/>¥r¥n';
+      fileListBody += '<br/>¥r¥n';
+    }
+
+    // 結果のHTMLを流し込む
+    document.getElementById('ID001').innerHTML = fileListBody;
+  };
+
   return (
-    <div className={Styles.bodyBackground}>
-      <div className={Styles.flex_container}>
-        <div className={Styles.position_fixed}>
-          <Menubar />
-        </div>
-        <div className={Styles.grid_container}>
-          <div className={Styles.item_A}>
-            <h1 className={Styles.title}>情報検索</h1>
-            <ResearchBar />
-          </div>
-          <div className={Styles.item_B}>
-            <div className={Styles.information}>
-              <a href=''>タイトル</a>
-              <div>内容</div>
-            </div>
-          </div>
-        </div>
-        <Flash></Flash>
-      </div>
+    <div>
+      <input type='file' onChange={OnFileSelect} multiple />
+      <ul id='ID001'></ul>
     </div>
   );
 }
