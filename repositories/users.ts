@@ -61,12 +61,15 @@ export async function update(data, user) {
   } else {
     picture = data.picture[0].name;
   }
+  const savings = Number(data.savings);
   const res = await instance.put(`/user/${user.id}`, {
     name: data.name,
     introduction: data.introduction,
     gender: data.gender,
     alive: alive,
     birthday: data.birthday,
+    job: data.job,
+    savings: savings,
     picture: picture,
     age: age,
   });
@@ -82,15 +85,13 @@ export async function editPicture(userId, picture) {
   return res.data;
 }
 
-export async function fetchSearch(searchWord, page, gender, age) {
+export async function fetchSearch(searchWord, page, gender, age, job) {
   const res: any = await instance.post(`/user/page?page=${page}&limit=20`, {
     searchWord: searchWord,
     gender: gender,
     age: age,
+    job: job,
   });
 
   return res.data.items;
-}
-
-{
 }

@@ -24,10 +24,5 @@
 
 .flex_container {
   margin: 0 0 0 auto;
-  width: 330px;
   display: flex;
-}
-
-.countFollower{
-  margin-top: 2rem;
 }

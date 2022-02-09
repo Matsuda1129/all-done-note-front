@@ -10,6 +10,7 @@ import modalPostReducer from './modalSlice';
 import isUseEffectReducer from './isUseEffect';
 import todoSearchBarReducer from './todos/todoSearchBarSlice';
 import { persistReducer } from 'redux-persist';
+import mailReducer from './mailSlice';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
 const createNoopStorage = () => {
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   users: userReducer,
   posts: postReducer,
   todoSearchBar: todoSearchBarReducer,
+  mails: mailReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -6,5 +6,8 @@ export const ProtectRoute = ({ children }: { children: React.ReactNode }) => {
   const signedIn = Cookies.get('signedIn');
   if (signedIn !== 'true') router.replace('/login');
 
-  return <main>{children}</main>;
+  const overflow = { overflow: 'auto' };
+  // const overflow = { position: 'fixed' };
+
+  return <main style={overflow}>{children}</main>;
 };

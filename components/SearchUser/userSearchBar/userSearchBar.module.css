@@ -1,7 +1,20 @@
 .search_input {
   height: 3.5rem;
-  margin-left: 5rem;
-  margin-right: 3%;
   border-radius: 2em;
+  margin-bottom: 3rem;
   width: 50%;
+}
+.search_input_job {
+  margin-left: 2rem;
+  width: 20rem;
+}
+
+.flex_container_item {
+  margin-left: 2rem;
+}
+
+.display_flex {
+  display: flex;
+  flex-wrap: wrap;
+  white-space: nowrap;
 }

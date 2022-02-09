@@ -6,7 +6,7 @@ import { Loader, CountFollower, FollowButton } from '../../parts';
 import Image from 'next/image';
 import Styles from './searchedUser.module.css';
 
-export default function SearchedUsers({ age, gender, searchWord }) {
+export default function SearchedUsers({ age, gender, searchWord,job }) {
   const [users, setUsers] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
@@ -18,7 +18,8 @@ export default function SearchedUsers({ age, gender, searchWord }) {
           searchWord,
           1,
           gender,
-          age
+          age,
+          job
         );
         await setUsers(page1);
         await setPage(2);
@@ -28,14 +29,15 @@ export default function SearchedUsers({ age, gender, searchWord }) {
       }
     };
     firstFetch();
-  }, [age, gender, searchWord]);
+  }, [age, gender, searchWord,job]);
 
   const fetchData = async () => {
     const componentsFormServer = await usersRepository.fetchSearch(
       searchWord,
       page,
       gender,
-      age
+      age,
+      job
     );
     setUsers([...users, ...componentsFormServer]);
     if (componentsFormServer.length === 0 || componentsFormServer.length < 20) {

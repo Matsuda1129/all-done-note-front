@@ -1,0 +1,67 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  width: 50%;
+  height: 50%;
+  padding: 1em;
+  background: #fff;
+  border-radius: 2rem;
+}
+
+.textarea {
+  font-size: 1.5em;
+  width: 100%;
+  height: 80%;
+  border: none;
+}
+
+.post_button {
+  margin-top: 1rem;
+  background-color: rgb(35, 123, 196);
+  color: white;
+  border: 2px solid rgb(35, 123, 196);
+  border-radius: 1.5rem;
+  width: 120px;
+  height: 3.5rem;
+  white-space: normal;
+}
+
+.post_button:hover {
+  color: rgb(35, 123, 196);
+  background: #fff;
+  border: 2px solid rgb(35, 123, 196);
+}
+
+.batsu {
+  font-size: 100%; /*ボタンの大きさ*/
+  font-weight: bold;
+  border: 1px solid #999;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 1.3em;
+  line-height: 1em;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 1rem;
+}
+
+.batsu:hover {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}

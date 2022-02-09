@@ -4,6 +4,7 @@ import { Flash, Menubar, CreatePostModal } from './parts';
 import { ProtectRoute } from '../protectRouter/protectRouter';
 
 export default function Layout({ children }) {
+
   return (
     <ProtectRoute>
       <div className={Styles.position_fixed}>
@@ -20,7 +21,7 @@ export default function Layout({ children }) {
           </div>
         </div>
       </div>
-      <div className={Styles.item_B}>{children}</div>
+        <div className={Styles.item_B}>{children}</div>
       <footer>
         <CreatePostModal />
       </footer>

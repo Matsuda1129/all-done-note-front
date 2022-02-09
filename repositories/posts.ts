@@ -41,3 +41,22 @@ export async function findAllPost() {
 
   return res.data;
 }
+
+export async function findPostById(id: number) {
+  const res = await instance.get(`post/${id}`);
+
+  return res.data;
+}
+
+export async function deleteOne(id: number) {
+  await instance({
+    method: 'delete',
+    url: `post/${id}`,
+  });
+}
+
+export async function update(id: number, content: string) {
+  await instance.put(`post/update/${id}`, {
+    content: content,
+  });
+}

@@ -1,0 +1,22 @@
+.tab_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.border {
+  border: 1px solid gray;
+}
+
+.genre_title {
+  font-size: 3rem;
+  font-weight: bold;
+  border-top: 2px solid gray;
+  text-align: center;
+  background-color: rgb(179, 250, 255);
+}
+
+.listhe_position{
+  color: aqua;
+  margin: 5rem;
+}

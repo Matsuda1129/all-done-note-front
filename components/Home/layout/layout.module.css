@@ -2,6 +2,18 @@
   position: fixed;
 }
 
+.overflow {
+  /* position: fixed; */
+  overflow: hidden;
+  /* position: relative; */
+  /* width: 100vw; */
+  /* height: 1000vh;/ */
+  /* top: 0; */
+  /* left: 20%; */
+  /* right: 0; */
+  /* bottom: 1000; */
+}
+
 .bodyBackground {
   width: 100vw;
   height: 100vh;

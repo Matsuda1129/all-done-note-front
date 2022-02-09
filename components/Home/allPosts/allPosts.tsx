@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFalse } from '../../../redux/isUseEffect';
+import { RootState } from '../../../redux/store';
 import { postsRepository } from '../../../repositories';
 import { Loader, InfinitePosts } from '../../parts';
 
@@ -7,6 +10,10 @@ export default function AllPosts() {
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
+  const dispatch = useDispatch();
+  const isUseEffect = useSelector(
+    (state: RootState) => state.isUseEffect.isUseEffect
+  );
 
   useEffect(() => {
     const firstFetch = async () => {
@@ -15,12 +22,13 @@ export default function AllPosts() {
         await setPosts(page1);
         await setPage(2);
         await setHasMore(true);
+        await dispatch(setFalse());
       } catch (error) {
         console.log(error);
       }
     };
     firstFetch();
-  }, []);
+  }, [dispatch, isUseEffect]);
 
   const fetchData = async () => {
     const componentsFormServer = await postsRepository.fetchData(page);

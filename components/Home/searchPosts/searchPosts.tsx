@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFalse } from '../../../redux/isUseEffect';
+import { RootState } from '../../../redux/store';
 import { postsRepository } from '../../../repositories';
 import { Loader, InfinitePosts } from '../../parts';
 
@@ -7,20 +10,26 @@ export default function SearchPosts({ searchWord }) {
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
+  const dispatch = useDispatch();
+  const isUseEffect = useSelector(
+    (state: RootState) => state.isUseEffect.isUseEffect
+  );
 
   useEffect(() => {
     const firstFetch = async () => {
       try {
         const page1 = await postsRepository.fetchSearch(1, searchWord);
+        console.log(searchWord);
         await setPosts(page1);
         await setPage(2);
         await setHasMore(true);
+        await dispatch(setFalse());
       } catch (error) {
         console.log(error);
       }
     };
     firstFetch();
-  }, [searchWord]);
+  }, [searchWord, isUseEffect, dispatch]);
 
   const fetchData = async () => {
     const componentsFormServer = await postsRepository.fetchSearch(

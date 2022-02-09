@@ -25,12 +25,14 @@ export default function CreateTodoModal({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValuse>();
 
   const onSubmit = async (data) => {
     try {
       await createOneList(data, user.id);
+      await reset();
       await dispatch(setTrue());
       alert('todoリストを作成しました');
       await openCreateTodoModal();

@@ -1,58 +1,20 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import Styles from '../../../styles/todo/todos.module.css';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { Button } from '../../../components/utils';
-import {
-  CreateTodoModal,
-  TodoGenreList,
-  TodoMoneySum,
-  TodoSearchBar,
-} from '../../../components/Todo';
 import { Layout } from '../../../components/Home';
-import { todosService } from '../../../services';
-import { setFalse } from '../../../redux/isUseEffect';
 import { usersRepository } from '../../../repositories';
-import {
-  setSearchBarMoneyFinish,
-  setSearchBarMoneyGenre,
-  setSearchBarMoneyUnFinish,
-  setSearchBarPreparationFinish,
-  setSearchBarPreparationGenre,
-  setSearchBarPreparationUnFinish,
-  setSearchBarTodoFinish,
-  setSearchBarTodoGenre,
-  setSearchBarTodoUnFinish,
-} from '../../../redux/todos/todoSearchBarSlice';
+import { todosService } from '../../../services';
+import Styles from '../../../styles/todo/todos.module.css';
 
-export default function Todo() {
-  const dispatch = useDispatch();
-  const isUseEffect = useSelector(
-    (state: RootState) => state.isUseEffect.isUseEffect
-  );
-
-  const SearchBarTodoState = useSelector(
-    (state: RootState) => state.todoSearchBar.todoSearchBar
-  );
-  const SearchBarMoneyState = useSelector(
-    (state: RootState) => state.todoSearchBar.moneySearchBar
-  );
-  const SearchBarPreparationState = useSelector(
-    (state: RootState) => state.todoSearchBar.preparationSearchBar
-  );
+export default function Detail() {
   const router = useRouter();
   const [username, setUsername] = useState<string>();
-
-  type user = {
-    id: number;
-  };
-  const [user, setUser] = useState<user>({ id: null });
-  const [genresMoney, setGenresMoney] = useState([]);
-  const [genresPreparation, setGenresPreparation] = useState([]);
-  const [genresTodo, setGenresTodo] = useState([]);
-  const [createTodoModal, setCreateTodoModal] = useState(false);
+  const [preparationPercent, setPreparationPercent] = useState(Number);
+  const [todoPercent, setTodoPercent] = useState(Number);
+  const [moneyPercent, setMoneyPercent] = useState(Number);
+  const [allPercent, setAllPercent] = useState(Number);
+  const [goalMoneyPercent1, setGoalMoneyPercent1] = useState(Number);
+  const [goalMoneyPercent2, setGoalMoneyPercent2] = useState(Number);
   useEffect(() => {
     if (router.asPath !== router.route) {
       setUsername(String(router.query.username));
@@ -63,8 +25,56 @@ export default function Todo() {
     if (username) {
       const firstFetch = async () => {
         try {
-          const userData = await usersRepository.find(username);
-          await setUser(userData);
+          const userData: any = await usersRepository.find(username);
+          const preparationPercentData = await todosService.findTodoPercent(
+            userData.id,
+            '準備'
+          );
+          const moneyPercentData = await todosService.findTodoPercent(
+            userData.id,
+            'お金'
+          );
+          const todoPercentData = await todosService.findTodoPercent(
+            userData.id,
+            'やりたいこと'
+          );
+
+          const todoPercentMoney1 = await todosService.findTodoMoneyPercent1(
+            userData.id
+          );
+          const todoPercentMoneyPercent1 = await Math.floor(
+            (userData.savings / todoPercentMoney1) * 100
+          );
+
+          const todoPercentMoney2 = await todosService.findTodoMoneyPercent2(
+            userData.id
+          );
+
+          const todoPercentMoneyPercent2 = await Math.floor(
+            (userData.savings / todoPercentMoney2) * 100
+          );
+
+          await setPreparationPercent(preparationPercentData);
+          await setMoneyPercent(moneyPercentData);
+          await setTodoPercent(todoPercentData);
+
+          if (todoPercentMoneyPercent1 > 100) {
+            await setGoalMoneyPercent1(100);
+          } else {
+            await setGoalMoneyPercent1(todoPercentMoneyPercent1);
+          }
+
+          if (todoPercentMoneyPercent2 > 100) {
+            await setGoalMoneyPercent2(100);
+          } else {
+            await setGoalMoneyPercent2(todoPercentMoneyPercent2);
+          }
+
+          const allPercentData = Math.round(
+            (moneyPercentData + preparationPercentData + todoPercentData) / 3
+          );
+
+          await setAllPercent(allPercentData);
         } catch (error) {
           console.log(error);
         }
@@ -73,189 +83,92 @@ export default function Todo() {
     }
   }, [username]);
 
-  useEffect(() => {
-    if (user.id !== null) {
-      const firstFetch = async () => {
-        try {
-          await dispatch(setFalse());
-          const moneyGenresData = await todosService.findUserGenre(
-            user.id,
-            'お金'
-          );
-          await setGenresMoney(moneyGenresData);
-          const preparationGenresData = await todosService.findUserGenre(
-            user.id,
-            '準備'
-          );
-          await setGenresPreparation(preparationGenresData);
-          const todoGenresData = await todosService.findUserGenre(
-            user.id,
-            'やりたいこと'
-          );
-          await setGenresTodo(todoGenresData);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      firstFetch();
-    }
-  }, [dispatch, isUseEffect, user]);
-
-  const openCreateTodoModal = async () => {
-    if (createTodoModal) {
-      await setCreateTodoModal(false);
-      await dispatch(setFalse());
-    } else {
-      await setCreateTodoModal(true);
-    }
-  };
-
-  const underline = { borderBottom: 'solid 2px #00f' };
-  const [tab, setTabs] = useState(1);
-  const handleTabs1 = () => {
-    setTabs(1);
-  };
-  const handleTabs2 = () => {
-    setTabs(2);
-  };
-  const handleTabs3 = () => {
-    setTabs(3);
-  };
-  const handleTabs4 = () => {
-    setTabs(4);
-  };
-
   return (
-    <div>
-      <Layout>
-        <Tabs>
-          <TabList className={Styles.tab_wrap}>
-            <Tab onClick={handleTabs1} style={tab === 1 ? underline : null}>
-              準備
-            </Tab>
-            <Tab onClick={handleTabs2} style={tab === 2 ? underline : null}>
-              生涯費用
-            </Tab>
-            <Tab onClick={handleTabs3} style={tab === 3 ? underline : null}>
-              やりたいこと
-            </Tab>
-            <Tab onClick={handleTabs4} style={tab === 4 ? underline : null}>
-              総額
-            </Tab>
-            <Button onClick={openCreateTodoModal}>作成</Button>
-          </TabList>
+    <Layout>
+      <link
+        rel='stylesheet'
+        href='https://cdn.rawgit.com/theus/chart.css/v1.0.0/dist/chart.css'
+      />
 
-          <TabPanel>
-            <TodoSearchBar
-              genres={genresPreparation}
-              setSearchBarFinish={setSearchBarPreparationFinish}
-              setSearchBarUnFinish={setSearchBarPreparationUnFinish}
-              setSearchGenre={setSearchBarPreparationGenre}
-              searchBarState={SearchBarPreparationState}
-            />
-            {genresPreparation.map((genre) => {
-              return (
-                <div key={genre}>
-                  <TodoGenreList
-                    searchBarState={SearchBarPreparationState}
-                    userId={user.id}
-                    genre={genre}
-                    group={'準備'}
-                  />
-                </div>
-              );
-            })}
-            <div className={Styles.border}></div>
-          </TabPanel>
-          <TabPanel>
-            <TodoSearchBar
-              searchBarState={SearchBarMoneyState}
-              genres={genresMoney}
-              setSearchBarFinish={setSearchBarMoneyFinish}
-              setSearchBarUnFinish={setSearchBarMoneyUnFinish}
-              setSearchGenre={setSearchBarMoneyGenre}
-            />
-            {genresMoney.map((genre) => {
-              return (
-                <div key={genre}>
-                  <TodoGenreList
-                    searchBarState={SearchBarMoneyState}
-                    userId={user.id}
-                    genre={genre}
-                    group={'お金'}
-                  />
-                </div>
-              );
-            })}
-            <div className={Styles.border}></div>
-          </TabPanel>
-          <TabPanel>
-            <TodoSearchBar
-              setSearchBarFinish={setSearchBarTodoFinish}
-              setSearchBarUnFinish={setSearchBarTodoUnFinish}
-              setSearchGenre={setSearchBarTodoGenre}
-              genres={genresTodo}
-              searchBarState={SearchBarTodoState}
-            />
-            {genresTodo.map((genre) => {
-              return (
-                <div key={genre}>
-                  <TodoGenreList
-                    searchBarState={SearchBarTodoState}
-                    userId={user.id}
-                    genre={genre}
-                    group={'やりたいこと'}
-                  />
-                </div>
-              );
-            })}
-            <div className={Styles.border}></div>
-          </TabPanel>
-          <TabPanel>
-            <div className={Styles.genre_title}>準備</div>
-            {genresPreparation.map((genre) => {
-              return (
-                <TodoMoneySum
-                  genre={genre}
-                  key={genre}
-                  group={'準備'}
-                  userId={user.id}
-                />
-              );
-            })}
-            <div className={Styles.genre_title}>生涯費用</div>
-            {genresMoney.map((genre) => {
-              return (
-                <TodoMoneySum
-                  genre={genre}
-                  key={genre}
-                  group={'お金'}
-                  userId={user.id}
-                />
-              );
-            })}
-            <div className={Styles.genre_title}>やりたいこと</div>
-            {genresTodo.map((genre) => {
-              return (
-                <TodoMoneySum
-                  genre={genre}
-                  key={genre}
-                  group={'やりたいこと'}
-                  userId={user.id}
-                />
-              );
-            })}
-            <div className={Styles.border}></div>
-          </TabPanel>
-        </Tabs>
-      </Layout>
+      <Link href={`../../todos/${username}/lists`}>
+        <a href='' className={Styles.listhe_position}>
+          {username}のリストへ
+        </a>
+      </Link>
 
-      <footer>
-        <CreateTodoModal
-          createTodoModal={createTodoModal}
-          openCreateTodoModal={openCreateTodoModal}
-        />
-      </footer>
-    </div>
+      <table className={`charts column ${Styles.table}`}>
+        <thead>
+          <tr>
+            <th scope='col' className={Styles.table_col1}>
+              項目
+            </th>
+            <th scope='col' className={Styles.table_col2}>
+              目標金額達成率
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope='row'> 目標金額１ </th>
+            <div
+              className={`charts__chart chart--p${goalMoneyPercent1} chart--grey ${Styles.chart_height}`}
+              data-percent
+            ></div>
+          </tr>
+          <tr>
+            <th scope='row'> 目標金額２ </th>
+            <div
+              className={`charts__chart chart--p${goalMoneyPercent2} chart--blue ${Styles.chart_height}`}
+              data-percent
+            ></div>
+          </tr>
+        </tbody>
+      </table>
+
+      <table className={`charts column ${Styles.table}`}>
+        <thead>
+          <tr>
+            <th scope='col' className={Styles.table_col1}>
+              項目
+            </th>
+            <th scope='col' className={Styles.table_col2}>
+              完了達成率
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope='row'> 全体 </th>
+            <div
+              className={`charts__chart chart--p${allPercent} chart--grey ${Styles.chart_height}`}
+              data-percent
+            ></div>
+          </tr>
+          <tr>
+            <th scope='row'> 準備 </th>
+            <div
+              className={`charts__chart chart--p${preparationPercent} chart--blue ${Styles.chart_height}`}
+              data-percent
+            ></div>
+          </tr>
+          <tr>
+            <th scope='row'> 生涯費用 </th>
+            <div
+              className={`charts__chart chart--p${moneyPercent} chart--yellow ${Styles.chart_height}`}
+              data-percent
+            ></div>
+          </tr>
+          <tr>
+            <th scope='row'> やりたいこと </th>
+            <div
+              className={`charts__chart chart--p${todoPercent} chart--green ${Styles.chart_height}`}
+              data-percent
+            ></div>
+          </tr>
+        </tbody>
+      </table>
+    </Layout>
   );
 }

@@ -26,3 +26,37 @@ export async function findTodoPercent(userId: number, group: string) {
 
   return percent;
 }
+
+export async function findTodoMoneyPercent1(userId: number) {
+  const groupData: any = await todosRepository.findUserGroup(userId, '準備');
+  let sumMoney = 0;
+  for (let i = 0; i < groupData.length; i++) {
+    sumMoney += groupData[i].money;
+  }
+
+  return sumMoney;
+}
+
+export async function findTodoMoneyPercent2(userId: number) {
+  const groupData1: any = await todosRepository.findUserGroup(userId, 'お金');
+  const groupData2: any = await todosRepository.findUserGroup(
+    userId,
+    'やりたいこと'
+  );
+  const groupData3: any = await todosRepository.findUserGroup(
+    userId,
+    '準備'
+  );
+  let sumMoney = 0;
+  for (let i = 0; i < groupData1.length; i++) {
+    sumMoney += groupData1[i].money;
+  }
+  for (let i = 0; i < groupData2.length; i++) {
+    sumMoney += groupData2[i].money;
+  }
+  for (let i = 0; i < groupData3.length; i++) {
+    sumMoney += groupData3[i].money;
+  }
+
+  return sumMoney;
+}

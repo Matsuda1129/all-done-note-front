@@ -11,6 +11,9 @@ export type User = {
   picture: string | null;
   gender: string | null;
   birthday: string | null;
+  job: string | null;
+  savings: number | null;
+  // family: string[] | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 };
@@ -33,6 +36,9 @@ const initialState: UserState = {
     picture: null,
     gender: null,
     birthday: null,
+    job: null,
+    savings: null,
+    // family: null,
     createdAt: null,
     updatedAt: null,
   },

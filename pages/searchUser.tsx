@@ -6,6 +6,7 @@ export default function Information() {
   const [searchWord, setSearchWord] = useState('');
   const [gender, setGender] = useState(undefined);
   const [age, setAge] = useState(undefined);
+  const [job, setJob] = useState(undefined);
 
   return (
     <Layout>
@@ -16,10 +17,16 @@ export default function Information() {
             setSearchWord={setSearchWord}
             setGender={setGender}
             setAge={setAge}
+            setJob={setJob}
           />
         </div>
         <br />
-        <SearchedUsers gender={gender} age={age} searchWord={searchWord} />
+        <SearchedUsers
+          job={job}
+          gender={gender}
+          age={age}
+          searchWord={searchWord}
+        />
       </div>
     </Layout>
   );

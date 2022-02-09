@@ -3,14 +3,10 @@ import { FollowButton } from '../../parts';
 import { Button } from '../../utils';
 import Styles from './profileBar.module.css';
 
-export default function ProfileBar({
-  checkLogin,
-  userId,
-  showProfileModal,
-}) {
+export default function ProfileBar({ checkLogin, userId, showProfileModal }) {
   if (!checkLogin) {
     return (
-      <div>
+      <div className={Styles.flex_container}>
         <FollowButton userId={userId} />
       </div>
     );

@@ -1,0 +1,129 @@
+.position_fixed {
+  position: fixed;
+}
+
+.bodyBackground {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../../public/images/mainBack.jpg');
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+.grid_container {
+  background-color: rgb(255, 255, 255, 0.7);
+  height: 150%;
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  display: grid;
+  grid-template-columns: 2fr 2fr 6fr;
+  grid-template-areas: 'areaA areaB areaC';
+}
+
+.item_A {
+  grid-area: areaA;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.item_B {
+  grid-area: areaB;
+  border-left: 2px solid gray;
+  border-right: 2px solid gray;
+  display: flex;
+  /* background-color: blue; */
+}
+
+.item_C {
+  position: absolute;
+  right: 3%;
+  border-right: 2px solid gray;
+  width: 56%;
+  flex-flow: column;
+  min-height: 100vh;
+  /* left: 40%; */
+  /* right: 30%; */
+  /* border-bottom: 2px solid gray; */
+  /* background-color: rgba(58, 45, 95, 0.7); */
+}
+
+.menubar_position {
+  position: relative;
+  top: 3%;
+  left: 10%;
+  right: 10%;
+}
+
+.flex_container{
+  position: relative;
+  top: 10%;
+  left: 15%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.iconMail {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../public/mail/mail.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconKamihikouki {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../public/mail/kamihikouki.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconPost {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../public/mail/post.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconPuls {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../../../public/mail/puls.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+
+.button {
+  background-color:transparent;
+  border: none;
+}
+
+@media (max-width: 950px) {
+  /* .item_B {
+    position: absolute;
+    left: 30%;
+    right: 3%;
+  }
+
+  .item_C {
+    display: none;
+  } */
+}
+
+@media (max-width: 500px) {
+  .grid_container {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+  }
+  .item_B {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+  }
+
+  .item_A {
+    display: none;
+  }
+}

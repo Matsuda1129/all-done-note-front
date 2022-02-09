@@ -58,6 +58,7 @@ export default function TodoGenreList({
     };
     firstFetch();
   }, [
+    isUseEffect,
     genre,
     group,
     searchBarState.finished,

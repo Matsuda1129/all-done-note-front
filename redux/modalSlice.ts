@@ -9,12 +9,12 @@ export const modalPostSlice = createSlice({
     setTrue: (state) => {
       state.modalPost = true;
     },
-    setFalse: (state) => {
+    setModalFalse: (state) => {
       state.modalPost = false;
     },
   },
 });
 
-export const { setTrue, setFalse } = modalPostSlice.actions;
+export const { setTrue, setModalFalse } = modalPostSlice.actions;
 
 export default modalPostSlice.reducer;
