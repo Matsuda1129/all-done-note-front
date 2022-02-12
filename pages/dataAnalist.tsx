@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { Layout } from '../components/Home';
 import Styles from '../styles/dataAnalist.module.css';
+import { CSSProperties } from 'react';
+// import { Chart } from 'hollanddd/chart-css-react';
+import { Chart, ArcElement } from 'chart.js';
+import { Bar, Pie } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
 export default function DataAnalist() {
   const [preparationPercent, setPreparationPercent] = useState(Number);
@@ -10,8 +23,65 @@ export default function DataAnalist() {
   const [goalMoneyPercent1, setGoalMoneyPercent1] = useState(Number);
   const [goalMoneyPercent2, setGoalMoneyPercent2] = useState(Number);
 
+  ChartJS.register(
+    ArcElement,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+
+  const data = {
+    // x 軸のラベル
+    labels: [
+      '1000万',
+      '2000万',
+      '3000万',
+      '4000万',
+      '5000万',
+      '6000万',
+      '7000万',
+      '8000万',
+      '9000万',
+      '1億',
+    ],
+    datasets: [
+      {
+        label: '目標金額１',
+        // データの値
+        data: [65, 59, 80, 81, 56, 55, 40, 81, 56, 40],
+        // グラフの背景色
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)',
+        ],
+        // グラフの枠線の色
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)',
+        ],
+        // グラフの枠線の太さ
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <Layout>
+      <Bar data={data} className={Styles.Bar_charts} />
+
       <link
         rel='stylesheet'
         href='https://cdn.rawgit.com/theus/chart.css/v1.0.0/dist/chart.css'

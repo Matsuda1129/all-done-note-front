@@ -8,6 +8,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { s3Repository, usersRepository } from '../../../repositories';
 import { backfaceFixed } from '../../../lib/backFaceFixed';
+import { useMemo, useState } from 'react';
 
 type FormValuse = {
   name: string;
@@ -17,8 +18,17 @@ type FormValuse = {
   birthday: string;
   picture: string;
   savings: number;
-  family: string[];
   job: string;
+  alone: string;
+  isMarried: string;
+  isParents: string;
+  isSpouseParents: string;
+  isChild: string;
+  isChildren2: string;
+  isChildren3: string;
+  isOthers: string;
+  openData: boolean;
+  openDataAfterDie: boolean;
 };
 
 export default function ProfileModal({
@@ -34,12 +44,40 @@ export default function ProfileModal({
     formState: { errors },
   } = useForm<FormValuse>();
 
+  const [alone, setAlone] = useState(user.alone);
+  const [isMarried, setIsMarried] = useState(user.isMarried);
+  const [isParents, setIsParents] = useState(user.isParents);
+  const [isSpouseParents, setIsSpouseParents] = useState(user.isSpouseParents);
+  const [isChild, setIsChild] = useState(user.isChild);
+  const [isChildren2, setIsChildren2] = useState(user.isChildren2);
+  const [isChildren3, setIsChildren3] = useState(user.isChildren3);
+  const [isOthers, setIsOthers] = useState(user.isOthers);
+  const handleCheckboxClick = async (e, set) => {
+    if (e === true) {
+      await set(false);
+    } else {
+      await set(true);
+    }
+  };
+
+  const family = [
+    alone,
+    isMarried,
+    isParents,
+    isSpouseParents,
+    isChild,
+    isChildren2,
+    isChildren3,
+    isOthers,
+  ];
+
   const onSubmit = async (data) => {
     try {
-      const updateData = await usersRepository.update(data, user);
+      const updateData = await usersRepository.update(data, user, family);
       await backfaceFixed(false);
       await dispatch(setUsers(updateData));
       await dispatch(() => setUser(updateData));
+      await window.location.reload();
       alert('プロフィールを編集しました');
       await dispatch(() => showOffProfileModal());
     } catch (e) {
@@ -165,82 +203,115 @@ export default function ProfileModal({
                       その他サービス業
                     </MenuItem>
                   </Select>
-                  {/* <label>家族構成</label>
+                  <label>家族構成</label>
                   <div className={Styles.flex_family}>
                     <label htmlFor=''>
                       <input
+                        {...register('alone')}
+                        checked={alone}
+                        onChange={() => handleCheckboxClick(alone, setAlone)}
                         type='checkbox'
                         name='family'
                         id='family'
-                        value='一人暮らし'
                       />
                       一人暮らし
                     </label>
                     <label htmlFor=''>
                       <input
+                        {...register('isMarried')}
+                        checked={isMarried}
+                        onChange={() =>
+                          handleCheckboxClick(isMarried, setIsMarried)
+                        }
                         type='checkbox'
                         name='family'
                         id='family'
-                        value='配偶者'
                       />
                       配偶者
                     </label>
                     <label htmlFor=''>
                       <input
+                        {...register('isParents')}
+                        checked={isParents}
+                        onChange={() =>
+                          handleCheckboxClick(isParents, setIsParents)
+                        }
                         type='checkbox'
                         name='family'
                         id='family'
-                        value={'ご自身の親'}
                       />
                       ご自身の親
                     </label>
                     <label htmlFor=''>
                       <input
+                        {...register('isSpouseParents')}
+                        checked={isSpouseParents}
+                        onChange={() =>
+                          handleCheckboxClick(
+                            isSpouseParents,
+                            setIsSpouseParents
+                          )
+                        }
                         type='checkbox'
                         name='family'
                         id='family'
-                        value={'配偶者の親'}
                       />
                       配偶者の親
                     </label>
                     <label htmlFor=''>
                       <input
+                        {...register('isChild')}
+                        checked={isChild}
+                        onChange={() =>
+                          handleCheckboxClick(isChild, setIsChild)
+                        }
                         type='checkbox'
                         name='family'
                         id='family'
-                        value={'子供'}
                       />
                       子供
                     </label>
                     <label htmlFor=''>
                       <input
+                        {...register('isChildren2')}
+                        checked={isChildren2}
+                        onChange={() =>
+                          handleCheckboxClick(isChildren2, setIsChildren2)
+                        }
                         type='checkbox'
                         name='family'
                         id='family'
-                        value={'子供２人'}
                       />
                       子供２人
                     </label>
                     <label htmlFor=''>
                       <input
+                        {...register('isChildren3')}
+                        checked={isChildren3}
+                        onChange={() =>
+                          handleCheckboxClick(isChildren3, setIsChildren3)
+                        }
                         type='checkbox'
                         name='family'
                         id='family'
-                        value={'子供３人以上'}
                       />
                       子供３人以上
                     </label>
                     <label htmlFor=''>
                       <input
+                        {...register('isOthers')}
+                        checked={isOthers}
+                        onChange={() =>
+                          handleCheckboxClick(isOthers, setIsOthers)
+                        }
                         className='checks'
                         type='checkbox'
                         name='family'
                         id='family'
-                        value={'その他家族'}
                       />
                       その他家族
                     </label>
-                  </div> */}
+                  </div>
 
                   <label>alive</label>
                   <Select
@@ -251,6 +322,27 @@ export default function ProfileModal({
                     <MenuItem value={'true'}>alive</MenuItem>
                     <MenuItem value={'false'}>dead</MenuItem>
                   </Select>
+
+                  <label>情報公開</label>
+                  <Select
+                    {...register('openData')}
+                    defaultValue={user.openData}
+                    className={Styles.flex_container_item2}
+                  >
+                    <MenuItem value={'true'}>公開</MenuItem>
+                    <MenuItem value={'false'}>非公開</MenuItem>
+                  </Select>
+
+                  <label>死後の情報公開</label>
+                  <Select
+                    {...register('openDataAfterDie')}
+                    defaultValue={user.openDataAfterDie}
+                    className={Styles.flex_container_item2}
+                  >
+                    <MenuItem value={'true'}>公開</MenuItem>
+                    <MenuItem value={'false'}>非公開</MenuItem>
+                  </Select>
+
                   <label>誕生日</label>
                   <input
                     {...register('birthday', {

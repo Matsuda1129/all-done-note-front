@@ -43,9 +43,11 @@ export default function TodoLists({ list, userId }) {
     if (finish) {
       await todosRepository.changeTodoFinish(list, false);
       await setFinish(false);
+      await dispatch(setTrue());
     } else {
       await todosRepository.changeTodoFinish(list, true);
       await setFinish(true);
+      await dispatch(setTrue());
     }
   };
 

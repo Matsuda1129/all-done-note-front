@@ -21,7 +21,7 @@ export async function find(username: string) {
   return user;
 }
 
-export async function update(data, user) {
+export async function update(data, user, family) {
   function getAge(birthday) {
     //今日
     const dateObject = new Date(birthday);
@@ -54,6 +54,14 @@ export async function update(data, user) {
   if (data.alive === 'false') {
     alive = false;
   }
+  let openData = true;
+  if (data.openData === 'false') {
+    openData = false;
+  }
+  let openDataAfterDie = true;
+  if (data.openDataAfterDie === 'false') {
+    openDataAfterDie = false;
+  }
 
   let picture;
   if (data.picture.length === 0) {
@@ -72,6 +80,16 @@ export async function update(data, user) {
     savings: savings,
     picture: picture,
     age: age,
+    alone: family[0],
+    isMarried: family[1],
+    isParents: family[2],
+    isSpouseParents: family[3],
+    isChild: family[4],
+    isChildren2: family[5],
+    isChildren3: family[6],
+    isOthers: family[7],
+    openData: openData,
+    openDataAfterDie: openDataAfterDie,
   });
 
   return res.data;
@@ -83,6 +101,17 @@ export async function editPicture(userId, picture) {
   });
 
   return res.data;
+}
+
+export async function editTodo(userId, todoData) {
+  await instance.put(`/user/${userId}/todo`, {
+    goalMoney1: todoData[0],
+    goalMoney2: todoData[1],
+    allPercent: todoData[2],
+    preparationPercent: todoData[3],
+    moneyPercent: todoData[4],
+    todoPercent: todoData[5],
+  });
 }
 
 export async function fetchSearch(searchWord, page, gender, age, job) {

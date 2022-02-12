@@ -25,3 +25,9 @@
   margin-top: 5rem;
   margin-left: 5rem;
 }
+
+.middle {
+  text-align: center;
+  margin-top: 20rem;
+  /* width: 90px; */
+}

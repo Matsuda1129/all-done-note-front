@@ -29,6 +29,7 @@ import {
 
 export default function Todo() {
   const dispatch = useDispatch();
+  const loginUser = useSelector((state: RootState) => state.users.user);
   const isUseEffect = useSelector(
     (state: RootState) => state.isUseEffect.isUseEffect
   );
@@ -99,7 +100,24 @@ export default function Todo() {
       };
       firstFetch();
     }
-  }, [dispatch, isUseEffect, user]);
+  }, [dispatch, isUseEffect, user, username]);
+
+  useEffect(() => {
+    if (user.id === loginUser.id) {
+      const firstFetch = async () => {
+        try {
+          const alltodoPercent = await todosService.findTodoAllPercent(
+            username
+          );
+
+          await usersRepository.editTodo(user.id, alltodoPercent);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      firstFetch();
+    }
+  }, [loginUser.id, user.id, username, isUseEffect]);
 
   const openCreateTodoModal = async () => {
     if (createTodoModal) {

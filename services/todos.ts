@@ -1,4 +1,4 @@
-import { todosRepository } from '../repositories';
+import { todosRepository, usersRepository } from '../repositories';
 
 export async function findUserGenre(userId: number, group: string) {
   const data: any = await todosRepository.findUserGroup(userId, group);
@@ -43,10 +43,7 @@ export async function findTodoMoneyPercent2(userId: number) {
     userId,
     'やりたいこと'
   );
-  const groupData3: any = await todosRepository.findUserGroup(
-    userId,
-    '準備'
-  );
+  const groupData3: any = await todosRepository.findUserGroup(userId, '準備');
   let sumMoney = 0;
   for (let i = 0; i < groupData1.length; i++) {
     sumMoney += groupData1[i].money;
@@ -59,4 +56,73 @@ export async function findTodoMoneyPercent2(userId: number) {
   }
 
   return sumMoney;
+}
+
+export async function findTodoAllPercent(username: string) {
+  const userData: any = await usersRepository.find(username);
+  const preparationPercentData = await findTodoPercent(userData.id, '準備');
+  const moneyPercentData = await findTodoPercent(userData.id, 'お金');
+  const todoPercentData = await findTodoPercent(userData.id, 'やりたいこと');
+
+  const todoPercentMoney1 = await findTodoMoneyPercent1(userData.id);
+  const todoPercentMoneyPercent1 = await Math.floor(
+    (userData.savings / todoPercentMoney1) * 100
+  );
+
+  const todoPercentMoney2 = await findTodoMoneyPercent2(userData.id);
+
+  const todoPercentMoneyPercent2 = await Math.floor(
+    (userData.savings / todoPercentMoney2) * 100
+  );
+
+  let goalMoneyPercent1;
+  if (todoPercentMoneyPercent1 > 100) {
+    goalMoneyPercent1 = 100;
+  } else {
+    goalMoneyPercent1 = todoPercentMoneyPercent1;
+  }
+
+  let goalMoneyPercent2;
+  if (todoPercentMoneyPercent2 > 100) {
+    goalMoneyPercent2 = 100;
+  } else {
+    goalMoneyPercent2 = todoPercentMoneyPercent2;
+  }
+
+  const allPercentData = Math.round(
+    (moneyPercentData + preparationPercentData + todoPercentData) / 3
+  );
+
+  const data = [
+    goalMoneyPercent1,
+    goalMoneyPercent2,
+    allPercentData,
+    preparationPercentData,
+    moneyPercentData,
+    todoPercentData,
+  ];
+
+  return data;
+}
+
+export async function checkOpenData(username, loginUserId) {
+  const userData: any = await usersRepository.find(username);
+  let checkOpenData;
+  if (userData.id === loginUserId) {
+    checkOpenData = true;
+  } else if (userData.alive) {
+    if (userData.openData) {
+      checkOpenData = true;
+    } else {
+      checkOpenData = false;
+    }
+  } else if (!userData.alive) {
+    if (userData.openDataAfterDie) {
+      checkOpenData = true;
+    } else {
+      checkOpenData = false;
+    }
+  }
+
+  return checkOpenData;
 }

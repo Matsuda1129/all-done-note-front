@@ -19,6 +19,7 @@
     "amazon-cognito-identity-js": "^5.2.3",
     "aws-sdk": "^2.1040.0",
     "axios": "^0.22.0",
+    "charts-css-react": "^0.0.9",
     "date-fns": "^2.25.0",
     "dotenv": "^10.0.0",
     "gray-matter": "^4.0.3",
@@ -50,10 +51,12 @@
     "@types/node-fetch": "^3.0.3",
     "@types/react": "^17.0.27",
     "@types/react-redux": "^7.1.19",
+    "chart.js": "^3.7.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.2",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.4.1",
+    "react-chartjs-2": "^4.0.1",
     "typescript": "^4.4.3"
   }
 }

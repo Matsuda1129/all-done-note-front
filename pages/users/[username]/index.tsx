@@ -99,56 +99,13 @@ export default function User() {
     if (username) {
       const firstFetch = async () => {
         try {
-          const userData: any = await usersRepository.find(username);
-          const preparationPercentData = await todosService.findTodoPercent(
-            userData.id,
-            '準備'
-          );
-          const moneyPercentData = await todosService.findTodoPercent(
-            userData.id,
-            'お金'
-          );
-          const todoPercentData = await todosService.findTodoPercent(
-            userData.id,
-            'やりたいこと'
-          );
-
-          const todoPercentMoney1 = await todosService.findTodoMoneyPercent1(
-            userData.id
-          );
-          const todoPercentMoneyPercent1 = await Math.floor(
-            (userData.savings / todoPercentMoney1) * 100
-          );
-
-          const todoPercentMoney2 = await todosService.findTodoMoneyPercent2(
-            userData.id
-          );
-
-          const todoPercentMoneyPercent2 = await Math.floor(
-            (userData.savings / todoPercentMoney2) * 100
-          );
-
-          await setPreparationPercent(preparationPercentData);
-          await setMoneyPercent(moneyPercentData);
-          await setTodoPercent(todoPercentData);
-
-          if (todoPercentMoneyPercent1 > 100) {
-            await setGoalMoneyPercent1(100);
-          } else {
-            await setGoalMoneyPercent1(todoPercentMoneyPercent1);
-          }
-
-          if (todoPercentMoneyPercent2 > 100) {
-            await setGoalMoneyPercent2(100);
-          } else {
-            await setGoalMoneyPercent2(todoPercentMoneyPercent2);
-          }
-
-          const allPercentData = Math.round(
-            (moneyPercentData + preparationPercentData + todoPercentData) / 3
-          );
-
-          await setAllPercent(allPercentData);
+          const data = await todosService.findTodoAllPercent(username);
+          await setGoalMoneyPercent1(data[0]);
+          await setGoalMoneyPercent2(data[1]);
+          await setAllPercent(data[2]);
+          await setPreparationPercent(data[3]);
+          await setMoneyPercent(data[4]);
+          await setTodoPercent(data[5]);
         } catch (error) {
           console.log(error);
         }
