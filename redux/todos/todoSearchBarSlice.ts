@@ -3,17 +3,17 @@ export const todoSearchBarPreparationSlice = createSlice({
   name: 'searchBarTodo',
   initialState: {
     todoSearchBar: {
-      genre: '',
+      genre: undefined,
       finished: false,
       unfinished: false,
     },
     preparationSearchBar: {
-      genre: '',
+      genre: undefined,
       finished: false,
       unfinished: false,
     },
     moneySearchBar: {
-      genre: '',
+      genre: undefined,
       finished: false,
       unfinished: false,
     },

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setTrue } from '../../../../redux/isUseEffect';
+import { RootState } from '../../../../redux/store';
 import { todosRepository } from '../../../../repositories';
 import EditTodoModal from './parts/editTodoModal/editTodoModal';
 import MoneyModal from './parts/moneyModal/moneyModal';
@@ -11,6 +12,9 @@ export default function TodoLists({ list, userId }) {
   const [moneyModal, setMoneyModal] = useState(false);
   const [editTodoModal, setEditTodoModal] = useState(false);
   const [finish, setFinish] = useState(false);
+  const loginUserCheck = useSelector(
+    (state: RootState) => state.loginUserCheck.loginUserCheck
+  );
 
   useEffect(() => {
     const firstFetch = async () => {
@@ -62,35 +66,61 @@ export default function TodoLists({ list, userId }) {
 
   return (
     <div className={Styles.list_title}>
-      <input
-        className={Styles.checkbox}
-        type='checkbox'
-        checked={finish}
-        onChange={() => changeFinish(list)}
-      />
-      <Listname list={list} finish={finish} />
-      <div className={Styles.editBar}>
-        <button className={Styles.iconLock} />
-        <button className={Styles.iconMoney} onClick={() => openMoneyModal()} />
-        <button
-          className={Styles.iconMemo}
-          onClick={() => openEditTodoModal()}
-        />
-        <button className={Styles.batsu} onClick={() => deleteList(list.id)}>
-          ×
-        </button>
-      </div>
-      <MoneyModal
-        openMoneyModal={openMoneyModal}
-        moneyModal={moneyModal}
-        list={list}
-        />
-      <EditTodoModal
-        list={list}
-        openEditTodoModal={openEditTodoModal}
-        editTodoModal={editTodoModal}
-        userId={userId}
-      />
+      {loginUserCheck ? (
+        <>
+          <input
+            className={Styles.checkbox}
+            type='checkbox'
+            checked={finish}
+            onChange={() => changeFinish(list)}
+          />
+          <Listname list={list} finish={finish} />
+          <div className={Styles.editBar}>
+            <button className={Styles.iconLock} />
+            <button
+              className={Styles.iconMoney}
+              onClick={() => openMoneyModal()}
+            />
+            <button
+              className={Styles.iconMemo}
+              onClick={() => openEditTodoModal()}
+            />
+            <button
+              className={Styles.batsu}
+              onClick={() => deleteList(list.id)}
+            >
+              ×
+            </button>
+          </div>
+          <MoneyModal
+            openMoneyModal={openMoneyModal}
+            moneyModal={moneyModal}
+            list={list}
+          />
+          <EditTodoModal
+            list={list}
+            openEditTodoModal={openEditTodoModal}
+            editTodoModal={editTodoModal}
+            userId={userId}
+          />
+        </>
+      ) : (
+        <>
+          <input className={Styles.checkbox} type='checkbox' checked={finish} />
+          <Listname list={list} finish={finish} />
+          <div className={Styles.editBar}>
+            <button
+              className={Styles.iconMoney}
+              onClick={() => openMoneyModal()}
+            />
+          </div>
+          <MoneyModal
+            openMoneyModal={openMoneyModal}
+            moneyModal={moneyModal}
+            list={list}
+          />
+        </>
+      )}
     </div>
   );
 }

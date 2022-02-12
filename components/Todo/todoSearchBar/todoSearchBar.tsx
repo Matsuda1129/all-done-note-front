@@ -12,6 +12,7 @@ export default function TodoSearchBar({
   searchBarState,
 }) {
   const dispatch = useDispatch();
+  
 
   const changeCheckFinished = async () => {
     if (searchBarState.finished === true) {

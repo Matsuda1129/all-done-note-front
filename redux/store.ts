@@ -10,6 +10,7 @@ import modalPostReducer from './modalSlice';
 import isUseEffectReducer from './isUseEffect';
 import todoSearchBarReducer from './todos/todoSearchBarSlice';
 import openDataReducer from './todos/openDataSlice';
+import loginUserCheckReducer from './loginUserCheckSlice';
 import { persistReducer } from 'redux-persist';
 import mailReducer from './mailSlice';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
@@ -33,6 +34,7 @@ const storage =
     : createNoopStorage();
 
 const rootReducer = combineReducers({
+  loginUserCheck:loginUserCheckReducer,
   openData: openDataReducer,
   isUseEffect: isUseEffectReducer,
   modalPost: modalPostReducer,

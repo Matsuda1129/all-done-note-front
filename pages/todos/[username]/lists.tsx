@@ -26,10 +26,16 @@ import {
   setSearchBarTodoGenre,
   setSearchBarTodoUnFinish,
 } from '../../../redux/todos/todoSearchBarSlice';
+import { changeOpenData } from '../../../redux/todos/openDataSlice';
+import { changeLoignUserCheck } from '../../../redux/loginUserCheckSlice';
 
 export default function Todo() {
   const dispatch = useDispatch();
+  const openData = useSelector((state: RootState) => state.openData.open);
   const loginUser = useSelector((state: RootState) => state.users.user);
+  const loginUserCheck = useSelector(
+    (state: RootState) => state.loginUserCheck.loginUserCheck
+  );
   const isUseEffect = useSelector(
     (state: RootState) => state.isUseEffect.isUseEffect
   );
@@ -64,15 +70,23 @@ export default function Todo() {
     if (username) {
       const firstFetch = async () => {
         try {
-          const userData = await usersRepository.find(username);
+          const res = await todosService.checkOpenData(username, loginUser.id);
+          await dispatch(changeOpenData(res));
+          const userData: any = await usersRepository.find(username);
           await setUser(userData);
+
+          if (loginUser.id === userData.id) {
+            await dispatch(changeLoignUserCheck(true));
+          } else {
+            await dispatch(changeLoignUserCheck(false));
+          }
         } catch (error) {
           console.log(error);
         }
       };
       firstFetch();
     }
-  }, [username]);
+  }, [dispatch, loginUser.id, username]);
 
   useEffect(() => {
     if (user.id !== null) {
@@ -146,126 +160,134 @@ export default function Todo() {
   return (
     <div>
       <Layout>
-        <Tabs>
-          <TabList className={Styles.tab_wrap}>
-            <Tab onClick={handleTabs1} style={tab === 1 ? underline : null}>
-              準備
-            </Tab>
-            <Tab onClick={handleTabs2} style={tab === 2 ? underline : null}>
-              生涯費用
-            </Tab>
-            <Tab onClick={handleTabs3} style={tab === 3 ? underline : null}>
-              やりたいこと
-            </Tab>
-            <Tab onClick={handleTabs4} style={tab === 4 ? underline : null}>
-              総額
-            </Tab>
-            <Button onClick={openCreateTodoModal}>作成</Button>
-          </TabList>
+        {openData ? (
+          <Tabs>
+            <TabList className={Styles.tab_wrap}>
+              <Tab onClick={handleTabs1} style={tab === 1 ? underline : null}>
+                準備
+              </Tab>
+              <Tab onClick={handleTabs2} style={tab === 2 ? underline : null}>
+                生涯費用
+              </Tab>
+              <Tab onClick={handleTabs3} style={tab === 3 ? underline : null}>
+                やりたいこと
+              </Tab>
+              <Tab onClick={handleTabs4} style={tab === 4 ? underline : null}>
+                総額
+              </Tab>
+              {loginUserCheck ? (
+                <Button onClick={openCreateTodoModal}>作成</Button>
+              ) : null}
+            </TabList>
 
-          <TabPanel>
-            <TodoSearchBar
-              genres={genresPreparation}
-              setSearchBarFinish={setSearchBarPreparationFinish}
-              setSearchBarUnFinish={setSearchBarPreparationUnFinish}
-              setSearchGenre={setSearchBarPreparationGenre}
-              searchBarState={SearchBarPreparationState}
-            />
-            {genresPreparation.map((genre) => {
-              return (
-                <div key={genre}>
-                  <TodoGenreList
-                    searchBarState={SearchBarPreparationState}
-                    userId={user.id}
+            <TabPanel>
+              <TodoSearchBar
+                genres={genresPreparation}
+                setSearchBarFinish={setSearchBarPreparationFinish}
+                setSearchBarUnFinish={setSearchBarPreparationUnFinish}
+                setSearchGenre={setSearchBarPreparationGenre}
+                searchBarState={SearchBarPreparationState}
+              />
+              {genresPreparation.map((genre) => {
+                return (
+                  <div key={genre}>
+                    <TodoGenreList
+                      searchBarState={SearchBarPreparationState}
+                      userId={user.id}
+                      genre={genre}
+                      group={'準備'}
+                    />
+                  </div>
+                );
+              })}
+              <div className={Styles.border}></div>
+            </TabPanel>
+            <TabPanel>
+              <TodoSearchBar
+                searchBarState={SearchBarMoneyState}
+                genres={genresMoney}
+                setSearchBarFinish={setSearchBarMoneyFinish}
+                setSearchBarUnFinish={setSearchBarMoneyUnFinish}
+                setSearchGenre={setSearchBarMoneyGenre}
+              />
+              {genresMoney.map((genre) => {
+                return (
+                  <div key={genre}>
+                    <TodoGenreList
+                      searchBarState={SearchBarMoneyState}
+                      userId={user.id}
+                      genre={genre}
+                      group={'お金'}
+                    />
+                  </div>
+                );
+              })}
+              <div className={Styles.border}></div>
+            </TabPanel>
+            <TabPanel>
+              <TodoSearchBar
+                setSearchBarFinish={setSearchBarTodoFinish}
+                setSearchBarUnFinish={setSearchBarTodoUnFinish}
+                setSearchGenre={setSearchBarTodoGenre}
+                genres={genresTodo}
+                searchBarState={SearchBarTodoState}
+              />
+              {genresTodo.map((genre) => {
+                return (
+                  <div key={genre}>
+                    <TodoGenreList
+                      searchBarState={SearchBarTodoState}
+                      userId={user.id}
+                      genre={genre}
+                      group={'やりたいこと'}
+                    />
+                  </div>
+                );
+              })}
+              <div className={Styles.border}></div>
+            </TabPanel>
+            <TabPanel>
+              <div className={Styles.genre_title}>準備</div>
+              {genresPreparation.map((genre) => {
+                return (
+                  <TodoMoneySum
                     genre={genre}
+                    key={genre}
                     group={'準備'}
-                  />
-                </div>
-              );
-            })}
-            <div className={Styles.border}></div>
-          </TabPanel>
-          <TabPanel>
-            <TodoSearchBar
-              searchBarState={SearchBarMoneyState}
-              genres={genresMoney}
-              setSearchBarFinish={setSearchBarMoneyFinish}
-              setSearchBarUnFinish={setSearchBarMoneyUnFinish}
-              setSearchGenre={setSearchBarMoneyGenre}
-            />
-            {genresMoney.map((genre) => {
-              return (
-                <div key={genre}>
-                  <TodoGenreList
-                    searchBarState={SearchBarMoneyState}
                     userId={user.id}
+                  />
+                );
+              })}
+              <div className={Styles.genre_title}>生涯費用</div>
+              {genresMoney.map((genre) => {
+                return (
+                  <TodoMoneySum
                     genre={genre}
+                    key={genre}
                     group={'お金'}
-                  />
-                </div>
-              );
-            })}
-            <div className={Styles.border}></div>
-          </TabPanel>
-          <TabPanel>
-            <TodoSearchBar
-              setSearchBarFinish={setSearchBarTodoFinish}
-              setSearchBarUnFinish={setSearchBarTodoUnFinish}
-              setSearchGenre={setSearchBarTodoGenre}
-              genres={genresTodo}
-              searchBarState={SearchBarTodoState}
-            />
-            {genresTodo.map((genre) => {
-              return (
-                <div key={genre}>
-                  <TodoGenreList
-                    searchBarState={SearchBarTodoState}
                     userId={user.id}
-                    genre={genre}
-                    group={'やりたいこと'}
                   />
-                </div>
-              );
-            })}
-            <div className={Styles.border}></div>
-          </TabPanel>
-          <TabPanel>
-            <div className={Styles.genre_title}>準備</div>
-            {genresPreparation.map((genre) => {
-              return (
-                <TodoMoneySum
-                  genre={genre}
-                  key={genre}
-                  group={'準備'}
-                  userId={user.id}
-                />
-              );
-            })}
-            <div className={Styles.genre_title}>生涯費用</div>
-            {genresMoney.map((genre) => {
-              return (
-                <TodoMoneySum
-                  genre={genre}
-                  key={genre}
-                  group={'お金'}
-                  userId={user.id}
-                />
-              );
-            })}
-            <div className={Styles.genre_title}>やりたいこと</div>
-            {genresTodo.map((genre) => {
-              return (
-                <TodoMoneySum
-                  genre={genre}
-                  key={genre}
-                  group={'やりたいこと'}
-                  userId={user.id}
-                />
-              );
-            })}
-            <div className={Styles.border}></div>
-          </TabPanel>
-        </Tabs>
+                );
+              })}
+              <div className={Styles.genre_title}>やりたいこと</div>
+              {genresTodo.map((genre) => {
+                return (
+                  <TodoMoneySum
+                    genre={genre}
+                    key={genre}
+                    group={'やりたいこと'}
+                    userId={user.id}
+                  />
+                );
+              })}
+              <div className={Styles.border}></div>
+            </TabPanel>
+          </Tabs>
+        ) : (
+          <div className={Styles.middle}>
+            {username}はデータを非公開にしています
+          </div>
+        )}
       </Layout>
 
       <footer>

@@ -5,6 +5,7 @@ import CountFollowing from './countFollowing/countFollowing';
 import InfinitePosts from './infinitePosts/infinitePosts';
 import Loader from './loader/loader';
 import PostView from './infinitePosts/parts/postView/postView';
+import TodoCharts from './charts/todoCharts';
 
 export {
   Heart,
@@ -14,4 +15,5 @@ export {
   InfinitePosts,
   Loader,
   PostView,
+  TodoCharts,
 };

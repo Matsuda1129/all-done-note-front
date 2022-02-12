@@ -41,9 +41,9 @@ export default function CreateTodoModal({
     }
   };
 
-  if (createTodoModal) {
-    return (
-      <div>
+  return (
+    <div>
+      {createTodoModal ? (
         <div className={Styles.overlay}>
           <div className={Styles.content}>
             <button className={Styles.batsu} onClick={openCreateTodoModal}>
@@ -131,9 +131,7 @@ export default function CreateTodoModal({
             </form>
           </div>
         </div>
-      </div>
-    );
-  } else {
-    return null;
-  }
+      ) : null}
+    </div>
+  );
 }
