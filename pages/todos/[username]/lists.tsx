@@ -123,7 +123,6 @@ export default function Todo() {
           const alltodoPercent = await todosService.findTodoAllPercent(
             username
           );
-
           await usersRepository.editTodo(user.id, alltodoPercent);
         } catch (error) {
           console.log(error);

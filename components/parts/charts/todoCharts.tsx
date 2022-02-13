@@ -17,12 +17,12 @@ export default function TodoCharts({ username }) {
       const firstFetch = async () => {
         try {
           const data = await todosService.findTodoAllPercent(username);
-          await setGoalMoneyPercent1(data[0]);
-          await setGoalMoneyPercent2(data[1]);
-          await setAllPercent(data[2]);
-          await setPreparationPercent(data[3]);
-          await setMoneyPercent(data[4]);
-          await setTodoPercent(data[5]);
+          await setGoalMoneyPercent1(data.goalMoneyPercent1);
+          await setGoalMoneyPercent2(data.goalMoneyPercent2);
+          await setAllPercent(data.allPercentData);
+          await setPreparationPercent(data.preparationPercentData);
+          await setMoneyPercent(data.moneyPercentData);
+          await setTodoPercent(data.todoPercentData);
         } catch (error) {
           console.log(error);
         }

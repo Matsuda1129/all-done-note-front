@@ -1,5 +1,5 @@
 import Styles from './familyModal.module.css';
-import { backfaceFixed } from '../../../../lib/backFaceFixed';
+import { backfaceFixed } from '../../../lib/backFaceFixed';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -75,7 +75,6 @@ export default function FamilyModal({
               <div className={Styles.error_message}>{errorMessage}</div>
               <div className={Styles.flex_family}>
                 <label>
-                  {errors.alone && <div>{errors.alone.valueOf}</div>}
                   <input {...register('alone')} type='checkbox' />
                   一人暮らし
                 </label>

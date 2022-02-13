@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from '../components/Home';
 import Styles from '../styles/dataAnalist.module.css';
-import { CSSProperties } from 'react';
-// import { Chart } from 'hollanddd/chart-css-react';
 import { Chart, ArcElement } from 'chart.js';
 import { Bar, Pie } from 'react-chartjs-2';
 import {
@@ -14,8 +12,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { usersRepository } from '../repositories';
-import { SearchedUsers, UserSearchBar } from '../components/SearchUser';
+import { DataAnalistSearchBar } from '../components/DataAnalist';
+import { dataAnalizeService } from '../services';
 
 export default function DataAnalist() {
   const [preparationPercent, setPreparationPercent] = useState(Number);
@@ -25,18 +23,6 @@ export default function DataAnalist() {
   const [goalMoneyPercent1, setGoalMoneyPercent1] = useState(Number);
   const [goalMoneyPercent2, setGoalMoneyPercent2] = useState(Number);
 
-  useEffect(() => {
-    const firstFetch = async () => {
-      try {
-        const allUserData = await usersRepository.findAll();
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    firstFetch();
-  }, []);
-
-  const [searchWord, setSearchWord] = useState('');
   const [gender, setGender] = useState(undefined);
   const [alive, setAlive] = useState(undefined);
   const [age, setAge] = useState(undefined);
@@ -52,6 +38,55 @@ export default function DataAnalist() {
     isOthers: false,
   });
   const [familyModal, setFamilyModal] = useState(false);
+  const [goalMoeny1Ratio, setGoalMoney1Ratio] = useState({
+    zeroMillion: 0,
+    tenMillion: 0,
+    twentyMillion: 0,
+    thirtyMillion: 0,
+    fortyMillion: 0,
+    fiftyMillion: 0,
+    sixtyMillion: 0,
+    seventyMillion: 0,
+    eightyMillion: 0,
+    ninetyMillion: 0,
+  });
+  const [goalMoeny2Ratio, setGoalMoney2Ratio] = useState({
+    zeroMillion: 0,
+    tenMillion: 0,
+    twentyMillion: 0,
+    thirtyMillion: 0,
+    fortyMillion: 0,
+    fiftyMillion: 0,
+    sixtyMillion: 0,
+    seventyMillion: 0,
+    eightyMillion: 0,
+    ninetyMillion: 0,
+  });
+
+  useEffect(() => {
+    const firstFetch = async () => {
+      try {
+        const data: any = await dataAnalizeService.analizedData(
+          gender,
+          age,
+          job,
+          alive,
+          family
+        );
+        await setGoalMoney1Ratio(data.goalMoeny1Ratio);
+        await setGoalMoney2Ratio(data.goalMoeny2Ratio);
+        await setGoalMoneyPercent1(data.goalMoney1Percent);
+        await setGoalMoneyPercent2(data.goalMoney2Percent);
+        await setAllPercent(data.allPercent);
+        await setPreparationPercent(data.preparationPercent);
+        await setMoneyPercent(data.moneyPercent);
+        await setTodoPercent(data.todoPercent);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    firstFetch();
+  }, [age, alive, family, gender, job]);
 
   ChartJS.register(
     ArcElement,
@@ -63,9 +98,10 @@ export default function DataAnalist() {
     Legend
   );
 
-  const data = {
+  const goalMoeny1RatioData = {
     // x 軸のラベル
     labels: [
+      '1000万以下',
       '1000万',
       '2000万',
       '3000万',
@@ -75,13 +111,79 @@ export default function DataAnalist() {
       '7000万',
       '8000万',
       '9000万',
-      '1億',
     ],
     datasets: [
       {
-        label: '目標金額１',
+        label: '目標金額１ 人数',
         // データの値
-        data: [65, 59, 80, 81, 56, 55, 40, 81, 56, 40],
+        data: [
+          goalMoeny1Ratio.zeroMillion,
+          goalMoeny1Ratio.tenMillion,
+          goalMoeny1Ratio.twentyMillion,
+          goalMoeny1Ratio.thirtyMillion,
+          goalMoeny1Ratio.fortyMillion,
+          goalMoeny1Ratio.fiftyMillion,
+          goalMoeny1Ratio.sixtyMillion,
+          goalMoeny1Ratio.seventyMillion,
+          goalMoeny1Ratio.eightyMillion,
+          goalMoeny1Ratio.ninetyMillion,
+        ],
+        // グラフの背景色
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)',
+        ],
+        // グラフの枠線の色
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)',
+        ],
+        // グラフの枠線の太さ
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const goalMoeny2RatioData = {
+    // x 軸のラベル
+    labels: [
+      '1000万以下',
+      '1000万',
+      '2000万',
+      '3000万',
+      '4000万',
+      '5000万',
+      '6000万',
+      '7000万',
+      '8000万',
+      '9000万',
+    ],
+    datasets: [
+      {
+        label: '目標金額2 人数',
+        // データの値
+        data: [
+          goalMoeny2Ratio.zeroMillion,
+          goalMoeny2Ratio.tenMillion,
+          goalMoeny2Ratio.twentyMillion,
+          goalMoeny2Ratio.thirtyMillion,
+          goalMoeny2Ratio.fortyMillion,
+          goalMoeny2Ratio.fiftyMillion,
+          goalMoeny2Ratio.sixtyMillion,
+          goalMoeny2Ratio.seventyMillion,
+          goalMoeny2Ratio.eightyMillion,
+          goalMoeny2Ratio.ninetyMillion,
+        ],
         // グラフの背景色
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -110,8 +212,21 @@ export default function DataAnalist() {
 
   return (
     <Layout>
-      <UserSearchBar />
-      <Bar data={data} className={Styles.Bar_charts} />
+      <h1 style={{ textAlign: 'center' }}>データ分析</h1>
+      <div style={{ textAlign: 'center' }}>
+        <DataAnalistSearchBar
+          setAge={setAge}
+          setAlive={setAlive}
+          setFamily={setFamily}
+          setGender={setGender}
+          setJob={setJob}
+          setFamilyModal={setFamilyModal}
+          familyModal={familyModal}
+        />
+      </div>
+      <br />
+      <Bar data={goalMoeny1RatioData} className={Styles.Bar_charts} />
+      <Bar data={goalMoeny2RatioData} className={Styles.Bar_charts} />
 
       <link
         rel='stylesheet'

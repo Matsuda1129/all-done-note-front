@@ -1,14 +1,12 @@
 import { Select, MenuItem } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { backfaceFixed } from '../../../lib/backFaceFixed';
 import { FamilyModal } from '../../parts';
 import { Button } from '../../utils';
-import Styles from './userSearchBar.module.css';
-import { backfaceFixed } from '../../../lib/backFaceFixed';
+import Styles from './dataAnalistSearchBar.module.css';
 
-export default function UserSearchBar({
-  searchWord,
-  setSearchWord,
+export default function DataAnalistSearchBar({
   setGender,
   setAge,
   setAlive,
@@ -55,13 +53,6 @@ export default function UserSearchBar({
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          className={Styles.search_input}
-          type='text'
-          placeholder='キーワード検索'
-          onChange={(e) => setSearchWord(e.target.value)}
-          value={searchWord}
-        />
         <div className={Styles.display_flex_column}>
           <div className={Styles.display_flex}>
             <label className={Styles.flex_container_item}>

@@ -44,7 +44,6 @@ export async function create(
 }
 
 export async function findById(id: number) {
-  console.log(id);
   const res = await instance.get(`mail/${id}`);
 
   return res.data;

@@ -19,7 +19,6 @@ export default function MailsDetail() {
     message: string;
   };
   const [mail, setMail] = useState<mail>();
-  console.log(mail);
 
   useEffect(() => {
     setPageId(Number(router.query.id));

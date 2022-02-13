@@ -105,12 +105,14 @@ export async function editPicture(userId, picture) {
 
 export async function editTodo(userId, todoData) {
   await instance.put(`/user/${userId}/todo`, {
-    goalMoney1: todoData[0],
-    goalMoney2: todoData[1],
-    allPercent: todoData[2],
-    preparationPercent: todoData[3],
-    moneyPercent: todoData[4],
-    todoPercent: todoData[5],
+    goalMoney1: todoData.goalMoney1,
+    goalMoney2: todoData.goalMoney2,
+    goalMoney1Percent: todoData.goalMoneyPercent1,
+    goalMoney2Percent: todoData.goalMoneyPercent2,
+    allPercent: todoData.allPercentData,
+    preparationPercent: todoData.preparationPercentData,
+    moneyPercent: todoData.moneyPercentData,
+    todoPercent: todoData.todoPercentData,
   });
 }
 
@@ -146,4 +148,36 @@ export async function fetchSearch(
   });
 
   return res.data.items;
+}
+
+
+export async function dataAnalize(
+  gender,
+  age,
+  job,
+  alive,
+  family
+) {
+  if (alive === 'false') {
+    alive = false;
+  }
+  if (alive === 'true') {
+    alive = true;
+  }
+  const res: any = await instance.post(`/user/dataAnalize`, {
+    gender: gender,
+    alive: alive,
+    age: age,
+    job: job,
+    alone: family.alone,
+    isMarried: family.isMarried,
+    isParents: family.isParents,
+    isSpouseParents: family.isSpouseParents,
+    isChild: family.isChild,
+    isChildren2: family.isChildren2,
+    isChildren3: family.isChildren3,
+    isOthers: family.isOthers,
+  });
+
+  return res.data;
 }

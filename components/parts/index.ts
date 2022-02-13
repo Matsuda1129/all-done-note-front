@@ -6,6 +6,7 @@ import InfinitePosts from './infinitePosts/infinitePosts';
 import Loader from './loader/loader';
 import PostView from './infinitePosts/parts/postView/postView';
 import TodoCharts from './charts/todoCharts';
+import FamilyModal from './familyModal/familyModal';
 
 export {
   Heart,
@@ -16,4 +17,5 @@ export {
   Loader,
   PostView,
   TodoCharts,
+  FamilyModal,
 };

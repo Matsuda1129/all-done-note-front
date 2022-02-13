@@ -8,7 +8,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { s3Repository, usersRepository } from '../../../repositories';
 import { backfaceFixed } from '../../../lib/backFaceFixed';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type FormValuse = {
   name: string;
@@ -54,6 +54,54 @@ export default function ProfileModal({
   const [isOthers, setIsOthers] = useState(user.isOthers);
   const [familyeErrorMessage, setFamilyErrorMessage] = useState(String);
 
+  useEffect(() => {
+    const checkFamily = async () => {
+      try {
+        if (alone) {
+          if (
+            isMarried === true ||
+            isParents === true ||
+            isSpouseParents === true ||
+            isChild === true ||
+            isChildren2 === true ||
+            isChildren3 === true ||
+            isOthers === true
+          ) {
+            setFamilyErrorMessage(
+              '一人暮らしが選択されています、他の選択肢を外してください'
+            );
+
+            return;
+          }
+        }
+        if (
+          (isChild && isChildren2) ||
+          (isChild && isChildren3) ||
+          (isChildren2 && isChildren3) ||
+          (isChild && isChildren2 && isChildren3)
+        ) {
+          setFamilyErrorMessage('子供の選択肢が複数選ばれています');
+
+          return;
+        }
+
+        setFamilyErrorMessage('');
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    checkFamily();
+  }, [
+    alone,
+    isChild,
+    isChildren2,
+    isChildren3,
+    isMarried,
+    isOthers,
+    isParents,
+    isSpouseParents,
+  ]);
+
   const handleCheckboxClick = async (e, set) => {
     if (e === true) {
       await set(false);
@@ -61,37 +109,8 @@ export default function ProfileModal({
       await set(true);
     }
   };
-
   const onSubmit = async (data) => {
     try {
-      if (data.alone) {
-        if (
-          data.isMarried === true ||
-          data.isParents === true ||
-          data.isSpouseParents === true ||
-          data.isChild === true ||
-          data.isChildren2 === true ||
-          data.isChildren3 === true ||
-          data.isOthers === true
-        ) {
-          setFamilyErrorMessage(
-            '一人暮らしが選択されています、他の選択肢を外してください'
-          );
-
-          return;
-        }
-      }
-      if (
-        (data.isChild && data.isChildren2) ||
-        (data.isChild && data.isChildren3) ||
-        (data.isChildren2 && data.isChildren3) ||
-        (data.child && data.isChild2 && data.isChildren3)
-      ) {
-        setFamilyErrorMessage('子供の選択肢が複数選ばれています');
-
-        return;
-      }
-
       setFamilyErrorMessage('');
       const updateData = await usersRepository.update(data, user);
       await backfaceFixed(false);

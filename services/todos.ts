@@ -27,7 +27,7 @@ export async function findTodoPercent(userId: number, group: string) {
   return percent;
 }
 
-export async function findTodoMoneyPercent1(userId: number) {
+export async function findTodoMoney1(userId: number) {
   const groupData: any = await todosRepository.findUserGroup(userId, '準備');
   let sumMoney = 0;
   for (let i = 0; i < groupData.length; i++) {
@@ -37,7 +37,7 @@ export async function findTodoMoneyPercent1(userId: number) {
   return sumMoney;
 }
 
-export async function findTodoMoneyPercent2(userId: number) {
+export async function findTodoMoney2(userId: number) {
   const groupData1: any = await todosRepository.findUserGroup(userId, 'お金');
   const groupData2: any = await todosRepository.findUserGroup(
     userId,
@@ -64,43 +64,44 @@ export async function findTodoAllPercent(username: string) {
   const moneyPercentData = await findTodoPercent(userData.id, 'お金');
   const todoPercentData = await findTodoPercent(userData.id, 'やりたいこと');
 
-  const todoPercentMoney1 = await findTodoMoneyPercent1(userData.id);
-  const todoPercentMoneyPercent1 = await Math.floor(
-    (userData.savings / todoPercentMoney1) * 100
+  const todoMoney1 = await findTodoMoney1(userData.id);
+  const todoPercentMoney1 = await Math.floor(
+    (userData.savings / todoMoney1) * 100
   );
 
-  const todoPercentMoney2 = await findTodoMoneyPercent2(userData.id);
+  const todoMoney2 = await findTodoMoney2(userData.id);
 
-  const todoPercentMoneyPercent2 = await Math.floor(
-    (userData.savings / todoPercentMoney2) * 100
+  const todoPercentMoney2 = await Math.floor(
+    (userData.savings / todoMoney2) * 100
   );
 
   let goalMoneyPercent1;
-  if (todoPercentMoneyPercent1 > 100) {
+  if (todoPercentMoney1 > 100) {
     goalMoneyPercent1 = 100;
   } else {
-    goalMoneyPercent1 = todoPercentMoneyPercent1;
+    goalMoneyPercent1 = todoPercentMoney1;
   }
 
   let goalMoneyPercent2;
-  if (todoPercentMoneyPercent2 > 100) {
+  if (todoPercentMoney2 > 100) {
     goalMoneyPercent2 = 100;
   } else {
-    goalMoneyPercent2 = todoPercentMoneyPercent2;
+    goalMoneyPercent2 = todoPercentMoney2;
   }
 
   const allPercentData = Math.round(
     (moneyPercentData + preparationPercentData + todoPercentData) / 3
   );
-
-  const data = [
-    goalMoneyPercent1,
-    goalMoneyPercent2,
-    allPercentData,
-    preparationPercentData,
-    moneyPercentData,
-    todoPercentData,
-  ];
+  const data = {
+    goalMoney1: todoMoney1,
+    goalMoney2: todoMoney2,
+    goalMoneyPercent1: goalMoneyPercent1,
+    goalMoneyPercent2: goalMoneyPercent2,
+    allPercentData: allPercentData,
+    preparationPercentData: preparationPercentData,
+    moneyPercentData: moneyPercentData,
+    todoPercentData: todoPercentData,
+  };
 
   return data;
 }
