@@ -21,7 +21,7 @@ export async function find(username: string) {
   return user;
 }
 
-export async function update(data, user, family) {
+export async function update(data, user) {
   function getAge(birthday) {
     //今日
     const dateObject = new Date(birthday);
@@ -80,14 +80,14 @@ export async function update(data, user, family) {
     savings: savings,
     picture: picture,
     age: age,
-    alone: family[0],
-    isMarried: family[1],
-    isParents: family[2],
-    isSpouseParents: family[3],
-    isChild: family[4],
-    isChildren2: family[5],
-    isChildren3: family[6],
-    isOthers: family[7],
+    alone: data.alone,
+    isMarried: data.isMarried,
+    isParents: data.isParents,
+    isSpouseParents: data.isSpouseParents,
+    isChild: data.isChild,
+    isChildren2: data.isChildren2,
+    isChildren3: data.isChildren3,
+    isOthers: data.isOthers,
     openData: openData,
     openDataAfterDie: openDataAfterDie,
   });
@@ -114,12 +114,35 @@ export async function editTodo(userId, todoData) {
   });
 }
 
-export async function fetchSearch(searchWord, page, gender, age, job) {
+export async function fetchSearch(
+  searchWord,
+  page,
+  gender,
+  age,
+  job,
+  alive,
+  family
+) {
+  if (alive === 'false') {
+    alive = false;
+  }
+  if (alive === 'true') {
+    alive = true;
+  }
   const res: any = await instance.post(`/user/page?page=${page}&limit=20`, {
     searchWord: searchWord,
     gender: gender,
+    alive: alive,
     age: age,
     job: job,
+    alone: family.alone,
+    isMarried: family.isMarried,
+    isParents: family.isParents,
+    isSpouseParents: family.isSpouseParents,
+    isChild: family.isChild,
+    isChildren2: family.isChildren2,
+    isChildren3: family.isChildren3,
+    isOthers: family.isOthers,
   });
 
   return res.data.items;

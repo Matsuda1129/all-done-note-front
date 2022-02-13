@@ -9,6 +9,10 @@
   border-radius: 50%;
 }
 
+.invisible {
+  display: none;
+}
+
 .name {
   margin-left: 3rem;
   margin-top: 2rem;

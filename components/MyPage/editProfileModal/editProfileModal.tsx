@@ -19,14 +19,14 @@ type FormValuse = {
   picture: string;
   savings: number;
   job: string;
-  alone: string;
-  isMarried: string;
-  isParents: string;
-  isSpouseParents: string;
-  isChild: string;
-  isChildren2: string;
-  isChildren3: string;
-  isOthers: string;
+  alone: boolean;
+  isMarried: boolean;
+  isParents: boolean;
+  isSpouseParents: boolean;
+  isChild: boolean;
+  isChildren2: boolean;
+  isChildren3: boolean;
+  isOthers: boolean;
   openData: boolean;
   openDataAfterDie: boolean;
 };
@@ -52,6 +52,8 @@ export default function ProfileModal({
   const [isChildren2, setIsChildren2] = useState(user.isChildren2);
   const [isChildren3, setIsChildren3] = useState(user.isChildren3);
   const [isOthers, setIsOthers] = useState(user.isOthers);
+  const [familyeErrorMessage, setFamilyErrorMessage] = useState(String);
+
   const handleCheckboxClick = async (e, set) => {
     if (e === true) {
       await set(false);
@@ -60,24 +62,41 @@ export default function ProfileModal({
     }
   };
 
-  const family = [
-    alone,
-    isMarried,
-    isParents,
-    isSpouseParents,
-    isChild,
-    isChildren2,
-    isChildren3,
-    isOthers,
-  ];
-
   const onSubmit = async (data) => {
     try {
-      const updateData = await usersRepository.update(data, user, family);
+      if (data.alone) {
+        if (
+          data.isMarried === true ||
+          data.isParents === true ||
+          data.isSpouseParents === true ||
+          data.isChild === true ||
+          data.isChildren2 === true ||
+          data.isChildren3 === true ||
+          data.isOthers === true
+        ) {
+          setFamilyErrorMessage(
+            '一人暮らしが選択されています、他の選択肢を外してください'
+          );
+
+          return;
+        }
+      }
+      if (
+        (data.isChild && data.isChildren2) ||
+        (data.isChild && data.isChildren3) ||
+        (data.isChildren2 && data.isChildren3) ||
+        (data.child && data.isChild2 && data.isChildren3)
+      ) {
+        setFamilyErrorMessage('子供の選択肢が複数選ばれています');
+
+        return;
+      }
+
+      setFamilyErrorMessage('');
+      const updateData = await usersRepository.update(data, user);
       await backfaceFixed(false);
       await dispatch(setUsers(updateData));
       await dispatch(() => setUser(updateData));
-      await window.location.reload();
       alert('プロフィールを編集しました');
       await dispatch(() => showOffProfileModal());
     } catch (e) {
@@ -204,6 +223,9 @@ export default function ProfileModal({
                     </MenuItem>
                   </Select>
                   <label>家族構成</label>
+                  <div className={Styles.error_message}>
+                    {familyeErrorMessage}
+                  </div>
                   <div className={Styles.flex_family}>
                     <label htmlFor=''>
                       <input
@@ -211,8 +233,6 @@ export default function ProfileModal({
                         checked={alone}
                         onChange={() => handleCheckboxClick(alone, setAlone)}
                         type='checkbox'
-                        name='family'
-                        id='family'
                       />
                       一人暮らし
                     </label>
@@ -224,8 +244,6 @@ export default function ProfileModal({
                           handleCheckboxClick(isMarried, setIsMarried)
                         }
                         type='checkbox'
-                        name='family'
-                        id='family'
                       />
                       配偶者
                     </label>
@@ -237,8 +255,6 @@ export default function ProfileModal({
                           handleCheckboxClick(isParents, setIsParents)
                         }
                         type='checkbox'
-                        name='family'
-                        id='family'
                       />
                       ご自身の親
                     </label>
@@ -253,8 +269,6 @@ export default function ProfileModal({
                           )
                         }
                         type='checkbox'
-                        name='family'
-                        id='family'
                       />
                       配偶者の親
                     </label>
@@ -266,8 +280,6 @@ export default function ProfileModal({
                           handleCheckboxClick(isChild, setIsChild)
                         }
                         type='checkbox'
-                        name='family'
-                        id='family'
                       />
                       子供
                     </label>
@@ -279,8 +291,6 @@ export default function ProfileModal({
                           handleCheckboxClick(isChildren2, setIsChildren2)
                         }
                         type='checkbox'
-                        name='family'
-                        id='family'
                       />
                       子供２人
                     </label>
@@ -292,8 +302,6 @@ export default function ProfileModal({
                           handleCheckboxClick(isChildren3, setIsChildren3)
                         }
                         type='checkbox'
-                        name='family'
-                        id='family'
                       />
                       子供３人以上
                     </label>
@@ -306,8 +314,6 @@ export default function ProfileModal({
                         }
                         className='checks'
                         type='checkbox'
-                        name='family'
-                        id='family'
                       />
                       その他家族
                     </label>
@@ -343,6 +349,7 @@ export default function ProfileModal({
                     <MenuItem value={'false'}>非公開</MenuItem>
                   </Select>
 
+                  {errors.birthday && <p>{errors.birthday.message}</p>}
                   <label>誕生日</label>
                   <input
                     {...register('birthday', {
@@ -360,6 +367,10 @@ export default function ProfileModal({
                   accept='image/png, image/jpeg'
                   className={Styles.flex_container_item3}
                 />
+
+                <div className={Styles.error_message}>
+                  {familyeErrorMessage}
+                </div>
                 <div className={Styles.flex_container_item}>
                   <Button type='submit'>保存する</Button>
                 </div>

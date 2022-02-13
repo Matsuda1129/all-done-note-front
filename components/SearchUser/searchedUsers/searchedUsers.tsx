@@ -6,7 +6,15 @@ import { Loader, CountFollower, FollowButton } from '../../parts';
 import Image from 'next/image';
 import Styles from './searchedUser.module.css';
 
-export default function SearchedUsers({ age, gender, searchWord,job }) {
+export default function SearchedUsers({
+  age,
+  gender,
+  searchWord,
+  job,
+  family,
+  alive,
+  familyModal,
+}) {
   const [users, setUsers] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
@@ -19,7 +27,9 @@ export default function SearchedUsers({ age, gender, searchWord,job }) {
           1,
           gender,
           age,
-          job
+          job,
+          alive,
+          family
         );
         await setUsers(page1);
         await setPage(2);
@@ -29,7 +39,7 @@ export default function SearchedUsers({ age, gender, searchWord,job }) {
       }
     };
     firstFetch();
-  }, [age, gender, searchWord,job]);
+  }, [age, gender, searchWord, job, family, alive]);
 
   const fetchData = async () => {
     const componentsFormServer = await usersRepository.fetchSearch(
@@ -37,7 +47,9 @@ export default function SearchedUsers({ age, gender, searchWord,job }) {
       page,
       gender,
       age,
-      job
+      job,
+      alive,
+      family
     );
     setUsers([...users, ...componentsFormServer]);
     if (componentsFormServer.length === 0 || componentsFormServer.length < 20) {
@@ -61,14 +73,16 @@ export default function SearchedUsers({ age, gender, searchWord,job }) {
       {users.map((user) => {
         return (
           <div className={Styles.userBar} key={user.id}>
-            <Image
-              className={Styles.triming}
-              priority
-              src={process.env.NEXT_PUBLIC_IMAGE_URL + user.picture}
-              height={50}
-              width={70}
-              alt={'アイコン'}
-            />
+            <div className={familyModal ? Styles.invisible : null}>
+              <Image
+                className={Styles.triming}
+                priority={false}
+                src={process.env.NEXT_PUBLIC_IMAGE_URL + user.picture}
+                height={70}
+                width={70}
+                alt={'アイコン'}
+              />
+            </div>
             <Link href={`../users/${user.name}`}>
               <a className={Styles.name} href=''>
                 {user.name}

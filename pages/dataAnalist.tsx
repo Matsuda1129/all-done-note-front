@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout } from '../components/Home';
 import Styles from '../styles/dataAnalist.module.css';
 import { CSSProperties } from 'react';
@@ -14,6 +14,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { usersRepository } from '../repositories';
+import { SearchedUsers, UserSearchBar } from '../components/SearchUser';
 
 export default function DataAnalist() {
   const [preparationPercent, setPreparationPercent] = useState(Number);
@@ -22,6 +24,34 @@ export default function DataAnalist() {
   const [allPercent, setAllPercent] = useState(Number);
   const [goalMoneyPercent1, setGoalMoneyPercent1] = useState(Number);
   const [goalMoneyPercent2, setGoalMoneyPercent2] = useState(Number);
+
+  useEffect(() => {
+    const firstFetch = async () => {
+      try {
+        const allUserData = await usersRepository.findAll();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    firstFetch();
+  }, []);
+
+  const [searchWord, setSearchWord] = useState('');
+  const [gender, setGender] = useState(undefined);
+  const [alive, setAlive] = useState(undefined);
+  const [age, setAge] = useState(undefined);
+  const [job, setJob] = useState(undefined);
+  const [family, setFamily] = useState({
+    alone: false,
+    isMarried: false,
+    isParents: false,
+    isSpouseParents: false,
+    isChild: false,
+    isChildren2: false,
+    isChildren3: false,
+    isOthers: false,
+  });
+  const [familyModal, setFamilyModal] = useState(false);
 
   ChartJS.register(
     ArcElement,
@@ -80,6 +110,7 @@ export default function DataAnalist() {
 
   return (
     <Layout>
+      <UserSearchBar />
       <Bar data={data} className={Styles.Bar_charts} />
 
       <link
