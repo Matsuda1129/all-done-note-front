@@ -1,7 +1,0 @@
-@media (max-width: 500px) {
- .margin_bar{
-   margin-bottom: 4rem;
- }
-}
-
-

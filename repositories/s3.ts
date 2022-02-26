@@ -50,44 +50,10 @@ export async function uploadWill(e, username) {
   }
 }
 
-export async function downloadPhoto(e) {
-  const filename = 'treeIcon.jpg';
-  window.open(`/api/download-url?file=${filename}`, '_blank');
-}
-
-export async function deletePhoto(e) {
-  const file = e.target.files[0];
-  const filename = encodeURIComponent(file.name);
-
-  const params = {
-    Bucket: process.env.NEXT_PUBLIC_BUCKET,
-    Key: filename,
-  };
-
-  const s3 = new aws.S3();
-  await s3.deleteObject(params, function (err, data) {
-    if (err) console.log(err);
-    else console.log('### delete image ok'); // successful response
-  });
-}
-
 export async function deleteWill(username) {
   const params = {
     Bucket: process.env.NEXT_PUBLIC_BUCKET,
     Key: `will/${username}:will`,
-  };
-
-  const s3 = new aws.S3();
-  await s3.deleteObject(params, function (err, data) {
-    if (err) console.log(err);
-    else console.log('### delete image ok'); // successful response
-  });
-}
-
-export async function deleteProfilephoto(filename) {
-  const params = {
-    Bucket: process.env.NEXT_PUBLIC_BUCKET,
-    Key: filename,
   };
 
   const s3 = new aws.S3();

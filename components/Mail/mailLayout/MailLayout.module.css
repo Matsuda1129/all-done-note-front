@@ -30,7 +30,6 @@
 .item_B {
   grid-area: areaB;
   border-left: 2px solid gray;
-  border-right: 2px solid gray;
   display: flex;
   min-height: 100vh;
 }
@@ -38,6 +37,7 @@
 .item_C {
   position: absolute;
   right: 3%;
+  border-left: 2px solid gray;
   border-right: 2px solid gray;
   width: 56.4vw;
   flex-flow: column;
