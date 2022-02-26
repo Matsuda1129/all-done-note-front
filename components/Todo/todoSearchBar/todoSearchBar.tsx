@@ -1,7 +1,6 @@
 import { MenuItem, Select } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
 import Styles from './todoSearchBar.module.css';
 
 export default function TodoSearchBar({
@@ -12,7 +11,6 @@ export default function TodoSearchBar({
   searchBarState,
 }) {
   const dispatch = useDispatch();
-  
 
   const changeCheckFinished = async () => {
     if (searchBarState.finished === true) {

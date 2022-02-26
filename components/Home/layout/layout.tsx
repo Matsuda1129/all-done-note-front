@@ -78,9 +78,9 @@ export default function Layout({ children }) {
         </div>
         {children}
       </div>
-        <div className={Styles.z_index2}>
-          <CreatePostModal />
-        </div>
+      <div className={Styles.z_index2}>
+        <CreatePostModal />
+      </div>
     </ProtectRoute>
   );
 }

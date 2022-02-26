@@ -42,7 +42,11 @@ export default function MailsDetail() {
         <MailLayout>
           <br className={Styels.br} />
           <p>
-            <a href='#'className={Styels.backPage} onClick={() => history.back()}>
+            <a
+              href='#'
+              className={Styels.backPage}
+              onClick={() => history.back()}
+            >
               前のページにもどる
             </a>
           </p>

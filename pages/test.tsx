@@ -9,7 +9,9 @@ export default function Test() {
   return (
     <div>
       <input id='a' type='checkbox' className={Styles.checkbox} />
-      <label htmlFor='a' className={Styles.label}>✓</label>
+      <label htmlFor='a' className={Styles.label}>
+        ✓
+      </label>
     </div>
   );
 }

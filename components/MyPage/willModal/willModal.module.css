@@ -27,7 +27,7 @@
   flex-direction: column;
 }
 
-.flexBox{
+.flexBox {
   display: flex;
 }
 
@@ -53,17 +53,17 @@
   color: #fff;
 }
 
-.willDownload{
-  color:blue;
+.willDownload {
+  color: blue;
   width: 200px;
 }
 
-.willDownload:hover{
+.willDownload:hover {
   border-bottom: 2px solid blue;
 }
 
-@media (max-width:500px) {
-  .content{
+@media (max-width: 500px) {
+  .content {
     width: 80%;
   }
 }

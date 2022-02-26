@@ -60,9 +60,9 @@ export default function MailList({ mail }) {
               onClick={() => changeUnread()}
             ></button>
             <button
-              className={mail.unread === true
-                ? Styles.iconRubbish2
-                : Styles.iconRubbish}
+              className={
+                mail.unread === true ? Styles.iconRubbish2 : Styles.iconRubbish
+              }
               onClick={() => deleteMail()}
             ></button>
           </div>

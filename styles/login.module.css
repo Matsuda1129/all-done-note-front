@@ -113,7 +113,7 @@
   display: inline-block;
 }
 
-.br{
+.br {
   display: none;
 }
 
@@ -229,7 +229,7 @@
     left: 0%;
     flex-wrap: wrap;
   }
-  .br{
+  .br {
     display: flex;
   }
 }

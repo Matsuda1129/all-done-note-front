@@ -76,7 +76,6 @@
   border: 2px solid rgb(35, 123, 196);
 }
 
-
 @media (max-width: 500px) {
   .content {
     width: 80%;

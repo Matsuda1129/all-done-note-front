@@ -7,4 +7,3 @@ export type TodoSearchBar = {
 export type TodoSearchBarState = {
   todoSearchBar: TodoSearchBar;
 };
-

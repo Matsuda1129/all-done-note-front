@@ -80,7 +80,7 @@
   visibility: hidden;
 }
 
-.pictureSlider{
+.pictureSlider {
   padding-bottom: 6rem;
 }
 
@@ -90,7 +90,7 @@
     height: 80%;
   }
 
-  .flexBox{
+  .flexBox {
     bottom: 10%;
   }
 }

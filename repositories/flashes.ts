@@ -25,6 +25,6 @@ export async function create() {
 export async function tellDeath(userId) {
   await instance.post('flash', {
     userId: userId,
-    message: 'さんが死亡者になりました。'
+    message: 'さんが死亡者になりました。',
   });
 }

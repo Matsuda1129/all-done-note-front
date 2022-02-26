@@ -34,7 +34,7 @@ const storage =
     : createNoopStorage();
 
 const rootReducer = combineReducers({
-  loginUserCheck:loginUserCheckReducer,
+  loginUserCheck: loginUserCheckReducer,
   openData: openDataReducer,
   isUseEffect: isUseEffectReducer,
   modalPost: modalPostReducer,

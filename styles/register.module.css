@@ -1,25 +1,23 @@
 .flex_container_column {
- display: flex;
- flex-direction: column;
- justify-content: space-evenly;
- padding-top: 5rem;
- width: 30%;
- margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-top: 5rem;
+  width: 30%;
+  margin: 0 auto;
 }
 
-.margin{
+.margin {
   margin-top: 3rem;
   margin-right: 2rem;
 }
 
-.flex_container{
+.flex_container {
   display: flex;
   margin: 0 auto;
 }
 
-
-
-.flex_container_item{
+.flex_container_item {
   margin-bottom: 2rem;
   height: 5rem;
   border-radius: 2rem;
@@ -45,5 +43,5 @@
 @media (max-width: 500px) {
   .flex_container_column {
     width: 70%;
-   }
+  }
 }

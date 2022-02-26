@@ -17,7 +17,7 @@ export const openDataSlice = createSlice({
   },
 });
 
-export const { setOpenDataTrue, setOpenDataFalse, changeOpenData} =
+export const { setOpenDataTrue, setOpenDataFalse, changeOpenData } =
   openDataSlice.actions;
 
 export default openDataSlice.reducer;
