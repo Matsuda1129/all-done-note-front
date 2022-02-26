@@ -1,6 +1,6 @@
 import { MenuItem, Select } from '@material-ui/core';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Styles from './todoSearchBar.module.css';
 
 export default function TodoSearchBar({
