@@ -6,7 +6,11 @@ export default function InfinitePosts({ posts }) {
     <div>
       <div style={{ border: ' 1px solid gray' }}></div>
       {posts.map((post) => {
-        return <PostView post={post} key={post.id} />;
+        return (
+          <div key={post.id}>
+            <PostView post={post} />
+          </div>
+        );
       })}
     </div>
   );

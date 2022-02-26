@@ -42,23 +42,24 @@ export default function InformationSearchBar({
         onSubmit={handleSubmit(onSubmit)}
         className={Styles.flex_container_searchBar}
       >
-          <input
-            {...register('title', {})}
-            className={Styles.search_input}
-            type='text'
-            placeholder='キーワード検索'
-            onChange={(e) => setSearchTitle(e.target.value)}
-            value={searchTitle}
-          />
-          <label>ジャンル</label>
+        <input
+          {...register('title', {})}
+          className={Styles.search_input}
+          type='text'
+          placeholder='キーワード検索'
+          onChange={(e) => setSearchTitle(e.target.value)}
+          value={searchTitle}
+        />
+        <label>
+          ジャンル
           <Select
             {...register('genre')}
             className={Styles.search_genre}
             type='text'
             placeholder='キーワード検索'
             onChange={(e) => setSearchGenre(e.target.value)}
-        >
-          <MenuItem defaultValue=''>未選択</MenuItem>
+          >
+            <MenuItem defaultValue=''>未選択</MenuItem>
             {genres.map((genre) => {
               return (
                 <MenuItem value={genre} key={genre}>
@@ -67,6 +68,7 @@ export default function InformationSearchBar({
               );
             })}
           </Select>
+        </label>
       </form>
     </div>
   );

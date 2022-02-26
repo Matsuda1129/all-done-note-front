@@ -25,3 +25,22 @@
   text-align: center;
   margin-top: 20rem;
 }
+
+.width {
+  width: 50px;
+}
+
+@media (max-width: 500px) {
+  .tab_wrap {
+    margin-left: 25px;
+  }
+
+  .tab_margin {
+    margin-top: 1rem;
+    margin-right: 2rem;
+  }
+
+  .createBtn {
+    margin-top: 0.5rem;
+  }
+}

@@ -16,6 +16,11 @@
   border: none;
 }
 
+.comment_btn {
+  margin: 2rem;
+  white-space: normal;
+}
+
 .border {
   border-bottom: 2px solid gray;
 }
@@ -47,9 +52,17 @@
   border-radius: 50%;
 }
 
-.margin {
+.icon_margin {
   padding-top: 1rem;
   padding-left: 1rem;
 }
 
+@media (max-width: 500px) {
+  .margin_bar {
+    margin-bottom: 4rem;
+  }
 
+  .icon_margin {
+    display: none;
+  }
+}

@@ -121,21 +121,20 @@ export default function EditTodoModal({
                 <div className={Styles.flex_container_right}>
                   <label>メモ</label>
                   <textarea
-                    rows={25}
+                    rows={15}
                     {...register('memo', {
                       maxLength: {
                         value: 1000,
-                        message: '自己紹介は1000字以内でお願いします',
+                        message: 'メモは1000字以内でお願いします',
                       },
                     })}
                     placeholder='メモ'
-                    className={Styles.flex_container_memo}
                     defaultValue={list.memo}
                   />
-                  <div className={Styles.flex_container_button}>
-                    <Button type='submit'>保存する</Button>
-                  </div>
                 </div>
+              </div>
+              <div className={Styles.button}>
+                <Button type='submit'>保存する</Button>
               </div>
             </form>
           </div>

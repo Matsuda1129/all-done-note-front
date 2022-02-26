@@ -1,48 +1,12 @@
-.flex_container {
-  display: flex;
-  position: relative;
-  top: 3rem;
+.checkbox {
+  display: none;
 }
 
-.bodyBackground {
-  width: 100vw;
-  height: 100vh;
-  background-image: url('../public/images/mainBack.jpg');
-  background-size: 100% 100%;
-  background-attachment: fixed;
-}
-
-.position_fixed {
-  position: fixed;
-}
-
-.grid_container {
-  display: grid;
-  grid-template-rows: 1fr 1fr 3fr;
-  grid-template-columns: 100%;
-  border-left: 2px solid gray;
-  border-right: 2px solid gray;
-  grid-template-areas:
-    'areaA'
-    'areaB'
-    'areaC';
-}
-
-.title {
-  text-align: center;
-}
-
-.information {
-  margin-top: 2rem;
-  margin-left: 2rem;
-}
-
-.item_A {
-  grid-area: areaA;
-  border-top: 2px solid gray;
-  border-bottom: 2px solid gray;
-}
-.item_B {
-  grid-area: areaB;
-  border-bottom: 2px solid gray;
+.label {
+  border: 2px solid green;
+  border-radius: 50px 50px 50px 50px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-size: 30px;
+  font-weight: bold;
+  color: green;
 }

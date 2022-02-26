@@ -1,12 +1,8 @@
-.iconTree {
-  padding-top: 0.6rem;
-  padding-left: 13rem;
-  padding-bottom: 2rem;
-  background: url(../../public/images/treeIcon.jpg) no-repeat;
-  background-size: 10rem 10rem;
-}
-
 .flex_container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.flex_user_container {
   display: flex;
   justify-content: space-evenly;
 }
@@ -24,6 +20,7 @@
   margin-bottom: 5rem;
   position: relative;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   display: flex;
 }
 
@@ -101,4 +98,22 @@
 .middle {
   text-align: center;
   margin-bottom: 5rem;
+}
+
+@media (max-width: 500px) {
+  .flex_container {
+    flex-direction: column;
+  }
+
+  .profileBar {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .flex_container_under {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 300px;
+    flex-basis: 10rem;
+  }
 }

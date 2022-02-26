@@ -28,6 +28,7 @@ import {
 } from '../../../redux/todos/todoSearchBarSlice';
 import { changeOpenData } from '../../../redux/todos/openDataSlice';
 import { changeLoignUserCheck } from '../../../redux/loginUserCheckSlice';
+import { backfaceFixed } from '../../../lib/backFaceFixed';
 
 export default function Todo() {
   const dispatch = useDispatch();
@@ -135,13 +136,17 @@ export default function Todo() {
   const openCreateTodoModal = async () => {
     if (createTodoModal) {
       await setCreateTodoModal(false);
+      await backfaceFixed(false);
       await dispatch(setFalse());
     } else {
       await setCreateTodoModal(true);
+      await backfaceFixed(true);
     }
   };
 
-  const underline = { borderBottom: 'solid 2px #00f' };
+  const underline = {
+    borderBottom: 'solid 2px #00f',
+  };
   const [tab, setTabs] = useState(1);
   const handleTabs1 = () => {
     setTabs(1);
@@ -162,20 +167,38 @@ export default function Todo() {
         {openData ? (
           <Tabs>
             <TabList className={Styles.tab_wrap}>
-              <Tab onClick={handleTabs1} style={tab === 1 ? underline : null}>
+              <Tab
+                className={Styles.tab_margin}
+                onClick={handleTabs1}
+                style={tab === 1 ? underline : null}
+              >
                 準備
               </Tab>
-              <Tab onClick={handleTabs2} style={tab === 2 ? underline : null}>
+              <Tab
+                className={Styles.tab_margin}
+                onClick={handleTabs2}
+                style={tab === 2 ? underline : null}
+              >
                 生涯費用
               </Tab>
-              <Tab onClick={handleTabs3} style={tab === 3 ? underline : null}>
+              <Tab
+                className={Styles.tab_margin}
+                onClick={handleTabs3}
+                style={tab === 3 ? underline : null}
+              >
                 やりたいこと
               </Tab>
-              <Tab onClick={handleTabs4} style={tab === 4 ? underline : null}>
+              <Tab
+                className={Styles.tab_margin}
+                onClick={handleTabs4}
+                style={tab === 4 ? underline : null}
+              >
                 総額
               </Tab>
               {loginUserCheck ? (
-                <Button onClick={openCreateTodoModal}>作成</Button>
+                <div className={Styles.createBtn}>
+                  <Button onClick={openCreateTodoModal}>作成</Button>
+                </div>
               ) : null}
             </TabList>
 

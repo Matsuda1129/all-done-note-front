@@ -14,11 +14,13 @@ import {
 } from '../../../components/parts';
 import {
   Alive,
+  AliveModal,
   EditProfileModal,
   Logout,
   MyGoodPosts,
   MyPosts,
   ProfileBar,
+  WillModal,
 } from '../../../components/MyPage';
 import { usersRepository } from '../../../repositories';
 import { setFalse } from '../../../redux/isUseEffect';
@@ -32,7 +34,7 @@ type user = {
   name: string;
   email: string;
   introduction: string;
-  picture: string;
+  icon: string;
 };
 
 export default function User() {
@@ -44,6 +46,8 @@ export default function User() {
     (state: RootState) => state.isUseEffect.isUseEffect
   );
   const [profileModal, setProfileModal] = useState(false);
+  const [willModal, setWillModal] = useState(false);
+  const [aliveModal, setAliveModal] = useState(false);
   const [checkLogin, setCheckLogin] = useState(false);
   const [username, setUsername] = useState<string>();
   const [user, setUser] = useState<user>({
@@ -51,7 +55,7 @@ export default function User() {
     name: '',
     email: '',
     introduction: '',
-    picture: '',
+    icon: '',
   });
   useEffect(() => {
     if (router.asPath !== router.route) {
@@ -103,11 +107,11 @@ export default function User() {
     <Layout>
       <div className={Styles.flex_container}>
         <div className={Styles.position_nameBar}>
-          <div className={Styles.flex_container}>
+          <div className={Styles.flex_user_container}>
             <Image
               className={Styles.triming}
               priority
-              src={process.env.NEXT_PUBLIC_IMAGE_URL + user.picture}
+              src={process.env.NEXT_PUBLIC_IMAGE_URL + user.icon}
               height={50}
               width={100}
               alt={'アイコン'}
@@ -115,17 +119,20 @@ export default function User() {
             <h1 className={Styles.name}>{user.name}</h1>
           </div>
         </div>
-        <ProfileBar
-          userId={user.id}
-          showProfileModal={showProfileModal}
-          checkLogin={checkLogin}
-        />
+        <div className={Styles.profileBar}>
+          <ProfileBar
+            userId={user.id}
+            setWillModal={setWillModal}
+            showProfileModal={showProfileModal}
+            checkLogin={checkLogin}
+          />
+        </div>
       </div>
       <div className={Styles.introduction}>{user.introduction}</div>
       <div className={Styles.flex_container_under}>
         <CountFollowing userId={user.id} />
         <CountFollower userId={user.id} />
-        <Alive checkLogin={checkLogin} />
+        <Alive checkLogin={checkLogin} setAliveModal={setAliveModal} />
         <Logout checkLogin={checkLogin} />
       </div>
       <Tabs>
@@ -171,6 +178,8 @@ export default function User() {
           setProfileModal={setProfileModal}
           setUser={setUser}
         />
+        <WillModal willModal={willModal} setWillModal={setWillModal} />
+        <AliveModal aliveModal={aliveModal} setAliveModal={setAliveModal} />
       </footer>
     </Layout>
   );

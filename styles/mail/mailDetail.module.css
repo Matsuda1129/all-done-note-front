@@ -7,3 +7,23 @@
 .margin {
   margin-bottom: 2rem;
 }
+
+.br {
+  display: none;
+}
+
+.backPage {
+  margin-left: 4rem;
+  padding: 1rem;
+}
+
+.backPage:hover {
+  border-radius: 2rem;
+  background-color: rgb(228, 225, 225);
+}
+
+@media (max-width: 500px) {
+  .br {
+    display: flex;
+  }
+}

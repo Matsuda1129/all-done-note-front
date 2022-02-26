@@ -32,20 +32,16 @@
   border-left: 2px solid gray;
   border-right: 2px solid gray;
   display: flex;
-  /* background-color: blue; */
+  min-height: 100vh;
 }
 
 .item_C {
   position: absolute;
   right: 3%;
   border-right: 2px solid gray;
-  width: 56%;
+  width: 56.4vw;
   flex-flow: column;
   min-height: 100vh;
-  /* left: 40%; */
-  /* right: 30%; */
-  /* border-bottom: 2px solid gray; */
-  /* background-color: rgba(58, 45, 95, 0.7); */
 }
 
 .menubar_position {
@@ -55,7 +51,7 @@
   right: 10%;
 }
 
-.flex_container{
+.flex_containerB {
   position: relative;
   top: 10%;
   left: 15%;
@@ -95,20 +91,23 @@
 }
 
 .button {
-  background-color:transparent;
+  background-color: transparent;
   border: none;
 }
 
-@media (max-width: 950px) {
-  /* .item_B {
-    position: absolute;
-    left: 30%;
-    right: 3%;
-  }
+.burger_menu {
+  display: none;
+}
 
-  .item_C {
+@media (max-width: 950px) {
+  .item_B {
     display: none;
-  } */
+  }
+  .item_C {
+    border-left: 2px solid gray;
+    width: 70.4vw;
+    min-height: 100vh;
+  }
 }
 
 @media (max-width: 500px) {
@@ -117,13 +116,18 @@
     left: 0%;
     right: 0%;
   }
-  .item_B {
+  .item_C {
     position: absolute;
     left: 0%;
     right: 0%;
+    width: 100%;
   }
 
   .item_A {
     display: none;
+  }
+
+  .burger_menu {
+    display: flex;
   }
 }

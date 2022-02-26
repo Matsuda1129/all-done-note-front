@@ -29,10 +29,11 @@ export async function userPosts(page: number, searchId: number) {
   return data.items;
 }
 
-export async function create(userId, content) {
+export async function create(userId, content, picture) {
   await instance.post('post', {
     userId: userId,
     content: content,
+    picture: picture,
   });
 }
 
@@ -55,8 +56,9 @@ export async function deleteOne(id: number) {
   });
 }
 
-export async function update(id: number, content: string) {
+export async function update(id: number, content: string, picture: string[]) {
   await instance.put(`post/update/${id}`, {
     content: content,
+    picture: picture,
   });
 }

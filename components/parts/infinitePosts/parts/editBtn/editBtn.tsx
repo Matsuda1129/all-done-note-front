@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setTrue } from '../../../../../redux/isUseEffect';
 import { RootState } from '../../../../../redux/store';
 import { postsRepository } from '../../../../../repositories';
-import EditPostModal from '../editPostModal/editPostModal';
+import EditPostModal from './editPostModal/editPostModal';
 import Styles from './editBtn.module.css';
 import { backfaceFixed } from '../../../../../lib/backFaceFixed';
 

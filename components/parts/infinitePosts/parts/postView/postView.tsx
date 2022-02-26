@@ -8,6 +8,7 @@ import { RootState } from '../../../../../redux/store';
 import EditBtn from '../editBtn/editBtn';
 import { commentRepository } from '../../../../../repositories';
 import { setTrue } from '../../../../../redux/isUseEffect';
+import PictureSlider from '../pictureSlider/pictureSlider';
 
 export default function PostView({ post }) {
   const loginUser = useSelector((state: RootState) => state.users.user);
@@ -38,7 +39,7 @@ export default function PostView({ post }) {
           <Image
             className={Styles.triming}
             priority
-            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}` + post.user.picture}
+            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}` + post.user.icon}
             height={50}
             width={50}
             alt={'アイコン'}
@@ -51,7 +52,6 @@ export default function PostView({ post }) {
               </a>
             </Link>
           </div>
-
           <EditBtn post={post} />
         </div>
         <Link href={`../posts/${post.id}`}>
@@ -60,6 +60,13 @@ export default function PostView({ post }) {
           </a>
         </Link>
       </div>
+      <PictureSlider
+        path={`post/${loginUser.name}/`}
+        pictures={post.picture}
+        pictureSize1={{ width: 300, height: 200 }}
+        pictureSize2={{ width: 600, height: 400 }}
+        username={post.user.name}
+      />
       <div className={Styles.icon_bar}>
         <div className={Styles.heart_position}>
           <Heart postId={post.id} userId={loginUser.id} />

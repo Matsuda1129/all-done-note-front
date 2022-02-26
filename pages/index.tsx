@@ -29,7 +29,7 @@ export default function Index() {
             </span>
           </div>
           <text className={Styles.item_C}>
-            あなたが明日生きているかは神様にもわからない。人生が終わる前にやりたいこ、やらなければならないことを一緒に達成しましょう。
+            あなたが明日生きているかは神様にもわからない。人生が終わる前にやりたいこと、やらなければならないことを一緒に達成しましょう。
           </text>
           <div className={Styles.item_B}>
             <Link href='./login'>

@@ -14,9 +14,8 @@ type FormValuse = {
   name: string;
   introduction: string;
   gender: string;
-  alive: boolean;
   birthday: string;
-  picture: string;
+  icon: string;
   savings: number;
   job: string;
   alone: boolean;
@@ -139,21 +138,6 @@ export default function ProfileModal({
               </button>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={Styles.flex_container}>
-                  {errors.name && <p>{errors.name.message}</p>}
-                  <label>名前</label>
-                  <input
-                    {...register('name', {
-                      required: '名前は必須項目です',
-                      maxLength: {
-                        value: 20,
-                        message: '名前は20字以内でお願いします',
-                      },
-                    })}
-                    defaultValue={user.name}
-                    type='text'
-                    placeholder='名前'
-                    className={Styles.flex_container_item}
-                  />
                   {errors.introduction && <p>{errors.introduction.message}</p>}
                   <label>自己紹介</label>
                   <textarea
@@ -169,10 +153,12 @@ export default function ProfileModal({
                     defaultValue={user.introduction}
                     className={Styles.flex_container_item}
                   />
-                  {errors.birthday && <p>{errors.birthday.message}</p>}
+                  {errors.gender && <p>{errors.gender.message}</p>}
                   <label>性別</label>
                   <Select
-                    {...register('gender')}
+                    {...register('gender', {
+                      required: '性別は必須項目です',
+                    })}
                     defaultValue={user.gender}
                     className={Styles.flex_container_item2}
                   >
@@ -338,16 +324,6 @@ export default function ProfileModal({
                     </label>
                   </div>
 
-                  <label>alive</label>
-                  <Select
-                    {...register('alive')}
-                    defaultValue={user.alive}
-                    className={Styles.flex_container_item2}
-                  >
-                    <MenuItem value={'true'}>alive</MenuItem>
-                    <MenuItem value={'false'}>dead</MenuItem>
-                  </Select>
-
                   <label>情報公開</label>
                   <Select
                     {...register('openData')}
@@ -378,20 +354,20 @@ export default function ProfileModal({
                     type='date'
                     defaultValue={user.birthday}
                   />
-                </div>
-                <input
-                  {...register('picture')}
-                  onChange={s3Repository.uploadPhoto}
-                  type='file'
-                  accept='image/png, image/jpeg'
-                  className={Styles.flex_container_item3}
-                />
+                  <input
+                    {...register('icon')}
+                    onChange={s3Repository.uploadPhoto}
+                    type='file'
+                    accept='image/png, image/jpeg'
+                    className={Styles.flex_container_item3}
+                  />
 
-                <div className={Styles.error_message}>
-                  {familyeErrorMessage}
-                </div>
-                <div className={Styles.flex_container_item}>
-                  <Button type='submit'>保存する</Button>
+                  <div className={Styles.error_message}>
+                    {familyeErrorMessage}
+                  </div>
+                  <div className={Styles.flex_container_item}>
+                    <Button type='submit'>保存する</Button>
+                  </div>
                 </div>
               </form>
             </div>

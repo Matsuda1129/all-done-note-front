@@ -101,6 +101,7 @@ export default function Menubar() {
             <div className={Styles.message}>プロフィール</div>
           </a>
         </Link>
+        <br />
         <Link href={'/dataAnalist'}>
           <a href='' className={Styles.display_flex}>
             <Image

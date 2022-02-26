@@ -92,10 +92,9 @@ export default function Login() {
         />
         <div className={Styles.item_I}>
           <a href=''>パスワードをお忘れですか？</a>
-        </div>
-        <div className={Styles.item_J}>
+          <br className={Styles.br} />
           <Link href='./register'>
-            <a>アカウント作成</a>
+            <a>　　アカウント作成</a>
           </Link>
         </div>
       </div>

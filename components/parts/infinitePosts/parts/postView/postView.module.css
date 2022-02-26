@@ -23,11 +23,13 @@
   background-color: rgb(228, 225, 225, 0.5);
 }
 .content {
-  position: relative;
-  margin-top: 2rem;
-  margin-left: 2rem;
-  margin-bottom: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
   white-space: normal;
+  width: auto;
 }
 
 .content:hover {
@@ -52,4 +54,18 @@
 
 .triming {
   border-radius: 50%;
+}
+
+.picture{
+  display: flex;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  width: 95%;
+  background-color: aliceblue;
+}
+
+.zindex{
+  /* z-index: 2; */
+  z-index: 0;
+
 }

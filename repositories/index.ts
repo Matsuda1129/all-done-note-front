@@ -7,6 +7,7 @@ import * as todosRepository from './todos';
 import * as s3Repository from './s3';
 import * as commentRepository from './comment';
 import * as mailsRepository from './mails';
+import * as flashesRepository from './flashes';
 
 export {
   usersRepository,
@@ -17,5 +18,6 @@ export {
   todosRepository,
   s3Repository,
   commentRepository,
-  mailsRepository
+  mailsRepository,
+  flashesRepository,
 };

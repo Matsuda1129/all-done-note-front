@@ -27,25 +27,56 @@
   background-size: 5rem 5rem;
 }
 
-.flex_container{
+.flex_container {
   display: flex;
   border-bottom: 2px solid gray;
 }
 
-.border{
+.border {
   border: 1px solid gray;
 }
 
-.title{
+.title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.boxName{
+.boxName {
   margin-left: 10rem;
 }
 
-.margin{
+.button {
+  background-color: transparent;
+  border: none;
+}
+
+.margin {
   margin-left: 1rem;
+}
+
+.flex_container_mailBar {
+  display: none;
+}
+
+.br {
+  display: none;
+}
+
+@media (max-width: 950px) {
+  .flex_container_mailBar {
+    display: flex;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+  .border_bottom {
+    border-bottom: 2px solid gray;
+  }
+}
+
+@media (max-width: 500px) {
+  .br {
+    display: flex;
+  }
 }

@@ -1,0 +1,84 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  z-index: 1;
+  width: 50%;
+  height: auto;
+  padding: 1em;
+  background: #fff;
+  border-radius: 2rem;
+}
+
+.flexBox {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  white-space: nowrap;
+}
+.flex {
+  display: flex;
+}
+
+.batsu {
+  font-size: 100%; /*ボタンの大きさ*/
+  font-weight: bold;
+  border: 1px solid #999;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 1.3em;
+  line-height: 1em;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 1rem;
+}
+
+.batsu:hover {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.willDownload {
+  color: blue;
+  width: 200px;
+}
+
+.willDownload:hover {
+  border-bottom: 2px solid blue;
+}
+
+.btn {
+  margin: 5px;
+  background-color: rgb(35, 123, 196);
+  color: white;
+  border: 2px solid rgb(35, 123, 196);
+  border-radius: 1.5rem;
+  width: 300px;
+  height: 40px;
+}
+
+.btn:hover {
+  color: rgb(35, 123, 196);
+  background: #fff;
+  border: 2px solid rgb(35, 123, 196);
+}
+
+
+@media (max-width: 500px) {
+  .content {
+    width: 80%;
+  }
+}

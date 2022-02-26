@@ -21,6 +21,15 @@ export async function find(username: string) {
   return user;
 }
 
+export async function checkPassword(id: string, password: string) {
+  const res = await instance.post('/user/checkPassword', {
+    id: id,
+    password: password,
+  });
+
+  return res;
+}
+
 export async function update(data, user) {
   function getAge(birthday) {
     //今日
@@ -50,10 +59,6 @@ export async function update(data, user) {
 
   const age = getAge(data.birthday);
 
-  let alive = true;
-  if (data.alive === 'false') {
-    alive = false;
-  }
   let openData = true;
   if (data.openData === 'false') {
     openData = false;
@@ -63,22 +68,20 @@ export async function update(data, user) {
     openDataAfterDie = false;
   }
 
-  let picture;
-  if (data.picture.length === 0) {
-    picture = user.picture;
+  let icon;
+  if (data.icon.length === 0) {
+    icon = user.icon;
   } else {
-    picture = data.picture[0].name;
+    icon = data.icon[0].name;
   }
   const savings = Number(data.savings);
   const res = await instance.put(`/user/${user.id}`, {
-    name: data.name,
     introduction: data.introduction,
     gender: data.gender,
-    alive: alive,
     birthday: data.birthday,
     job: data.job,
     savings: savings,
-    picture: picture,
+    icon: icon,
     age: age,
     alone: data.alone,
     isMarried: data.isMarried,
@@ -95,8 +98,24 @@ export async function update(data, user) {
   return res.data;
 }
 
-export async function editPicture(userId, picture) {
-  const res = await instance.put(`/user/${userId}`, {
+export async function editAlive(userId, alive) {
+  const res = await instance.put(`/user/${userId}/alive`, {
+    alive: alive,
+  });
+
+  return res.data;
+}
+
+export async function editWill(userId, will) {
+  const res = await instance.put(`/user/${userId}/will`, {
+    will: will,
+  });
+
+  return res.data;
+}
+
+export async function editpicture(userId, picture) {
+  const res = await instance.put(`/user/${userId}/picture`, {
     picture: picture,
   });
 
@@ -150,14 +169,7 @@ export async function fetchSearch(
   return res.data.items;
 }
 
-
-export async function dataAnalize(
-  gender,
-  age,
-  job,
-  alive,
-  family
-) {
+export async function dataAnalize(gender, age, job, alive, family) {
   if (alive === 'false') {
     alive = false;
   }

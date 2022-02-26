@@ -36,11 +36,12 @@
 
 .content {
   width: 90vh;
-  height: 50vh;
+  height: 70vh;
   padding: 1em;
   background: #fff;
   border-radius: 2rem;
   overflow: hidden;
+  margin: 1rem;
 }
 
 .content_inner {

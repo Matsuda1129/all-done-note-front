@@ -7,6 +7,7 @@ import Loader from './loader/loader';
 import PostView from './infinitePosts/parts/postView/postView';
 import TodoCharts from './charts/todoCharts';
 import FamilyModal from './familyModal/familyModal';
+import SelectPictureModal from './selectPictureModal/selectPictureModal';
 
 export {
   Heart,
@@ -18,4 +19,5 @@ export {
   PostView,
   TodoCharts,
   FamilyModal,
+  SelectPictureModal,
 };

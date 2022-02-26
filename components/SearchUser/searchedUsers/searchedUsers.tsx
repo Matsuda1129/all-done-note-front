@@ -73,25 +73,34 @@ export default function SearchedUsers({
       {users.map((user) => {
         return (
           <div className={Styles.userBar} key={user.id}>
-            <div className={familyModal ? Styles.invisible : null}>
-              <Image
-                className={Styles.triming}
-                priority={false}
-                src={process.env.NEXT_PUBLIC_IMAGE_URL + user.picture}
-                height={70}
-                width={70}
-                alt={'アイコン'}
-              />
+            <div className={Styles.userData}>
+              <div className={familyModal ? Styles.invisible : null}>
+                <div className={Styles.userIcon}>
+                  <Image
+                    className={Styles.triming}
+                    priority={false}
+                    src={process.env.NEXT_PUBLIC_IMAGE_URL + user.icon}
+                    height={50}
+                    width={50}
+                    layout={'fixed'}
+                    alt={'アイコン'}
+                  />
+                </div>
+              </div>
+              <Link href={`../users/${user.name}`}>
+                <a className={Styles.name} href=''>
+                  {user.name}
+                </a>
+              </Link>
             </div>
-            <Link href={`../users/${user.name}`}>
-              <a className={Styles.name} href=''>
-                {user.name}
-              </a>
-            </Link>
-            <div className={Styles.name}>
-              <CountFollower userId={user.id} />
+            <div className={Styles.followSet}>
+              <div className={Styles.followCount}>
+                <CountFollower userId={user.id} />
+              </div>
+              <div className={Styles.followBtn}>
+                <FollowButton userId={user.id} />
+              </div>
             </div>
-            <FollowButton userId={user.id} />
           </div>
         );
       })}

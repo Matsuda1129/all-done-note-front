@@ -80,6 +80,7 @@ export default function PostDetail() {
       {post ? (
         <Layout>
           <div>
+            <div className={Styles.margin_bar}></div>
             <PostView post={post} />
           </div>
 
@@ -88,33 +89,32 @@ export default function PostDetail() {
               <div style={{ color: 'red' }}>{errors.comment.message}</div>
             )}
             <div className={Styles.flex_container_row}>
-              <div className={Styles.margin}>
+              <div className={Styles.icon_margin}>
                 <Image
                   className={Styles.triming}
                   priority
-                  src={
-                    `${process.env.NEXT_PUBLIC_IMAGE_URL}` + loginUser.picture
-                  }
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_URL}` + loginUser.icon}
                   height={50}
                   width={50}
                   alt={'アイコン'}
+                  layout={'fixed'}
                 />
               </div>
               <textarea
                 {...register('comment', {
-                  required: '入力してください',
+                  required: 'コメントを入力してください',
                   maxLength: {
                     value: 50,
                     message: '50字以内でお願いします',
                   },
                 })}
-                rows={1}
+                // rows={1}
                 placeholder='コメントする'
                 className={Styles.textarea}
               ></textarea>
-              <Button style={{ margin: '2rem' }} type='submit'>
-                コメントする
-              </Button>
+              <div className={Styles.comment_btn}>
+                <Button type='submit'>コメントする</Button>
+              </div>
             </div>
           </form>
           <div style={{ border: ' 1px solid gray' }}></div>
@@ -142,7 +142,7 @@ export default function PostDetail() {
                         priority
                         src={
                           `${process.env.NEXT_PUBLIC_IMAGE_URL}` +
-                          comment.user.picture
+                          comment.user.icon
                         }
                         height={50}
                         width={50}

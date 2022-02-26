@@ -5,43 +5,30 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .content {
+  z-index: 2;
   width: 50%;
-  height: 50%;
+  height: auto;
   padding: 1em;
   background: #fff;
   border-radius: 2rem;
 }
 
-.textarea {
-  font-size: 1.5em;
-  width: 100%;
-  height: 80%;
-  border: none;
+.flexBoxColumn {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  flex-direction: column;
 }
 
-.post_button {
-  margin-top: 1rem;
-  background-color: rgb(35, 123, 196);
-  color: white;
-  border: 2px solid rgb(35, 123, 196);
-  border-radius: 1.5rem;
-  width: 120px;
-  height: 3.5rem;
-  white-space: normal;
-}
-
-.post_button:hover {
-  color: rgb(35, 123, 196);
-  background: #fff;
-  border: 2px solid rgb(35, 123, 196);
+.flexBox{
+  display: flex;
 }
 
 .batsu {
@@ -64,4 +51,19 @@
   background: #333;
   border-color: #333;
   color: #fff;
+}
+
+.willDownload{
+  color:blue;
+  width: 200px;
+}
+
+.willDownload:hover{
+  border-bottom: 2px solid blue;
+}
+
+@media (max-width:500px) {
+  .content{
+    width: 80%;
+  }
 }

@@ -1,14 +1,12 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { MailLayout } from '../../components/Mail';
 import { mailsRepository } from '../../repositories';
 import Styels from '../../styles/mail/mailDetail.module.css';
 
 export default function MailsDetail() {
   const router = useRouter();
-  const dispatch = useDispatch();
   const [pageId, setPageId] = useState(Number);
 
   type mail = {
@@ -42,8 +40,9 @@ export default function MailsDetail() {
     <>
       {mail ? (
         <MailLayout>
+          <br className={Styels.br} />
           <p>
-            <a href='#' onClick={() => history.back()}>
+            <a href='#'className={Styels.backPage} onClick={() => history.back()}>
               前のページにもどる
             </a>
           </p>

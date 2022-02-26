@@ -2,12 +2,12 @@
   display: flex;
   margin: 3%;
   height: 3.5rem;
+  margin-left: 5rem;
 }
 
 .input {
   height: 3.5rem;
-  margin-left: 5rem;
-  margin-right: 3%;
+  margin-left: 1rem;
   border-radius: 2em;
   width: 150%;
 }

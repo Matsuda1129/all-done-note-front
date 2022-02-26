@@ -6,8 +6,18 @@
   width: 50%;
 }
 
-
 .flex_container_searchBar {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 500px) {
+  .search_input {
+    margin-left: 2rem;
+  }
+
+  .flex_container_searchBar{
+    margin-right: 1rem;
+  }
 }

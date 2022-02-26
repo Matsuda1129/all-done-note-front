@@ -19,7 +19,6 @@ export default function SearchPosts({ searchWord }) {
     const firstFetch = async () => {
       try {
         const page1 = await postsRepository.fetchSearch(1, searchWord);
-        console.log(searchWord);
         await setPosts(page1);
         await setPage(2);
         await setHasMore(true);
