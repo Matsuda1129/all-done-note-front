@@ -3,6 +3,7 @@
   width: 0px;
   height: 0px;
   margin-top: 5px;
+  cursor: pointer;
 }
 .heart:before,
 .heart:after {
@@ -23,6 +24,7 @@
   transform-origin: 100% 100%;
 }
 .offHeart {
+  cursor: pointer;
   position: absolute;
   width: 0px;
   height: 0px;

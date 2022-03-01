@@ -1,0 +1,82 @@
+.iconMail {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/mail/mail.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconKamihikouki {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/mail/kamihikouki.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconPost {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/mail/post.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+.iconPuls {
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+  background: url(../public/mail/puls.jpg) no-repeat;
+  background-size: 5rem 5rem;
+}
+
+.flex_container {
+  display: flex;
+  border-bottom: 2px solid gray;
+}
+
+.border {
+  border: 1px solid gray;
+}
+
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.boxName {
+  margin-left: 10rem;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+}
+
+.margin {
+  margin-left: 1rem;
+}
+
+.flex_container_mailBar {
+  display: none;
+}
+
+.br {
+  display: none;
+}
+
+@media (max-width: 950px) {
+  .flex_container_mailBar {
+    display: flex;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+  .border_bottom {
+    border-bottom: 2px solid gray;
+  }
+}
+
+@media (max-width: 500px) {
+  .br {
+    display: flex;
+  }
+}

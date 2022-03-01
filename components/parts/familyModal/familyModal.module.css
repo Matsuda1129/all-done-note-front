@@ -1,0 +1,112 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex_container {
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex_container p {
+  color: red;
+}
+
+.flex_container_item {
+  margin-bottom: 30px;
+}
+
+.flex_container_item2 {
+  width: 7em;
+  margin-bottom: 30px;
+}
+
+.flex_container_item3 {
+  width: 20em;
+  margin-bottom: 30px;
+}
+
+.content {
+  width: 90vh;
+  height: 70vh;
+  padding: 1em;
+  background: #fff;
+  border-radius: 2rem;
+  overflow: hidden;
+  margin: 1rem;
+}
+
+.content_inner {
+  overflow: auto;
+  width: 103%;
+  height: 100%;
+}
+
+.textarea {
+  font-size: 1.5em;
+  width: 100%;
+  height: 80%;
+  border: none;
+}
+
+.post_button {
+  margin-top: 1rem;
+  background-color: rgb(35, 123, 196);
+  color: white;
+  border: 2px solid rgb(35, 123, 196);
+  border-radius: 1.5rem;
+  width: 120px;
+  height: 3.5rem;
+  white-space: normal;
+}
+
+.post_button:hover {
+  color: rgb(35, 123, 196);
+  background: #fff;
+  border: 2px solid rgb(35, 123, 196);
+}
+
+.batsu {
+  font-size: 100%; /*ボタンの大きさ*/
+  font-weight: bold;
+  border: 1px solid #999;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 1.3em;
+  line-height: 1em;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 1rem;
+}
+
+.batsu:hover {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.flex_family {
+  display: flex;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  margin-bottom: 30px;
+}
+.flex_family label {
+  width: 150px;
+}
+
+.error_message {
+  color: red;
+  margin: 2rem;
+}

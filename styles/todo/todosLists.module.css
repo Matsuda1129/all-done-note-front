@@ -1,0 +1,46 @@
+.tab_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.border {
+  border: 1px solid gray;
+}
+
+.genre_title {
+  font-size: 3rem;
+  font-weight: bold;
+  border-top: 2px solid gray;
+  text-align: center;
+  background-color: rgb(179, 250, 255);
+}
+
+.listhe_position {
+  color: aqua;
+  margin: 5rem;
+}
+
+.middle {
+  text-align: center;
+  margin-top: 20rem;
+}
+
+.width {
+  width: 50px;
+}
+
+@media (max-width: 500px) {
+  .tab_wrap {
+    margin-left: 25px;
+  }
+
+  .tab_margin {
+    margin-top: 1rem;
+    margin-right: 2rem;
+  }
+
+  .createBtn {
+    margin-top: 0.5rem;
+  }
+}

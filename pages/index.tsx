@@ -21,9 +21,7 @@ export default function Index() {
               <Image
                 className={Styles.triming}
                 priority
-                src={
-                  'https://all-done-note-dev-picture-bucket.s3.ap-northeast-1.amazonaws.com/icons8-猫プロフィール-48.png'
-                }
+                src={imgurl}
                 height={80}
                 width={80}
                 alt={'アイコン'}
@@ -31,7 +29,7 @@ export default function Index() {
             </span>
           </div>
           <text className={Styles.item_C}>
-            あなたが明日生きているかは神様にもわからない。人生が終わる前にやりたいこ、やらなければならないことを一緒に達成しましょう。
+            あなたが明日生きているかは神様にもわからない。人生が終わる前にやりたいこと、やらなければならないことを一緒に達成しましょう。
           </text>
           <div className={Styles.item_B}>
             <Link href='./login'>

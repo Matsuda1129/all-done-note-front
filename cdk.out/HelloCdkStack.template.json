@@ -7,16 +7,9 @@
         "CorsConfiguration": {
           "CorsRules": [
             {
-              "AllowedHeaders": [
-                "*"
-              ],
-              "AllowedMethods": [
-                "POST",
-                "DELETE"
-              ],
-              "AllowedOrigins": [
-                "*"
-              ]
+              "AllowedHeaders": ["*"],
+              "AllowedMethods": ["POST", "DELETE"],
+              "AllowedOrigins": ["*"]
             }
           ]
         },

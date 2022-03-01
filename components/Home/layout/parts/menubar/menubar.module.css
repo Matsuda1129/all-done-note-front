@@ -1,0 +1,35 @@
+.display_flex {
+  display: inline-flex;
+  padding: 5px 10px;
+  border-radius: 2rem;
+}
+
+.display_flex:hover {
+  background-color: rgb(228, 225, 225);
+}
+
+.message {
+  white-space: nowrap;
+  margin-top: 0.3rem;
+  margin-left: 1rem;
+  font-size: 1.5rem;
+}
+
+.post_button {
+  position: relative;
+  left: 10%;
+  right: 10%;
+  margin-top: 1rem;
+  background-color: rgb(35, 123, 196);
+  color: white;
+  border: 2px solid rgb(35, 123, 196);
+  border-radius: 1.5rem;
+  width: 120px;
+  height: 3.5rem;
+}
+
+.post_button:hover {
+  color: rgb(35, 123, 196);
+  background: #fff;
+  border: 2px solid rgb(35, 123, 196);
+}

@@ -1,0 +1,186 @@
+.unread {
+  font-weight: bold;
+}
+
+.read {
+  background-color: rgba(201, 201, 201, 0.5);
+}
+
+.flex_container {
+  display: flex;
+  border-bottom: 2px solid gray;
+}
+
+.flex_container:hover {
+  box-shadow: 5px 3px 3px black;
+}
+
+.mail_bar {
+  display: none;
+  position: relative;
+  right: 12rem;
+  background-color: rgb(228, 225, 225);
+}
+
+.mail_bar:hover {
+  display: flex;
+}
+.mail_bar_read {
+  display: none;
+  position: relative;
+  right: 12rem;
+  background-color: white;
+}
+
+.mail_bar_read:hover {
+  display: flex;
+}
+
+.a {
+  display: flex;
+  color: black;
+  width: 100%;
+}
+
+.a:hover {
+  text-decoration: none;
+}
+
+.a:hover + .mail_bar {
+  display: flex;
+}
+
+.a:hover + .mail_bar_read {
+  display: flex;
+}
+
+.border {
+  border: 1px solid gray;
+}
+
+.name {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 3rem;
+  margin-left: 1rem;
+}
+
+.title {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-left: 7rem;
+  margin-right: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 50rem;
+}
+
+.time {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-left: 3rem;
+  margin-right: 1rem;
+  white-space: nowrap;
+}
+
+.iconOpenMail {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 3rem;
+  margin-right: 1rem;
+  padding-top: 1rem;
+  padding-left: 2.5rem;
+  padding-bottom: 2rem;
+  background: url(../../../public/mail/openMail.png) no-repeat;
+  background-size: 3rem 3rem;
+  border: transparent;
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.iconCloseMail {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 3rem;
+  margin-right: 1rem;
+  padding-top: 1rem;
+  padding-left: 2.5rem;
+  padding-bottom: 2rem;
+  background: url(../../../public/mail/closeMail.png) no-repeat;
+  background-size: 3rem 3rem;
+  border: transparent;
+  background-color: rgb(228, 225, 225);
+  border-radius: 1rem;
+}
+
+.iconRubbish {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+  padding-top: 1rem;
+  padding-left: 2.5rem;
+  padding-bottom: 2rem;
+  background: url(../../../public/mail/gomi.png) no-repeat;
+  background-size: 3rem 3rem;
+  border: transparent;
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.iconRubbish2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+  padding-top: 1rem;
+  padding-left: 2.5rem;
+  padding-bottom: 2rem;
+  background: url(../../../public/mail/gomi.png) no-repeat;
+  background-size: 3rem 3rem;
+  border: transparent;
+  background-color: rgb(228, 225, 225);
+  border-radius: 1rem;
+}
+
+/* .cssfukidashi {
+  padding: 0;
+  margin: 0;
+}
+.text {
+  width: 200px;
+  position: relative;
+  margin: 80px 50px 50px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+.fukidashi {
+  display: none;
+  width: 200px;
+  position: absolute;
+  top: 0;
+  left: 250px;
+  padding: 16px;
+  border-radius: 5px;
+  background: #33cc99;
+  color: #fff;
+  font-weight: bold;
+}
+.fukidashi:after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0;
+  bottom: -19px;
+  margin-left: 10px;
+  border: solid transparent;
+  border-color: rgba(51, 204, 153, 0);
+  border-top-color: #33cc99;
+  border-width: 10px;
+  pointer-events: none;
+  content: ' ';
+} */
+/* .text:hover + .fukidashi {
+  display: block;
+} */

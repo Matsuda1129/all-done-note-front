@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type Post = {
-  user_id: number | null;
+  userId: number | null;
   content: string | null;
   picture: string | null;
 };
@@ -12,7 +12,7 @@ export type PostState = {
 
 const initialState: PostState = {
   post: {
-    user_id: null,
+    userId: null,
     content: null,
     picture: null,
   },

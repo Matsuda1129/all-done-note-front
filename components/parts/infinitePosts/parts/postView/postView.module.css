@@ -1,0 +1,70 @@
+.flex_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.border {
+  border-bottom: 2px solid gray;
+}
+.namebar {
+  display: flex;
+  position: relative;
+  margin-top: 3%;
+  margin-left: 2%;
+}
+
+.name {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+.name:hover {
+  border-radius: 2rem;
+  background-color: rgb(228, 225, 225, 0.5);
+}
+.content {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  white-space: normal;
+  width: auto;
+}
+
+.content:hover {
+  border-radius: 2rem;
+  background-color: rgb(228, 225, 225, 0.5);
+}
+.icon_bar {
+  justify-content: space-evenly;
+  display: flex;
+}
+
+.heart_position {
+  margin-top: 0.8rem;
+}
+.iconHukidashi {
+  padding-top: 1rem;
+  padding-left: 4.5rem;
+  padding-bottom: 1rem;
+  background: url(../../../../../public/post/hukidashi.png) no-repeat;
+  background-size: 4rem 4rem;
+}
+
+.triming {
+  border-radius: 50%;
+}
+
+.picture {
+  display: flex;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  width: 95%;
+  background-color: aliceblue;
+}
+
+.zindex {
+  /* z-index: 2; */
+  z-index: 0;
+}

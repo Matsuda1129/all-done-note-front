@@ -7,7 +7,12 @@ import userReducer from './usersSlice';
 import counterReducer from './counterSlice';
 import postReducer from './postsSlice';
 import modalPostReducer from './modalSlice';
+import isUseEffectReducer from './isUseEffect';
+import todoSearchBarReducer from './todos/todoSearchBarSlice';
+import openDataReducer from './todos/openDataSlice';
+import loginUserCheckReducer from './loginUserCheckSlice';
 import { persistReducer } from 'redux-persist';
+import mailReducer from './mailSlice';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
 const createNoopStorage = () => {
@@ -29,10 +34,15 @@ const storage =
     : createNoopStorage();
 
 const rootReducer = combineReducers({
+  loginUserCheck: loginUserCheckReducer,
+  openData: openDataReducer,
+  isUseEffect: isUseEffectReducer,
   modalPost: modalPostReducer,
   counter: counterReducer,
   users: userReducer,
   posts: postReducer,
+  todoSearchBar: todoSearchBarReducer,
+  mails: mailReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

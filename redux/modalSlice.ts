@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const modalPostSlice = createSlice({
   name: 'modalPost',
@@ -6,15 +6,15 @@ export const modalPostSlice = createSlice({
     modalPost: false,
   },
   reducers: {
-    setTrue:(state) => {
+    setTrue: (state) => {
       state.modalPost = true;
     },
-    setFalse:(state) => {
+    setModalFalse: (state) => {
       state.modalPost = false;
     },
   },
 });
 
-export const { setTrue, setFalse } = modalPostSlice.actions;
+export const { setTrue, setModalFalse } = modalPostSlice.actions;
 
 export default modalPostSlice.reducer;

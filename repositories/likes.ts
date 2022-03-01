@@ -1,6 +1,6 @@
 import instance from '../axios';
 
-export async function findOneLike(postId: number, userId: number) {
+export async function find(postId: number, userId: number) {
   const res = await instance.post('/like/get', {
     userId: userId,
     postId: postId,
@@ -9,14 +9,14 @@ export async function findOneLike(postId: number, userId: number) {
   return res.data;
 }
 
-export async function createOneLike(postId: number, userId: number) {
+export async function create(postId: number, userId: number) {
   await instance.post('like', {
     userId: userId,
     postId: postId,
   });
 }
 
-export async function countOneLike(postId: number) {
+export async function count(postId: number) {
   const res = await instance.post('/like/count', {
     postId: postId,
   });
@@ -24,7 +24,7 @@ export async function countOneLike(postId: number) {
   return res.data;
 }
 
-export async function deleteOneLike(postId: number, userId: number) {
+export async function deleteOne(postId: number, userId: number) {
   await instance({
     method: 'delete',
     url: `like`,
@@ -35,10 +35,13 @@ export async function deleteOneLike(postId: number, userId: number) {
   });
 }
 
-export async function findUserLikes(userId: number) {
-  const res = await instance.post('/like/user', {
-    userId: userId,
-  });
+export async function findUser(page: number, userId: number) {
+  const res: any = await instance.post(
+    `/like/user/page?page=${page}&limit=20`,
+    {
+      userId: userId,
+    }
+  );
 
-  return res.data;
+  return res.data.items;
 }

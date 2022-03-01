@@ -12,7 +12,7 @@
     'areaC areaF'
     'areaC areaG'
     'areaC areaH'
-    'areaI areaJ';
+    'areaI areaI';
   display: grid;
   place-items: center;
 }
@@ -107,16 +107,14 @@
 .item_I {
   grid-area: areaI;
   position: relative;
-  left: 25%;
-}
-.item_J {
-  grid-area: areaJ;
-  position: relative;
-  right: 30%;
 }
 
 .text {
   display: inline-block;
+}
+
+.br {
+  display: none;
 }
 
 @media (max-width: 500px) {
@@ -133,8 +131,7 @@
       'areaC areaC'
       'areaF areaF'
       'areaG areaG'
-      'areaI areaI'
-      'areaJ areaJ';
+      'areaI areaI';
     display: grid;
     place-items: center;
   }
@@ -230,10 +227,9 @@
     position: relative;
     top: 0%;
     left: 0%;
+    flex-wrap: wrap;
   }
-  .item_J {
-    grid-area: areaJ;
-    position: relative;
-    right: 0%;
+  .br {
+    display: flex;
   }
 }

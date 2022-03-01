@@ -96,6 +96,9 @@
       'areaD';
   }
 
+  .bodyBackground {
+    height: 150vh;
+  }
   .description {
     position: relative;
     top: 25%;

@@ -1,0 +1,12 @@
+.checkbox {
+  display: none;
+}
+
+.label {
+  border: 2px solid green;
+  border-radius: 50px 50px 50px 50px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-size: 30px;
+  font-weight: bold;
+  color: green;
+}

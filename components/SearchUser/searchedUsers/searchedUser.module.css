@@ -1,0 +1,60 @@
+.userBar {
+  display: flex;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  width: 100%;
+  border-top: 2px solid gray;
+}
+
+.triming {
+  border-radius: 50%;
+}
+
+.invisible {
+  display: none;
+}
+
+.name {
+  /* width: 100px; */
+  margin-left: 3rem;
+  margin-top: 1.5rem;
+}
+
+.followCount {
+  margin-top: 2rem;
+  margin-left: 2rem;
+}
+.userData {
+  /* margin-top: 0.5rem; */
+  display: flex;
+}
+
+.followSet {
+  margin: 0 0 0 auto;
+  display: flex;
+}
+
+.followBtn {
+}
+
+@media (max-width: 500px) {
+  .userData {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .followSet {
+    display: flex;
+    flex-direction: column;
+    /* margin-bottom: 30rem; */
+  }
+}
+
+@media (max-width: 330px) {
+  .triming {
+    display: none;
+  }
+
+  .userIcon {
+    display: none;
+  }
+}

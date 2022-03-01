@@ -1,0 +1,31 @@
+.delete_btn {
+  margin-right: 10%;
+  background-color: white;
+  color: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+  border-radius: 1.5rem;
+  height: 3rem;
+  width: 10rem;
+}
+
+.delete_btn:hover {
+  color: white;
+  background: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+}
+
+.flex_container {
+  margin: 0 0 0 auto;
+  display: flex;
+}
+
+@media (max-width: 500px) {
+  .flex_container {
+    flex-direction: column;
+  }
+
+  .delete_btn {
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+  }
+}

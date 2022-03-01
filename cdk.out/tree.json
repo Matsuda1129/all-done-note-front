@@ -38,16 +38,9 @@
                     "corsConfiguration": {
                       "corsRules": [
                         {
-                          "allowedHeaders": [
-                            "*"
-                          ],
-                          "allowedMethods": [
-                            "POST",
-                            "DELETE"
-                          ],
-                          "allowedOrigins": [
-                            "*"
-                          ]
+                          "allowedHeaders": ["*"],
+                          "allowedMethods": ["POST", "DELETE"],
+                          "allowedOrigins": ["*"]
                         }
                       ]
                     },

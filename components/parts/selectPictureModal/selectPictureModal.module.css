@@ -1,0 +1,115 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  z-index: 2;
+  width: 80%;
+  height: 80%;
+  padding: 1em;
+  background: #fff;
+  border-radius: 2rem;
+}
+
+.content_inner {
+  overflow: auto;
+  width: 101%;
+  height: 100%;
+}
+
+.flexBox {
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pictureBar {
+  display: flex;
+  bottom: 10%;
+  padding: 1rem;
+  position: fixed;
+  flex-wrap: wrap;
+  z-index: 5;
+}
+.uploadBtn {
+  margin-left: 1rem;
+}
+
+.deleteBtn {
+  margin-left: 1rem;
+}
+
+.batsu {
+  position: fixed;
+  z-index: 4;
+  font-size: 100%; /*ボタンの大きさ*/
+  font-weight: bold;
+  border: 1px solid #999;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 1.3em;
+  line-height: 1em;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 1rem;
+}
+
+.batsu:hover {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.flexBox {
+  display: flex;
+}
+
+.inputFile {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.button {
+  margin-left: 1rem;
+  background-color: rgb(35, 123, 196);
+  color: white;
+  border: 2px solid rgb(35, 123, 196);
+  border-radius: 1.5rem;
+  width: 120px;
+  height: 35px;
+}
+
+.button:hover {
+  color: rgb(35, 123, 196);
+  background: #fff;
+  border: 2px solid rgb(35, 123, 196);
+}
+
+@media (max-width: 1100px) {
+  .button {
+    margin-top: 0.5rem;
+    width: 80px;
+    font-size: 1rem;
+    height: 25px;
+  }
+  .content {
+    width: 90%;
+    height: 90%;
+  }
+
+  .pictureBar {
+    width: 63%;
+  }
+}

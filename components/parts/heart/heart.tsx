@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { likesRepository } from '../../../repositories';
 import Styles from './heart.module.css';
-import {
-  countOneLike,
-  createOneLike,
-  deleteOneLike,
-  findOneLike,
-} from '../../../repositories/likes';
 
 export default function Heart({ userId, postId }) {
   const [likeCheck, setLikeCheck] = useState(Boolean);
@@ -14,15 +10,16 @@ export default function Heart({ userId, postId }) {
   useEffect(() => {
     const fetchLikes = async () => {
       try {
-        const likeData = await findOneLike(postId, userId);
-        const likeCount: any = await countOneLike(postId);
-        await setLikeCount(likeCount);
-
-        if (!likeData) {
-          await setLikeCheck(false);
-        } else {
-          await setLikeCheck(true);
+        if (userId !== null) {
+          const likeData = await likesRepository.find(postId, userId);
+          if (!likeData) {
+            await setLikeCheck(false);
+          } else {
+            await setLikeCheck(true);
+          }
         }
+        const likeCount: any = await likesRepository.count(postId);
+        await setLikeCount(likeCount);
       } catch (error) {
         console.log(error);
       }
@@ -33,8 +30,8 @@ export default function Heart({ userId, postId }) {
   const changeLike = async () => {
     if (!likeCheck) {
       try {
-        await createOneLike(postId, userId);
-        const likeCount: any = await countOneLike(postId);
+        await likesRepository.create(postId, userId);
+        const likeCount: any = await likesRepository.count(postId);
         await setLikeCount(likeCount);
         setLikeCheck(true);
       } catch (error) {
@@ -42,8 +39,8 @@ export default function Heart({ userId, postId }) {
       }
     } else {
       try {
-        await deleteOneLike(postId, userId);
-        const likeCount: any = await countOneLike(postId);
+        await likesRepository.deleteOne(postId, userId);
+        const likeCount: any = await likesRepository.count(postId);
         setLikeCount(likeCount);
         setLikeCheck(false);
       } catch (error) {

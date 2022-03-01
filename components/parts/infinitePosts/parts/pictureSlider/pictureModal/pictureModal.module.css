@@ -1,0 +1,114 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(131, 131, 131);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  margin: 20%;
+}
+
+.textarea {
+  font-size: 1.5em;
+  width: 100%;
+  height: 80%;
+  border: none;
+}
+
+.post_button {
+  margin-top: 1rem;
+  background-color: rgb(35, 123, 196);
+  color: white;
+  border: 2px solid rgb(35, 123, 196);
+  border-radius: 1.5rem;
+  width: 120px;
+  height: 3.5rem;
+  white-space: normal;
+}
+
+.post_button:hover {
+  color: rgb(35, 123, 196);
+  background: #fff;
+  border: 2px solid rgb(35, 123, 196);
+}
+
+.batsu {
+  z-index: 2;
+  position: fixed;
+  top: 3%;
+  left: 3%;
+  font-size: 100%; /*ボタンの大きさ*/
+  font-weight: bold;
+  border: 1px solid #999;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 1.3em;
+  line-height: 1em;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.batsu:hover {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.flexBox {
+  display: flex;
+}
+
+.pictureSliderBtnPositon {
+  margin-top: 25%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.pictureSliderBtn {
+  border: none;
+  background-color: transparent;
+  font-size: 3rem;
+  font-weight: bolder;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.numberPicture {
+  text-align: center;
+  color: black;
+  width: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  border-radius: 2rem;
+}
+
+@media (max-width: 1100px) {
+  .content {
+    margin: 0px;
+  }
+}
+
+@media (max-width: 800px) {
+  .pictureSliderBtnPositon {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .batsu {
+    top: 10%;
+  }
+}

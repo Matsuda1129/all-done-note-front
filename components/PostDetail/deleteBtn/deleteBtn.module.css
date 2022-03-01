@@ -1,0 +1,16 @@
+.delete_btn {
+  margin-top: 1rem;
+  margin-left: 20%;
+  background-color: white;
+  color: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+  border-radius: 1.5rem;
+  height: 3rem;
+  width: 10rem;
+}
+
+.delete_btn:hover {
+  color: white;
+  background: rgb(0, 183, 255);
+  border: 2px solid rgb(0, 183, 255);
+}

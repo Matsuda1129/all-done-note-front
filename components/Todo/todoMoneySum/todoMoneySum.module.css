@@ -1,0 +1,18 @@
+.list_title {
+  border-top: 2px solid gray;
+  display: flex;
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.editBar {
+  width: 30%;
+  margin: 0 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.listname {
+  margin-left: 1rem;
+}

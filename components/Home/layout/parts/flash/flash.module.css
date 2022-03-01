@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-flow: column;
+  justify-items: center;
+  align-items: center;
+  width: 80%;
+  height: 500px;
+  margin: 0 auto;
+  border: 2px solid gray;
+}
+
+.title {
+  text-align: center;
+  position: relative;
+  padding: 3%;
+}
+
+.border {
+  border-bottom: 2px solid gray;
+}
+
+.flash {
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 2px solid gray;
+  word-break: break-all;
+}
+
+.content_inner {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.content_name {
+  color: rgb(52, 150, 214);
+}
+
+.content_name:hover {
+  border-bottom: 2px solid rgb(52, 150, 214);
+}
+
+@media (max-width: 1050) {
+}

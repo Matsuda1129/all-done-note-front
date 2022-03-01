@@ -1,0 +1,102 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  z-index: 2;
+  width: 60%;
+  height: 70%;
+  padding: 1em;
+  background: #fff;
+  border-radius: 2rem;
+}
+
+.content_inner {
+  overflow: auto;
+  width: 101%;
+  height: 100%;
+}
+
+.textarea {
+  font-size: 1.5em;
+  margin-top: 5%;
+  width: 100%;
+  height: 80%;
+  border: none;
+}
+
+.pictureIcon {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.postBtn {
+  margin-top: 1rem;
+}
+
+.flexBox {
+  display: flex;
+  display: flex;
+  bottom: 15%;
+  padding: 1rem;
+  position: fixed;
+  flex-wrap: wrap;
+  border-radius: 0rem 0rem 2rem 2rem;
+}
+
+.batsu {
+  z-index: 0;
+  position: fixed;
+  font-size: 100%; /*ボタンの大きさ*/
+  font-weight: bold;
+  border: 1px solid #999;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 1.3em;
+  line-height: 1em;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 2rem;
+}
+
+.batsu:hover {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.visible {
+  visibility: hidden;
+}
+
+.pictureSlider {
+  padding-bottom: 6rem;
+}
+
+@media (max-width: 800px) {
+  .content {
+    width: 70%;
+    height: 80%;
+  }
+
+  .flexBox {
+    bottom: 10%;
+  }
+}
+
+@media (max-width: 500px) {
+  .content {
+    width: 95%;
+  }
+}
