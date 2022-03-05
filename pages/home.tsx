@@ -9,6 +9,7 @@ import {
   SearchPosts,
 } from '../components/Home';
 import { usersRepository } from '../repositories';
+import { setLoadingFalse } from '../redux/loadingSlice';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function Home() {
       try {
         const loginData = await usersRepository.findLogin();
         await dispatch(setUsers(loginData));
+        await dispatch(setLoadingFalse());
       } catch (error) {
         console.log(error);
       }

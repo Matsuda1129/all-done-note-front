@@ -14,7 +14,7 @@ import loginUserCheckReducer from './loginUserCheckSlice';
 import { persistReducer } from 'redux-persist';
 import mailReducer from './mailSlice';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
-
+import loadingReducer from './loadingSlice';
 const createNoopStorage = () => {
   return {
     getItem(_key) {
@@ -34,6 +34,7 @@ const storage =
     : createNoopStorage();
 
 const rootReducer = combineReducers({
+  loading: loadingReducer,
   loginUserCheck: loginUserCheckReducer,
   openData: openDataReducer,
   isUseEffect: isUseEffectReducer,

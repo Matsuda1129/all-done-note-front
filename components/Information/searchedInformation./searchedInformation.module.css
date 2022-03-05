@@ -3,3 +3,11 @@
   padding: 2rem;
   border-top: 2px solid gray;
 }
+
+.url {
+  color: blue;
+}
+
+.url:hover {
+  border-bottom: 2px solid blue;
+}

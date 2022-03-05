@@ -33,3 +33,13 @@
   background: #fff;
   border: 2px solid rgb(35, 123, 196);
 }
+
+.logout_button {
+  position: relative;
+  left: 10%;
+  right: 10%;
+  margin-top: 1rem;
+  border-radius: 1.5rem;
+  width: 120px;
+  height: 3.5rem;
+}

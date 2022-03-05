@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { usersService } from '../services';
 import { usersRepository } from '../repositories';
+import { useDispatch } from 'react-redux';
+import { setLoadingTrue } from '../redux/loadingSlice';
+import Loading from '../components/Loader/loading';
 
 type FormValuse = {
   name: string;
@@ -13,6 +16,7 @@ type FormValuse = {
   confirmPassword: string;
 };
 export default function Register() {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -21,6 +25,7 @@ export default function Register() {
   } = useForm<FormValuse>();
 
   const onSubmit = async (data) => {
+    await dispatch(setLoadingTrue());
     await usersService.register(data.name, data.email, data.password);
   };
 
@@ -29,6 +34,7 @@ export default function Register() {
       className={Styles.flex_container_column}
       onSubmit={handleSubmit(onSubmit)}
     >
+      <Loading />
       <div className={Styles.flex_container}>
         <div className={Styles.margin}>アカウント作成</div>
         <Image

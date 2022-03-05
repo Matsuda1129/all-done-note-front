@@ -5,6 +5,7 @@ import { UserState } from '../../../../../redux/usersSlice';
 import { setTrue } from '../../../../../redux/modalSlice';
 import Link from 'next/link';
 import { backfaceFixed } from '../../../../../lib/backFaceFixed';
+import { Logout } from '../../../../MyPage';
 
 export default function Menubar() {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ export default function Menubar() {
 
   return (
     <div>
-      <div className={Styles.container}>
+      <div>
         <div>
           <Image
             priority
@@ -124,6 +125,11 @@ export default function Menubar() {
         >
           投稿する
         </button>
+        <br />
+        <br />
+        <div className={Styles.logout_button}>
+          <Logout checkLogin={true} />
+        </div>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import SelectPicture from './selectPicture/selectPicture';
 import { RootState } from '../../../redux/store';
 import { setUsers } from '../../../redux/usersSlice';
 import { s3Repository, usersRepository } from '../../../repositories';
+import { setLoadingFalse, setLoadingTrue } from '../../../redux/loadingSlice';
 
 type FormValuse = {
   picture: string[];
@@ -19,6 +20,8 @@ export default function SelectPictureModal({
   const dispatch = useDispatch();
   const loginUser = useSelector((state: RootState) => state.users.user);
   const [userPictures, setUserPictures] = useState(loginUser.picture);
+  const [selectedPictures, setSelectedPictures] = useState([]);
+  const [fetchPicture, setFetchPicture] = useState(false);
   const {
     register,
     handleSubmit,
@@ -34,38 +37,17 @@ export default function SelectPictureModal({
     }
   };
 
-  const uploadPicture = async () => {
-    let element: any = document.getElementById('picture');
-    let pictureArray = [];
-    for (let i = 0; i < element.files.length; i++) {
-      pictureArray.push(element.files[i].name);
-    }
-    if (pictureArray.length === 0) {
-      return alert('画像を選択してください');
-    }
-    await s3Repository.uploadPicture(element.files, loginUser.name);
-    await setUserPictures([...loginUser.picture, ...pictureArray]);
-    await usersRepository.editpicture(loginUser.id, [
-      ...loginUser.picture,
-      ...pictureArray,
-    ]);
-    const res = await usersRepository.find(loginUser.name);
-    await dispatch(setUsers(res));
-  };
-
-  const [selectedPictures, setSelectedPictures] = useState([]);
-  const [fetchPicture, setFetchPicture] = useState(false);
-
   useEffect(() => {
     const pictureFetch = async () => {
       try {
-        setFetchPicture(false);
+        await setFetchPicture(false);
       } catch (error) {
         console.log(error);
       }
     };
     pictureFetch();
   }, [fetchPicture]);
+
   const selectPicture = async (value) => {
     await setSelectedPictures([...selectedPictures, ...[value]]);
     await setPostPictures([...selectedPictures, ...[value]]);
@@ -80,8 +62,34 @@ export default function SelectPictureModal({
     await setPostPictures(result);
   };
 
+  const uploadPicture = async () => {
+    await dispatch(setLoadingTrue());
+    let element: any = document.getElementById('picture');
+    let pictureArray = [];
+    for (let i = 0; i < element.files.length; i++) {
+      pictureArray.push(element.files[i].name);
+    }
+    if (pictureArray.length === 0) {
+      await dispatch(setLoadingFalse());
+
+      return alert('画像を選択してください');
+    }
+    await s3Repository.uploadPicture(element.files, loginUser.name);
+    await setUserPictures([...loginUser.picture, ...pictureArray]);
+    await usersRepository.editpicture(loginUser.id, [
+      ...loginUser.picture,
+      ...pictureArray,
+    ]);
+    const res = await usersRepository.find(loginUser.name);
+    await dispatch(setUsers(res));
+    await dispatch(setLoadingFalse());
+  };
+
   const deletePicture = async () => {
+    await dispatch(setLoadingTrue());
     if (selectedPictures.length === 0) {
+      await dispatch(setLoadingFalse());
+
       return alert('画像を選択してください');
     }
     // await s3Repository.deletePicture(selectedPictures, loginUser.name);
@@ -102,7 +110,7 @@ export default function SelectPictureModal({
     await dispatch(setUsers(res));
     await setPostPictures([]);
     await setSelectedPictures([]);
-    await setFetchPicture(true);
+    await dispatch(setLoadingFalse());
   };
 
   return (

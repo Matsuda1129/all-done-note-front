@@ -3,14 +3,8 @@ import Styles from './layout.module.css';
 import { Flash, Menubar, CreatePostModal } from './parts';
 import { ProtectRoute } from '../protectRouter/protectRouter';
 import { slide as Menu } from 'react-burger-menu';
-import aws from 'aws-sdk';
+import Loading from '../../Loader/loading';
 
-aws.config.update({
-  accessKeyId: process.env.NEXT_PUBLIC_ACCESS_KEY,
-  secretAccessKey: process.env.NEXT_PUBLIC_SECRET_KEY,
-  region: process.env.NEXT_PUBLIC_REGION,
-  signatureVersion: 'v4',
-});
 const styles = {
   bmBurgerButton: {
     position: 'fixed',
@@ -89,6 +83,7 @@ export default function Layout({ children }) {
       <div className={Styles.z_index2}>
         <CreatePostModal />
       </div>
+        <Loading />
     </ProtectRoute>
   );
 }
