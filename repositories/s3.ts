@@ -63,10 +63,10 @@ export async function deleteWill(username) {
   });
 }
 
-export async function uploadPicture(files, username) {
+export async function uploadPicture(files, username, pictureNames) {
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
-    const filename = encodeURIComponent(file.name);
+    const filename = pictureNames[i];
     const res = await fetch(
       `/api/upload-url?file=post/${username}/${filename}`
     );
@@ -85,6 +85,8 @@ export async function uploadPicture(files, username) {
       console.log('Uploaded successfully!');
     } else {
       console.error('Upload failed.');
+
+      return false;
     }
   }
 }

@@ -65,20 +65,35 @@ export default function SelectPictureModal({
   const uploadPicture = async () => {
     await dispatch(setLoadingTrue());
     let element: any = document.getElementById('picture');
-    let pictureArray = [];
+    let pictureNames = [];
     for (let i = 0; i < element.files.length; i++) {
-      pictureArray.push(element.files[i].name);
+      let S = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let N = 16;
+      const randomName = Array.from(Array(N))
+        .map(() => S[Math.floor(Math.random() * S.length)])
+        .join('');
+      console.log(randomName);
+      pictureNames.push(randomName);
     }
-    if (pictureArray.length === 0) {
+    if (pictureNames.length === 0) {
       await dispatch(setLoadingFalse());
 
       return alert('画像を選択してください');
     }
-    await s3Repository.uploadPicture(element.files, loginUser.name);
-    await setUserPictures([...loginUser.picture, ...pictureArray]);
+    const uploadResult = await s3Repository.uploadPicture(
+      element.files,
+      loginUser.name,
+      pictureNames
+    );
+    if (uploadResult === false) {
+      await dispatch(setLoadingFalse());
+
+      return alert('アップロードに失敗しました');
+    }
+    await setUserPictures([...loginUser.picture, ...pictureNames]);
     await usersRepository.editpicture(loginUser.id, [
       ...loginUser.picture,
-      ...pictureArray,
+      ...pictureNames,
     ]);
     const res = await usersRepository.find(loginUser.name);
     await dispatch(setUsers(res));
