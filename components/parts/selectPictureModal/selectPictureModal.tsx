@@ -72,7 +72,6 @@ export default function SelectPictureModal({
       const randomName = Array.from(Array(N))
         .map(() => S[Math.floor(Math.random() * S.length)])
         .join('');
-      console.log(randomName);
       pictureNames.push(randomName);
     }
     if (pictureNames.length === 0) {
