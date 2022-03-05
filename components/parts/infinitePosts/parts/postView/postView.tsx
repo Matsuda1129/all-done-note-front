@@ -61,7 +61,7 @@ export default function PostView({ post }) {
         </Link>
       </div>
       <PictureSlider
-        path={`post/${loginUser.name}/`}
+        path={`post/${post.user.name}/`}
         pictures={post.picture}
         pictureSize1={{ width: 300, height: 200 }}
         pictureSize2={{ width: 600, height: 400 }}

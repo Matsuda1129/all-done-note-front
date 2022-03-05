@@ -62,8 +62,12 @@
   border-bottom: 2px solid blue;
 }
 
+
+.text_wrap {
+  white-space: normal;
+}
 @media (max-width: 500px) {
   .content {
-    width: 80%;
+    width: 90%;
   }
 }

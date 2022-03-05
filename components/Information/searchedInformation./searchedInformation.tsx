@@ -57,8 +57,11 @@ export default function SearchedInformation({ searchGenre, searchTitle }) {
         {information.map((information) => {
           return (
             <div className={Styles.information} key={information.id}>
-              <div> {information.genre}</div>
-              <a href={`${information.url}`}>{information.title}</a>
+              <div> ジャンル：{information.genre}</div>
+              <br />
+              <a className={Styles.url} href={`${information.url}`}>{information.title}</a>
+              <br />
+              <br />
               <div>{information.content}</div>
             </div>
           );

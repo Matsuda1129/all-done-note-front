@@ -2,9 +2,12 @@ import Image from 'next/image';
 import Head from 'next/head';
 import Styles from '../styles/login.module.css';
 import { useForm } from 'react-hook-form';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { usersService } from '../services';
+import Loading from '../components/Loader/loading';
+import { useDispatch } from 'react-redux';
+import { setLoadingFalse, setLoadingTrue } from '../redux/loadingSlice';
 
 type FormValuse = {
   email: string;
@@ -12,14 +15,20 @@ type FormValuse = {
 };
 
 export default function Login() {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValuse>();
 
+  useEffect(() => {
+    dispatch(setLoadingFalse());
+  });
+
   const onSubmit = async (data) => {
     try {
+      await dispatch(setLoadingTrue());
       await usersService.login(data.email, data.password);
     } catch (error) {
       alert(error);
@@ -32,6 +41,7 @@ export default function Login() {
         <meta name='viewport' content='width=device-width,initial-scale=1.0' />
       </Head>
       <div className={Styles.grid_container}>
+        <Loading />
         <div className={Styles.item_A}>
           <Image
             priority

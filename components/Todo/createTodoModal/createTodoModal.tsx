@@ -55,7 +55,7 @@ export default function CreateTodoModal({
                   <div className={Styles.flex_container_row}>
                     <label>グループ</label>
                     <Select {...register('group')} defaultValue={'お金'}>
-                      <MenuItem value='お金'>お金</MenuItem>
+                      <MenuItem value='お金'>生活費用</MenuItem>
                       <MenuItem value='準備'>準備</MenuItem>
                       <MenuItem value='やりたいこと'>やりたいこと</MenuItem>
                     </Select>

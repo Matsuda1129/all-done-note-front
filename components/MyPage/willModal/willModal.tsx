@@ -8,6 +8,7 @@ import { s3Repository, usersRepository } from '../../../repositories';
 import { Button } from '../../utils';
 import { setUsers } from '../../../redux/usersSlice';
 import { Divide } from 'hamburger-react';
+import { setLoadingTrue, setLoadingFalse } from '../../../redux/loadingSlice';
 
 export default function WillModal({ willModal, setWillModal }) {
   const loginUser: any = useSelector((state: RootState) => state.users.user);
@@ -43,20 +44,24 @@ export default function WillModal({ willModal, setWillModal }) {
   };
 
   const uploadWill = async () => {
+    await dispatch(setLoadingTrue());
     let element: any = document.getElementById('will');
     await s3Repository.uploadWill(element.files, loginUser.name);
     await usersRepository.editWill(loginUser.id, true);
     const res = await usersRepository.find(loginUser.name);
     await dispatch(setUsers(res));
+    await dispatch(setLoadingFalse());
   };
 
   const deleteWill = async () => {
     const check = confirm('アップロードしている遺書を削除してよいですか？');
     if (check) {
+      await dispatch(setLoadingTrue());
       await s3Repository.deleteWill(loginUser.name);
       await usersRepository.editWill(loginUser.id, false);
       const res = await usersRepository.find(loginUser.name);
       await dispatch(setUsers(res));
+      await dispatch(setLoadingFalse());
     }
   };
 
@@ -95,7 +100,7 @@ export default function WillModal({ willModal, setWillModal }) {
                     <br />
                   </div>
                 ) : (
-                  <div>現在遺書はアップロードされていません</div>
+                  <div className={Styles.text_wrap}>現在遺書はアップロードされていません</div>
                 )}
               </div>
             ) : (
