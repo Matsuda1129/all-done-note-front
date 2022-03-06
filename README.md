@@ -1,4 +1,4 @@
-# all-done-note-
+# all-done-note-front
 
 バックエンドのGithubのURL
 https://github.com/Matsuda1129/all-done-note-server
