@@ -1,1 +1,5 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+バックエンドのGithubのURL
+https://github.com/Matsuda1129/all-done-note-server
+
+インフラのGithubのURL
+https://github.com/Matsuda1129/all-done-note-infrastructure
