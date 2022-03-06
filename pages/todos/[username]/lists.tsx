@@ -14,7 +14,7 @@ import {
 import { Layout } from '../../../components/Home';
 import { todosService } from '../../../services';
 import { setFalse } from '../../../redux/isUseEffect';
-import { usersRepository } from '../../../repositories';
+import { todosRepository, usersRepository } from '../../../repositories';
 import {
   setSearchBarMoneyFinish,
   setSearchBarMoneyGenre,
@@ -60,6 +60,10 @@ export default function Todo() {
   const [genresMoney, setGenresMoney] = useState([]);
   const [genresPreparation, setGenresPreparation] = useState([]);
   const [genresTodo, setGenresTodo] = useState([]);
+  const [moneySumMoney, setMoneySumMoney] = useState();
+  const [preparationSumMoney, setPreparationSumMoney] = useState();
+  const [todoSumMoney, setTodoSumMoney] = useState();
+  const [allSumMoney, setAllSumMoney] = useState();
   const [createTodoModal, setCreateTodoModal] = useState(false);
   useEffect(() => {
     if (router.asPath !== router.route) {
@@ -89,11 +93,35 @@ export default function Todo() {
     }
   }, [dispatch, loginUser.id, username]);
 
+  const sumMoney = async (group, setState) => {
+    const moneyData: any = await todosRepository.findUserGroup(
+      loginUser.id,
+      group
+    );
+    let sumMoney = 0;
+    for (let i = 0; i < moneyData.length; i++) {
+      sumMoney += moneyData[i].money;
+    }
+    const moneyConma = sumMoney.toLocaleString();
+    setState(moneyConma);
+
+    return sumMoney;
+  };
+
   useEffect(() => {
     if (user.id !== null) {
       const firstFetch = async () => {
         try {
           await dispatch(setFalse());
+
+          const money1 = await sumMoney('お金', setMoneySumMoney);
+          const money2 = await sumMoney('準備', setPreparationSumMoney);
+          const money3 = await sumMoney('やりたいこと', setTodoSumMoney);
+
+          const sumMoney123 = money1 + money2 + money3;
+          const moneyConma: any = sumMoney123.toLocaleString();
+          await setAllSumMoney(moneyConma);
+
           const moneyGenresData = await todosService.findUserGenre(
             user.id,
             'お金'
@@ -115,6 +143,7 @@ export default function Todo() {
       };
       firstFetch();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, isUseEffect, user, username]);
 
   useEffect(() => {
@@ -269,7 +298,16 @@ export default function Todo() {
               <div className={Styles.border}></div>
             </TabPanel>
             <TabPanel>
-              <div className={Styles.genre_title}>準備</div>
+              <div className={Styles.goalMoney_title}>
+                目標額１(準備) ¥{preparationSumMoney}
+              </div>
+              <div></div>
+              <div className={Styles.goalMoney_title}>
+                目標額２(準備 + 生涯費用 + やりたいこと) ¥{allSumMoney}
+              </div>
+              <div className={Styles.genre_title}>
+                準備 ¥{preparationSumMoney}
+              </div>
               {genresPreparation.map((genre) => {
                 return (
                   <TodoMoneySum
@@ -280,7 +318,9 @@ export default function Todo() {
                   />
                 );
               })}
-              <div className={Styles.genre_title}>生涯費用</div>
+              <div className={Styles.genre_title}>
+                生涯費用 ¥{moneySumMoney}
+              </div>
               {genresMoney.map((genre) => {
                 return (
                   <TodoMoneySum
@@ -291,7 +331,9 @@ export default function Todo() {
                   />
                 );
               })}
-              <div className={Styles.genre_title}>やりたいこと</div>
+              <div className={Styles.genre_title}>
+                やりたいこと ¥{todoSumMoney}
+              </div>
               {genresTodo.map((genre) => {
                 return (
                   <TodoMoneySum

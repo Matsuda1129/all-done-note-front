@@ -9,17 +9,21 @@
 }
 
 .genre_title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   border-top: 2px solid gray;
   text-align: center;
   background-color: rgb(179, 250, 255);
 }
 
-.listhe_position {
-  color: aqua;
-  margin: 5rem;
+.goalMoney_title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  border-top: 2px solid gray;
+  background-color: rgb(179, 250, 255);
+  padding-left: 1rem;
 }
+
 
 .middle {
   text-align: center;

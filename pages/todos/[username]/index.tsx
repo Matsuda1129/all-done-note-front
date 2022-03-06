@@ -41,8 +41,8 @@ export default function Detail() {
         <div>
           <br />
           <Link href={`../../todos/${username}/lists`}>
-            <a href='' className={Styles.listhe_position}>
-              {username}のリストへ
+            <a href='' className={Styles.list_position}>
+              {username}の目標リスト一覧へ
             </a>
           </Link>
 
