@@ -16,6 +16,12 @@ https://all-done-note-dev-picture-bucket.s3.ap-northeast-1.amazonaws.com/All+Don
 Adobe xd デザイン　webで見れるが全体図で見れず一枚ずつしか見れない。
 https://xd.adobe.com/view/95d8c6d1-e6d9-4b22-a093-be8d49d97390-c08b/
 
+ER図　MysqlWorkBench 
+https://all-done-note-dev-picture-bucket.s3.ap-northeast-1.amazonaws.com/alldone_note+ER+8%3A7.mwb
+
+awsの全体図 
+https://drive.google.com/file/d/12rG_23aNNPJF81GcZfZn7_8w1XaY1ljP/view?usp=sharing
+
 # アプリ説明
 このアプリは終活を目的に作ったSNSアプリです。基本的なSNSの機能に加えてTodoリスト、データ分析機能があります。
 
