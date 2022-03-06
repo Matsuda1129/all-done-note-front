@@ -1,6 +1,7 @@
 import Styles from './moneyModal.module.css';
 
 export default function MoneyModal({ moneyModal, openMoneyModal, list }) {
+  const moneyConma: any = list.money.toLocaleString();
   if (moneyModal) {
     return (
       <div>
@@ -11,7 +12,7 @@ export default function MoneyModal({ moneyModal, openMoneyModal, list }) {
             </button>
             <form>
               <label>費用</label>
-              <div className={Styles.flex_container_item}> ¥{list.money}</div>
+              <div className={Styles.flex_container_item}> ¥{moneyConma}</div>
             </form>
           </div>
         </div>

@@ -6,18 +6,9 @@ export async function find() {
   return res.data;
 }
 
-const messages = [
-  'aaaaaaaaaa',
-  'bbbbbbbbbbb',
-  'ccccccccccccc',
-  'ddddddddddddddddddddddd',
-  'eeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-];
-
-export async function create() {
-  const message = messages[Math.floor(Math.random() * messages.length)];
+export async function create(userId, message) {
   await instance.post('flash', {
-    userId: 1,
+    userId: userId,
     message: message,
   });
 }
@@ -25,6 +16,6 @@ export async function create() {
 export async function tellDeath(userId) {
   await instance.post('flash', {
     userId: userId,
-    message: 'さんが死亡者になりました。',
+    message: 'さんのaliveデータが変更されました',
   });
 }

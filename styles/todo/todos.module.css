@@ -1,5 +1,10 @@
-.listhe_position {
+.list_position {
+  color: blue;
   margin-left: 7rem;
+}
+
+.list_position:hover {
+  border-bottom: 2px solid blue;
 }
 .middle {
   text-align: center;
