@@ -16,7 +16,7 @@ https://all-done-note-dev-picture-bucket.s3.ap-northeast-1.amazonaws.com/All+Don
 Adobe xd デザイン　webで見れるが全体図で見れず一枚ずつしか見れない。
 https://xd.adobe.com/view/95d8c6d1-e6d9-4b22-a093-be8d49d97390-c08b/
 
-#アプリの説明
+# アプリ説明
 このアプリは終活を目的に作ったSNSアプリです。基本的なSNSの機能に加えてTodoリスト、データ分析機能があります。
 
 Todoリストの項目は準備、生活費用、やりたいことの３つに大きく別れています。
