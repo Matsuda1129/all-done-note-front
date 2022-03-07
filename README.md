@@ -34,3 +34,32 @@ Todoリストの項目は準備、生活費用、やりたいことの３つに�
 目標金額２はTodoリストのすべての合計金額です。つまり目標金額２は自分が死ぬまでに必要な金額です。
 
 データ分析ページではそれらのTodoリストデータやプロフィール情報を元にデータの平均の達成率などを調べられます。プロフィール情報にuserの生死情報を加えているのは、死ぬのいつかわからない、生きているうちにあなたのやりたいこと、やるべきことをやっていかなくてはいけないと実感して欲しいためです。
+
+# Usage
+You need to prepare S3 buket and vercel　enviroment variable.
+
+Please make your S3 buket and IAM role for using S3 buket
+After make S3 buket, please change next.config.js images:domains: url for your S3buket URl.
+
+You have to make vercel account for using vercel env.
+First create vercel account
+Second create a git repository for this app and import it on vercel.
+Third You can use vercel enviroment. Please create these  env. 
+
+```bash
+NEXT_PUBLIC_IMAGE_URL = your s3buket url and /
+NEXT_PUBLIC_baseURL = localhost:3000(server localhost is 3000)
+NEXT_PUBLIC_BUCKET = your s3buket name
+NEXT_PUBLIC_REGION = your aws region
+NEXT_PUBLIC_SECRET_KEY = your IAM role SECRET_KEY
+NEXT_PUBLIC_ACCESS_KEY = ACCESS_KEY
+```
+
+Next, You need to install vercel cli
+
+```bash
+npm i -g vercel
+vercel login
+vercel dev --listen 8000  because server cors origin url is 8000
+```
+That's　
