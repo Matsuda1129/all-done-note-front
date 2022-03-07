@@ -62,4 +62,4 @@ npm i -g vercel
 vercel login
 vercel dev --listen 8000  because server cors origin url is 8000
 ```
-That's　
+That's　all
