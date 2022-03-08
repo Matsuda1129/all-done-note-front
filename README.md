@@ -42,7 +42,7 @@ Please make your S3 bucket and IAM role for using S3 bucket
 After make S3 bucket, please change next.config.js images:domains: url for your S3buket URl.
 
 You have to make vercel account for using vercel env.
-First create vercel account
+First create vercel account.
 Second create a git repository for this app and import it on vercel.
 Third You can use vercel enviroment. Please create these  env. 
 
